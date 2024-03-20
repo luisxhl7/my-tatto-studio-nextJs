@@ -1,0 +1,119 @@
+.banner {
+  &__section-1 {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  &__section-image {
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    background-image: url(../../../assets/local-tattoo.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    animation: zoomBackground 15s;
+    @keyframes zoomBackground {
+        from{
+            background-size: 100%;
+        }
+        to{
+            background-size: 120%;
+        }
+    }
+    & img {
+      width: 0px;
+      flex-grow: 1;
+      object-fit: cover;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0));
+      pointer-events: none;
+    }
+  }
+  &__divisor-section {
+    z-index: 2;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    & img {
+      object-fit: cover;
+      width: 100%;
+      height: 300px;
+      animation: stripeMovement 4s ease-out;
+      filter: drop-shadow(0 0 50px #000000);
+      @keyframes stripeMovement{
+        0%{
+          opacity: 0;
+        }
+        100%{
+          opacity: 1;
+        }
+      }
+    }
+    & h1 {
+      position: absolute;
+      bottom: 50px;
+      font-size: 100px;
+      z-index: 1;
+      text-transform: capitalize;
+      animation: stripeMovement 4s ease-out;
+      @keyframes stripeMovement{
+        0%{
+          opacity: 0;
+        }
+        100%{
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &__content-image {
+    opacity: 0;
+    flex-grow: 1;
+    width: 0;
+    display: flex;
+    transition: 0.5s ease, opacity 2s ease-in-out;
+    position: relative;
+    &:hover {
+      cursor: pointer;
+      filter: contrast(140%);
+      opacity: 1;
+      width: 200px;
+      & .banner__content-image__name{
+        opacity: 1;
+      }
+    }
+
+    &__name{
+      position: absolute;
+      text-align: center;
+      top: 0;
+      color: #ffffff;
+      font-size: 30px;
+      background-color: rgba(0, 0, 0, 0.253);
+      width: 100%;
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      transition: opacity .5s ease-in-out;
+      text-transform: capitalize;
+    }
+    &.--show {
+      opacity: 1;
+    }
+    &.--isFilter{
+      & img{
+        transition: 2s ease;
+        filter: grayscale(100%);
+      }
+    }
+  }
+}
+

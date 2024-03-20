@@ -1,8 +1,10 @@
+import { Banner } from "@/components/molecules/banner";
+import { imagesList } from "@/data/tattoo-artist";
 
 export default function Home() {
   return (
     <main>
-      <h1>TATUAJES</h1>
+      <Banner imagesList={imagesList} title='my studio tattoo'/>
     </main>
   );
 }
