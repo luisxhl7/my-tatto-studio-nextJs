@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Grenze_Gotisch } from "next/font/google";
+import { NavBar } from "@/components/organisms/navbar";
+import { Footer } from "@/components/organisms/footer";
 import "./globals.scss";
 
-const inter = Grenze_Gotisch({
+const GrenzeGotisch = Grenze_Gotisch({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
@@ -23,7 +25,11 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="256x256"/>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={GrenzeGotisch.className}>
+        <NavBar/>
+        {children}
+        <Footer/>
+      </body>
     </html>
   );
 }
