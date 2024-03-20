@@ -1,5 +1,5 @@
 import icono_tattoo from "./icono-tattoo.svg";
-import local_tattoo from "./local-tattoo.jpg";
+import local_tattoo from "./local-tattoo.svg";
 import rasgado_1 from "./rasgado-1.svg";
 import rasgado_2 from "./rasgado-2.svg";
 import rasgado_limpio from "./rasgado-limpio-svg.svg";
