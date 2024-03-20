@@ -42,7 +42,7 @@ export const NavBar = () => {
       <Link href="/" className="navBar__logo">
         <Image src={images.icono_tattoo} alt="" width={70} height={70} />
       </Link>
-      {!isMobile ? (
+      {/* {!isMobile ? (
         <ul className="navBar__options-list">
           <li>
             <Link href="/" onClick={handleLinkClick}>
@@ -103,7 +103,7 @@ export const NavBar = () => {
         </ul>
       ) : (
         <NavbarMobile/>
-      )}
+      )} */}
     </nav>
   );
 };

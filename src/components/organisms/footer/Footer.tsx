@@ -14,15 +14,15 @@ export const Footer = () => {
       </CardOfInfoDropdown>
 
       <CardOfInfoDropdown title={'ACERCA DE MY TATTOO STUDIO'}>
-        <a href=" ">Términos de Uso</a>
-        <a href=" ">¿Quiénes Somos?</a>
-        <a href=" ">Responsabilidad Social</a>
+        <a href="/*">Términos de Uso</a>
+        <a href="/*">¿Quiénes Somos?</a>
+        <a href="/*">Responsabilidad Social</a>
       </CardOfInfoDropdown>
 
       <CardOfInfoDropdown title={'SERVICIO AL CLIENTE'}>
-        <a href=" ">Aplicar mi garantía</a>
-        <a href=" ">Preguntas Frecuentes</a>
-        <a href=" ">Estado de mi recolección</a>
+        <a href="/*">Aplicar mi garantía</a>
+        <a href="/*">Preguntas Frecuentes</a>
+        <a href="/*">Estado de mi recolección</a>
       </CardOfInfoDropdown>
       
       <CardOfInfoDropdown title={'UBICACIÓN'}>

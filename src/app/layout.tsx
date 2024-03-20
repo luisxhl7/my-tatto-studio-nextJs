@@ -22,9 +22,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <head>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="256x256"/>
-      </head>
       <body className={GrenzeGotisch.className}>
         <NavBar/>
         {children}
