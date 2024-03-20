@@ -1,4 +1,5 @@
 'use client'
+
 import React from 'react'
 import { CardOfInfoDropdown } from '../../molecules/card-of-info-dropdown/CardOfInfoDropdown'
 import './footer.scss'
