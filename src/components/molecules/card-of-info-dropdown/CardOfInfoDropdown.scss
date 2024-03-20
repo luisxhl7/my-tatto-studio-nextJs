@@ -1,0 +1,46 @@
+@import '../../../style/mixins.scss';
+@import '../../../style/variables.scss';
+
+.cardOfInfoDropdown{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 30px;
+    color: #ffffff;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    @include FromMin($x-large) {
+        height: auto;
+        cursor: auto;
+        overflow: auto;
+    }
+    &__content-title{
+        display: flex;
+        justify-content: space-between;
+    }
+    &__arrow{
+        &.--isOpen{
+            transform: rotate(180deg);
+        }
+        @include FromMin($x-large) {
+            display: none !important;
+        }
+    }
+    &.--isOpen{
+        height: auto;
+    }
+    a, span{
+        color: #ffffff;
+        margin: 3px 0px;
+    }
+    a{
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    &__title{
+        font-size: larger;
+        font-weight: bold;
+    }
+}

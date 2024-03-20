@@ -1,0 +1,15 @@
+@import '../../../style/mixins.scss';
+@import '../../../style/variables.scss';
+
+.footer{
+    height: auto;
+    padding: 10px 0px;
+    width: 100%;
+    background-color: #3d3d3d6b;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    @include FromMin($x-large) {
+        flex-direction: row;
+    }
+}
