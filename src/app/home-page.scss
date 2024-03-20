@@ -1,0 +1,121 @@
+.home-page {
+    &__section-welcome {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(90vh - 80px);
+        padding-bottom: 50px;
+        animation: animationInText linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 30%;
+        @keyframes animationInText {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+        }
+        &__content-info {
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        & h2 {
+            font-size: 50px;
+        }
+        & p {
+            font-size: 20px;
+        }
+        }
+    }
+    &__section-phrase{
+        background-image: url(https://estaticos.elcolombiano.com/binrepository/998x665/0c52/998d562/none/11101/QJEW/mtatuajes-en-sabaneta-3_40094000_20220605144706.jpg);
+        background-repeat: no-repeat;
+        background-size: 120%;
+        position: relative;
+        height: calc(100vh - 80px);
+        filter: grayscale(100%);
+        animation: reveal linear both;
+        animation-timeline: view();
+        animation-range: 
+          entry 10% cover 60%,
+        ;
+        @keyframes reveal {
+            from {
+                background-position: 0% 100%;
+            }
+            to {
+                background-position: 0% 0%;
+            }
+        }
+      
+        & img{
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 50px rgb(0, 0, 0));
+        }
+        &__image1{
+            rotate: 180deg;
+            position: absolute;
+            top: 0px;
+        }
+        &__image2{
+            position: absolute;
+            bottom: -1px;
+        }
+        &__content-info{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            background-color: #00000065;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            & h2{
+                font-size: 40px;
+            }
+        }
+    }
+    &__section-known {
+        width: 100%;
+        display: flex;
+        min-height: calc(100vh - 80px);
+        flex-direction: column;
+        text-align: center;
+        animation: animationInText linear both;
+        animation-timeline: view();
+        animation-range: entry 20% cover 30%;
+        position: relative;
+        @keyframes animationInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        &__content-info {
+        max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        margin: 70px auto 0px;
+        & h2 {
+            font-size: 50px;
+        }
+        & p {
+            font-size: 20px;
+        }
+        }
+        &__icon{
+            width: 100px;
+            height: 100px;
+            margin: auto;
+        }
+        &__separation{
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            height: auto;
+        }
+    }
+}
