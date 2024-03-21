@@ -114,6 +114,17 @@
         filter: grayscale(100%);
       }
     }
+    &__animation-filter{
+      animation: animationFilter 2s linear both;    
+      @keyframes animationFilter {
+        from{
+          filter: grayscale(100%);
+        }
+        to{
+          filter: grayscale(0%);
+        }
+      }
+    }
   }
 }
 

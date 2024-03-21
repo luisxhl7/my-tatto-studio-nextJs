@@ -56,10 +56,12 @@
           list-style-type: none;
           margin: 0;
           padding: 0;
-          display: none;
-          border-radius: 0px 0px 15px 15px;
+            overflow: hidden;
+            max-height: 0px;
+            border-radius: 0px 0px 15px 15px;
           background: #000000a2;
           color: #9b9b9b;
+          transition: .3s linear;
 
           & li {
             height: 40px;
@@ -76,6 +78,7 @@
     
         &.--open {
             ol {
+                max-height: 300px;
                 display: block;
             }
         }

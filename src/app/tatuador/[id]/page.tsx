@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Banner } from "@/components/molecules/banner";
 import { tattooArtist } from "@/data/tattoo-artist";
-import Image from "next/image";
 import './tatuador-page.scss'
 
 interface TatuadorPageProps {
@@ -34,17 +33,17 @@ const Page = ({params}: {params: PageParams}) => {
     }, [params.id]);
 
     return (
-        <div className="tatuadorPage">
-        <Banner imagesList={tatuador?.photo} title={tatuador?.name}/>
+        <main className="tatuadorPage">
+            <Banner imagesList={tatuador?.photo} title={tatuador?.name}/>
 
-        <p className="tatuadorPage__description">{tatuador?.description}</p>
+            <p className="tatuadorPage__description">{tatuador?.description}</p>
 
-        <section className="tatuadorPage__content-images">
-            {tatuador?.portafolio.map((item, idx) => (
-            <img key={idx} src={item} alt="" className="tatuadorPage__images"/>
-            ))}
-        </section>
-        </div>
+            <section className="tatuadorPage__content-images">
+                {tatuador?.portafolio.map((item, idx) => (
+                <img key={idx} src={item} alt="" className="tatuadorPage__images"/>
+                ))}
+            </section>
+        </main>
     )
 }
 

@@ -142,10 +142,6 @@
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        // &__content-image{
-        //     width: 600px;
-        //     height: 600px;
-        // }
         &__content-contacts{
             text-align: center;
             display: flex;
@@ -168,9 +164,5 @@
                 }
             }
         }
-        // & img{
-        //     max-width: 100%;
-        //     height: auto;
-        // }
     }
 }

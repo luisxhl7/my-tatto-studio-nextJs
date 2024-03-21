@@ -7,7 +7,7 @@ import './footer.scss'
 export const Footer = () => {
 
   return (
-    <div className='footer'>
+    <footer className='footer'>
       <CardOfInfoDropdown title={'CONTÁCTENOS'}>
         <span>Teléfono: (601) 1234567</span>
         <span>WhatsApp: (+57) 444 333 22 11</span>
@@ -30,6 +30,6 @@ export const Footer = () => {
       <CardOfInfoDropdown title={'UBICACIÓN'}>
         <span>Medellin cr333 #22 11</span>
       </CardOfInfoDropdown>
-    </div>
+    </footer>
   )
 }

@@ -62,7 +62,7 @@ export const Banner: React.FC<BannerProps> = ({ imagesList, title }) => {
             </Link>
           ))
         ) : (
-          <img src={typeof imagesList === "string" ? imagesList : ""} alt="" />
+          <img src={typeof imagesList === "string" ? imagesList : ""} alt="" className="banner__content-image__animation-filter"/>
         )}
       </div>
 
