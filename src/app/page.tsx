@@ -36,6 +36,9 @@ export default function Home() {
             realidad tus sueños!
           </p>
         </div>
+        <div className="home-page__section-welcome__content-image">
+          <Image src={images.local_tattoo} alt="" className="home-page__section-welcome__image"/>
+        </div>
       </section>
 
       <section className="home-page__section-phrase">
