@@ -2,13 +2,15 @@ import { Banner } from "@/components/molecules/banner";
 import { imagesList } from "@/data/tattoo-artist";
 import Image from "next/image";
 import images from "@/assets";
-import './home-page.scss'
+import Link from "next/link";
+import {Facebook, WhatsApp, Instagram} from '@mui/icons-material';
+import "./home-page.scss";
 
 export default function Home() {
   return (
     <main className="home-page">
-      <Banner imagesList={imagesList} title='my studio tattoo'/>
-      
+      <Banner imagesList={imagesList} title="my studio tattoo" />
+
       <section className="home-page__section-welcome">
         <div className="home-page__section-welcome__content-info">
           <h2>¡BIENVENIDOS AL MUNDO DE MY TATTOO STUDIO!</h2>
@@ -37,24 +39,43 @@ export default function Home() {
           </p>
         </div>
         <div className="home-page__section-welcome__content-image">
-          <Image src={images.local_tattoo} alt="" className="home-page__section-welcome__image"/>
+          <Image
+            src={images.local_tattoo}
+            alt=""
+            className="home-page__section-welcome__image"
+          />
         </div>
       </section>
 
       <section className="home-page__section-phrase">
-        <Image src={images.rasgado_con_negro} alt="" className="home-page__section-phrase__image1" loading="lazy"/>
+        <Image
+          src={images.rasgado_con_negro}
+          alt=""
+          className="home-page__section-phrase__image1"
+          loading="lazy"
+        />
         <div className="home-page__section-phrase__content-info">
           <h2>
             {`"Transformando la piel en lienzos vivos, un puntillado a la vez."`}
           </h2>
         </div>
-        <Image src={images.rasgado_con_negro} alt="" className="home-page__section-phrase__image2" loading="lazy"/>
+        <Image
+          src={images.rasgado_con_negro}
+          alt=""
+          className="home-page__section-phrase__image2"
+          loading="lazy"
+        />
       </section>
 
       <section className="home-page__section-known">
         <div className="home-page__section-known__content-info">
           <h2>CONOCE A MY STUDIO TATTOO Y SU EQUIPO</h2>
-          <Image src={images.icono_tattoo} alt="" className="home-page__section-known__icon" loading="lazy"/>
+          <Image
+            src={images.icono_tattoo}
+            alt=""
+            className="home-page__section-known__icon"
+            loading="lazy"
+          />
           <p>
             En el corazón del bullicioso distrito artístico de la ciudad, se
             encuentra MY Studio Tatto, un santuario para los amantes del arte
@@ -78,7 +99,49 @@ export default function Home() {
             ayudarte a hacer realidad tus visiones.
           </p>
         </div>
-        <Image src={images.rasgado_con_negro} alt="" className="home-page__section-known__separation" loading="lazy"/>
+      </section>
+
+      <section className="home-page__section-phrase"
+        style={{
+          backgroundImage: `url('https://foolhardytattoocom.files.wordpress.com/2020/06/tattoo-artist-wrapping-client-s-arm-in-plastic-clingfilm-to-encourage-tattoo-healing.jpg')`,
+        }}
+      >
+        <Image
+          src={images.rasgado_con_negro}
+          alt=""
+          className="home-page__section-phrase__image1"
+          loading="lazy"
+        />
+        <div className="home-page__section-phrase__content-info">
+          <h2>{`¿Necesitas consejos sobre el cuidado de tus tatuajes?`}</h2>
+          <p>
+            {`¡Estás en el lugar correcto! Descubre cómo mantener tus obras de arte en perfecto estado y tu piel radiante con nuestros expertos en el foro de cuidado de tatuajes. ¡No te pierdas esta invaluable información para lucir tus tatuajes con orgullo!`}
+          </p>
+          <Link href='/cuidados'>Ingrese aquí</Link>
+        </div>
+        <Image
+          src={images.rasgado_con_negro}
+          alt=""
+          className="home-page__section-phrase__image2"
+          loading="lazy"
+        />
+      </section>
+
+      <section className="home-page__section-end">
+        <div className="home-page__section-end__content-image">
+          <Image src={images.tatuador_x} alt=""/>
+        </div>
+        <div className="home-page__section-end__content-contacts">
+          <h2>¡Desata tu creatividad! <br /> ¡Estamos aquí para convertir tus ideas en arte!</h2>
+          <p>
+            ¡Contáctanos ahora y déjanos llevar tus sueños a la vida a través de tinta y pasión!
+          </p>
+          <div className="home-page__section-end__social-networks">
+            <Facebook/> 
+            <WhatsApp/>
+            <Instagram/> 
+          </div>
+        </div>
       </section>
     </main>
   );

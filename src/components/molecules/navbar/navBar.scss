@@ -8,7 +8,10 @@
     animation: enhance-header linear both;
     animation-timeline: scroll( root );
     animation-range: 0 200px;
-
+    &__logo{
+        display: flex;
+        align-items: center;
+    }
     &__options-list{
         display: flex;
         align-items: center;

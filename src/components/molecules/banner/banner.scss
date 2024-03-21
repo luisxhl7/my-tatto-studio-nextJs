@@ -41,7 +41,7 @@
   &__divisor-section {
     z-index: 2;
     position: absolute;
-    bottom: 0px;
+    bottom: -1px;
     width: 100%;
     & img {
       object-fit: cover;

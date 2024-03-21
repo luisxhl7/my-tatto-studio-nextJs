@@ -11,6 +11,7 @@ export const imagesList:ImageItem[] = [
   },
   {
     image: "https://www.elidealgallego.com/images/showid2/5827226?w=900",
+    // image: "https://i.pinimg.com/564x/e8/d3/70/e8d3707d01dde504f3ce8b72a04628c5.jpg",
     name: 'veronica'
   },
   {

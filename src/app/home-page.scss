@@ -70,7 +70,7 @@
         &__image1{
             rotate: 180deg;
             position: absolute;
-            top: 0px;
+            top: -1px;
         }
         &__image2{
             position: absolute;
@@ -80,19 +80,31 @@
             width: 100%;
             height: 100%;
             display: flex;
-            background-color: #00000065;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            background-color: #00000065;
             color: white;
+            text-align: center;
             & h2{
                 font-size: 40px;
+                max-width: 700px;
+            }
+            & p{
+                font-size: 20px;
+                max-width: 700px;
+            }
+            & a{
+                font-size: 20px;
+                text-decoration: underline;
+                color: #ffffff;
             }
         }
     }
     &__section-known {
         width: 100%;
         display: flex;
-        min-height: calc(100vh - 80px);
+        min-height: calc(80vh - 80px);
         flex-direction: column;
         text-align: center;
         animation: animationInText linear both;
@@ -124,11 +136,41 @@
             height: 100px;
             margin: auto;
         }
-        &__separation{
-            position: absolute;
-            bottom: 0px;
-            width: 100%;
-            height: auto;
+    }
+    &__section-end{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        // &__content-image{
+        //     width: 600px;
+        //     height: 600px;
+        // }
+        &__content-contacts{
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
+        &__social-networks{
+            margin-top: 20px;
+            width: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            & svg{
+                font-size: 30px;
+                cursor: pointer;
+                transition: .5s linear;
+                &:hover{
+                    color: #ffffff;
+                }
+            }
+        }
+        // & img{
+        //     max-width: 100%;
+        //     height: auto;
+        // }
     }
 }
