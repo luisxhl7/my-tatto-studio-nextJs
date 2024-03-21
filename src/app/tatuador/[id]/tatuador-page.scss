@@ -16,7 +16,7 @@
     margin: auto;
     text-align: center;
     font-size: 25px;
-    animation: reveals linear both;
+    animation: revealsTexts linear both;
     animation-timeline: view();
     animation-range: entry 10% cover 50%;
     margin-bottom: 100px;
@@ -30,20 +30,42 @@
     width: 100%;
     height: auto;
     margin-bottom: 32px;
-    animation: reveals linear both;
+    animation: revealsImages linear both;
     animation-timeline: view();
-    animation-range: entry 10% cover 20%;
-    @keyframes reveals {
+    animation-range: entry 20% cover 40%;
+    @keyframes revealsImages {
       from {
         opacity: 0;
-        translate: 0 500px;
+        translate: 0 200px;
         scale: .5;
+        filter: blur(5px);
       }
       to {
         opacity: 1;
         translate: 0 0;
         scale: 1;
+        filter: blur(0px);
       }
+    }
+  }
+  & h2{
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 50px;
+    animation: revealsTexts linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 50%;
+  }
+  @keyframes revealsTexts {
+    from {
+      opacity: 0;
+      translate: 0 200px;
+      scale: .5;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
     }
   }
 }

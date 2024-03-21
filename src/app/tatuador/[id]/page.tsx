@@ -38,9 +38,10 @@ const Page = ({params}: {params: PageParams}) => {
 
             <p className="tatuadorPage__description">{tatuador?.description}</p>
 
+            <h2>Proyectos Realizados</h2>
             <section className="tatuadorPage__content-images">
                 {tatuador?.portafolio.map((item, idx) => (
-                <img key={idx} src={item} alt="" className="tatuadorPage__images"/>
+                    <img key={idx} src={item} alt="" className="tatuadorPage__images"/>
                 ))}
             </section>
         </main>
