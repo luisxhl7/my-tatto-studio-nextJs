@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC } from "react";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import "./modal-image.scss";
 
@@ -10,8 +10,7 @@ interface ModalImageProps {
 }
 
 const ModalImage: FC<ModalImageProps> = ({ handleOpenModal, images, actualImage, setActualImage }) => {
-
-
+  
   const handleImageChange = (newPosition: number) => {
     if (newPosition >= 0 && newPosition < images.length) {
       setActualImage(newPosition);
@@ -19,7 +18,7 @@ const ModalImage: FC<ModalImageProps> = ({ handleOpenModal, images, actualImage,
   };
 
   return (
-    <div className="modal-image">
+    <div className={`modal-image`}>
       <div className="modal-image__content-image">
         <button
           onClick={() => handleOpenModal(undefined)}
@@ -30,7 +29,7 @@ const ModalImage: FC<ModalImageProps> = ({ handleOpenModal, images, actualImage,
         
         <button
           onClick={() => handleImageChange(actualImage - 1)}
-          className="modal-image__button-arrow"
+          className={`modal-image__button-arrow ${actualImage === 0 ? '--disabled' : ''}`}
         >
           <KeyboardArrowLeft />
         </button>
@@ -39,7 +38,7 @@ const ModalImage: FC<ModalImageProps> = ({ handleOpenModal, images, actualImage,
         
         <button
           onClick={() => handleImageChange(actualImage + 1)}
-          className="modal-image__button-arrow"
+          className={`modal-image__button-arrow ${actualImage + 1 === images.length ? '--disabled' : ''}`}
         >
           <KeyboardArrowRight />
         </button>

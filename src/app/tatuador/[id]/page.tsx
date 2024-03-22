@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 import { Banner } from "@/components/molecules/banner";
 import { tattooArtist } from "@/data/tattoo-artist";
@@ -51,11 +51,24 @@ const Page = ({ params }: { params: PageParams }) => {
       <h2>Proyectos Realizados</h2>
       <section className="tatuadorPage__content-images">
         {tatuador?.portafolio.map((item, idx) => (
-          <img key={idx} src={item} alt="" className="tatuadorPage__images" onClick={() => handleOpenModal(idx)}/>
+          <img
+            key={idx}
+            src={item}
+            alt=""
+            className="tatuadorPage__images"
+            onClick={() => handleOpenModal(idx)}
+          />
         ))}
       </section>
 
-      {openModal && <ModalImage handleOpenModal={handleOpenModal} images={tatuador?.portafolio ? tatuador?.portafolio : []} actualImage={actualImage} setActualImage={setActualImage}/>}
+      {openModal && (
+        <ModalImage
+          handleOpenModal={handleOpenModal}
+          images={tatuador?.portafolio ? tatuador?.portafolio : []}
+          actualImage={actualImage}
+          setActualImage={setActualImage}
+        />
+      )}
     </main>
   );
 };
