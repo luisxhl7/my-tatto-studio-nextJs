@@ -33,6 +33,7 @@
     animation: revealsImages linear both;
     animation-timeline: view();
     animation-range: entry 20% cover 40%;
+    cursor: pointer;
     @keyframes revealsImages {
       from {
         opacity: 0;

@@ -32,7 +32,6 @@ export const tattooArtist: TattooArtist[] = [
     portafolio: [
       'https://i.pinimg.com/564x/e8/87/c6/e887c66ff9945ce69fae60f07fae0b4e.jpg',
       'https://i.pinimg.com/564x/2a/8e/5d/2a8e5d50281bb7ab027d3d82ec017738.jpg',
-      'hhttps://i.pinimg.com/564x/cf/2c/06/cf2c06970efeb99f3f3ef9596b944ecc.jpg',
       'https://i.pinimg.com/564x/2b/f1/d7/2bf1d760e5f514915361594eca9fa8a2.jpg',
       'https://i.pinimg.com/564x/82/4d/f4/824df4f2c98330b29e70df1081b370a3.jpg',
       'https://i.pinimg.com/564x/c8/b9/bf/c8b9bf9902c7ef626056a3b1ca33187b.jpg',
