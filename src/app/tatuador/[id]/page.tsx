@@ -11,6 +11,7 @@ interface TatuadorPageProps {
   url: string;
   description: string;
   portafolio: string[];
+  disenos: string[];
   redesSociales: string[];
   logros: string[];
 }
@@ -22,13 +23,15 @@ interface PageParams {
 const Page = ({ params }: { params: PageParams }) => {
   const [tatuador, setTatuador] = useState<TatuadorPageProps | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [actualImage, setActualImage] = useState<number>(0); // Inicializar actualImage como 0
+  const [actualImage, setActualImage] = useState<number>(0);
+  const [listImages, setListImages] = useState<Array<string> | null>(null);
 
-  const handleOpenModal = (idx?: number) => {
-    setOpenModal(!openModal);
-    if (idx !== undefined) {
+  const handleOpenModal = (idx?: number, list?: Array<string> | null) => {
+    if (idx !== undefined && list !== undefined) {
       setActualImage(idx);
+      setListImages(list)
     }
+    setOpenModal(!openModal);
   };
 
   useEffect(() => {
@@ -56,15 +59,32 @@ const Page = ({ params }: { params: PageParams }) => {
             src={item}
             alt=""
             className="tatuadorPage__images"
-            onClick={() => handleOpenModal(idx)}
+            onClick={() => handleOpenModal(idx, tatuador?.portafolio)}
           />
         ))}
+      </section>
+
+      <section id="sectionPin" className="sectionPin">
+        <div className="pin-wrap-sticky">
+          <h2>Diseños</h2>
+          <div className="pin-wrap">
+            {tatuador?.disenos.map((item, idx) => (
+              <img
+                key={idx}
+                src={item}
+                alt=""
+                className=""
+                onClick={() => handleOpenModal(idx, tatuador?.disenos)}
+              />
+            ))}
+          </div>
+        </div>
       </section>
 
       {openModal && (
         <ModalImage
           handleOpenModal={handleOpenModal}
-          images={tatuador?.portafolio ? tatuador?.portafolio : []}
+          images={listImages ? listImages : []}
           actualImage={actualImage}
           setActualImage={setActualImage}
         />

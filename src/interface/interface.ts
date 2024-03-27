@@ -9,6 +9,7 @@ export interface TattooArtist {
     url: string;
     description: string;
     portafolio: string[];
+    disenos: string[];
     redesSociales: string[];
     logros: string[];
 }
