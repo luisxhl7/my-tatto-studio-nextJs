@@ -1,3 +1,6 @@
+@import '../style/mixins.scss';
+@import '../style/variables.scss';
+
 .home-page {
     &__section-welcome {
         display: flex;
@@ -9,6 +12,7 @@
         animation: animationInText linear both;
         animation-timeline: view();
         animation-range: entry 10% cover 30%;
+        padding: 0px 15px;
         @keyframes animationInText {
         from {
             opacity: 0;
@@ -50,9 +54,7 @@
         filter: grayscale(100%);
         animation: reveal linear both;
         animation-timeline: view();
-        animation-range: 
-          entry 10% cover 60%,
-        ;
+        animation-range: entry 10% cover 60%;
         @keyframes reveal {
             from {
                 background-position: 0% 100%;
@@ -60,6 +62,10 @@
             to {
                 background-position: 0% 0%;
             }
+        }
+        @include FromMax($medium) {
+            background-color: red;
+            background-size: cover;
         }
       
         & img{
@@ -86,6 +92,9 @@
             background-color: #00000065;
             color: white;
             text-align: center;
+            @include FromMax($large) {
+                padding: 0px 15px;
+            }
             & h2{
                 font-size: 40px;
                 max-width: 700px;
@@ -124,6 +133,7 @@
         display: flex;
         flex-direction: column;
         margin: 70px auto 0px;
+        padding: 0px 15px 50px;
         & h2 {
             font-size: 50px;
         }
@@ -142,6 +152,9 @@
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
+        @include FromMax($large) {
+            padding-bottom: 30px;
+        }
         &__content-contacts{
             text-align: center;
             display: flex;
@@ -161,6 +174,15 @@
                 transition: .5s linear;
                 &:hover{
                     color: #ffffff;
+                }
+            }
+        }
+        &__content-image{
+            @include FromMax($large) {
+                & img{
+                    margin: auto;
+                    width: 100%;
+                    height: auto;
                 }
             }
         }

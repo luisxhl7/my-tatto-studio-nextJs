@@ -10,6 +10,7 @@
     padding: 5px;
     margin: 5px;
     cursor: pointer;
+    transition: height .5s linear;
     @include FromMin($x-large) {
         height: auto;
         cursor: auto;
@@ -28,7 +29,7 @@
         }
     }
     &.--isOpen{
-        height: auto;
+        height: 180px;
     }
     a, span{
         color: #ffffff;

@@ -29,7 +29,7 @@ const Page = ({ params }: { params: PageParams }) => {
   const handleOpenModal = (idx?: number, list?: Array<string> | null) => {
     if (idx !== undefined && list !== undefined) {
       setActualImage(idx);
-      setListImages(list)
+      setListImages(list);
     }
     setOpenModal(!openModal);
   };
@@ -64,7 +64,7 @@ const Page = ({ params }: { params: PageParams }) => {
         ))}
       </section>
 
-      <section id="sectionPin" className="sectionPin">
+      {/* <section id="sectionPin" className="sectionPin">
         <div className="pin-wrap-sticky">
           <h2>Diseños</h2>
           <div className="pin-wrap">
@@ -79,6 +79,22 @@ const Page = ({ params }: { params: PageParams }) => {
             ))}
           </div>
         </div>
+      </section> */}
+
+      <section>
+        <h2>Diseños</h2>
+        <ul className="cards">
+          {tatuador?.disenos.map((item, idx) => (
+            <li key={idx}>
+              <img
+                src={item}
+                width="600"
+                height="600"
+                alt="…"
+              />
+            </li>
+          ))}
+        </ul>
       </section>
 
       {openModal && (

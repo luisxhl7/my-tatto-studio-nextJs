@@ -94,11 +94,6 @@ export const NavBar = () => {
               Cuidados
             </Link>
           </li>
-          <li>
-            <Link href="/contacto" onClick={handleLinkClick}>
-              Contacto
-            </Link>
-          </li>
         </ul>
       ) : (
         <NavbarMobile />

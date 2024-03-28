@@ -1,3 +1,6 @@
+@import '../../../style/mixins.scss';
+@import '../../../style/variables.scss';
+
 .banner {
   &__section-1 {
     display: flex;
@@ -61,10 +64,14 @@
     & h1 {
       position: absolute;
       bottom: 50px;
-      font-size: 100px;
+      font-size: 7vw;
       z-index: 1;
       text-transform: capitalize;
       animation: stripeMovement 4s ease-out;
+      text-shadow: 1px 1px 1px #000000;
+      @include FromMax($large) {
+        font-size: 60px;
+      }
       @keyframes stripeMovement{
         0%{
           opacity: 0;

@@ -66,7 +66,7 @@ const Cuidados = () => {
       <section className="cuidadosPage__Section-steps">
         <h3>Antes de hacer el tatuaje:</h3>
         <p>
-          <strong>Investiga al tatuador:</strong>
+          <strong>Investiga al tatuador: </strong>
           Investiga y elige un tatuador con experiencia y buena reputación.
           Revisa su portafolio para asegurarte de que su estilo y calidad de
           trabajo coincidan con lo que deseas.

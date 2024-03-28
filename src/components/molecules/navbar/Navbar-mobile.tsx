@@ -112,11 +112,6 @@ export const NavbarMobile = () => {
                         Cuidados
                         </Link>
                     </li>
-                    <li>
-                        <Link href="/contacto" onClick={handleLinkClick}>
-                        Contacto
-                        </Link>
-                    </li>
                 </ul>
             </div>
         </div>
