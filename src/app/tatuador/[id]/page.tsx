@@ -4,6 +4,7 @@ import { Banner } from "@/components/molecules/banner";
 import { tattooArtist } from "@/data/tattoo-artist";
 import ModalImage from "@/components/molecules/modal-image/Modal-image";
 import "./tatuador-page.scss";
+import { SimpleSlider } from "@/components/atoms/simpleSlider/SimpleSlider";
 
 interface TatuadorPageProps {
   name: string;
@@ -19,6 +20,19 @@ interface TatuadorPageProps {
 interface PageParams {
   id: string;
 }
+
+const customSettings = {
+  infinite: true,
+  centerMode: true,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  autoplay: true,
+  speed: 2000,
+  autoplaySpeed: 2000,
+  cssEase: "linear",
+  arrows: false,
+  swipeToSlide: true,
+};
 
 const Page = ({ params }: { params: PageParams }) => {
   const [tatuador, setTatuador] = useState<TatuadorPageProps | null>(null);
@@ -64,37 +78,15 @@ const Page = ({ params }: { params: PageParams }) => {
         ))}
       </section>
 
-      {/* <section id="sectionPin" className="sectionPin">
-        <div className="pin-wrap-sticky">
-          <h2>Diseños</h2>
-          <div className="pin-wrap">
-            {tatuador?.disenos.map((item, idx) => (
-              <img
-                key={idx}
-                src={item}
-                alt=""
-                className=""
-                onClick={() => handleOpenModal(idx, tatuador?.disenos)}
-              />
-            ))}
-          </div>
-        </div>
-      </section> */}
-
       <section>
         <h2>Diseños</h2>
-        <ul className="cards">
+        <SimpleSlider customSettings={customSettings}>
           {tatuador?.disenos.map((item, idx) => (
-            <li key={idx}>
-              <img
-                src={item}
-                width="600"
-                height="600"
-                alt="…"
-              />
-            </li>
+            <div className="tatuadorPage__slider" key={item}>
+              <img src={item} alt={`imagen`} />
+            </div>
           ))}
-        </ul>
+        </SimpleSlider>
       </section>
 
       {openModal && (

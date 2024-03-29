@@ -1,0 +1,35 @@
+@import '../../../style/mixins.scss';
+@import '../../../style/variables.scss';
+
+.slider-local{
+    width: 100%;
+    margin: auto;
+    height: auto;
+    // & .slick-slide, .slick-cloned{
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     flex-direction: column;
+    // }
+    // & .slick-prev:before, .slick-next:before{
+    //     color: #3d3d3d;
+    //     font-size: 35px;
+    //     z-index: 10;
+    // }
+    // & .slick-prev {
+    //     left: -32px;
+
+    // }
+    // & .slick-dots{
+    //     & li > button{
+    //         &::before{
+    //             margin-top: 30px;
+    //             color: rgb(92, 0, 250);
+    //             font-size: 13px;
+    //             @include FromMax($medium) {
+    //                 margin-top: 0px;
+    //             }
+    //         }
+    //     }
+    // }
+}

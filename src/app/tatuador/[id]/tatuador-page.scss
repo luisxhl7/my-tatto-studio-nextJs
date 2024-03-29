@@ -78,84 +78,43 @@
       scale: 1;
     }
   }
-}
 
-:root {
-  --cover-size: 15rem;
-}
 
-.cards {
-  // --size: 6;
-  min-height: calc(var(--cover-size)* 2.5);
-  width: calc(var(--cover-size)* var(--size));
-  margin: 0 auto;
-  padding: calc(var(--cover-size) / 3* 2) 0;
-  position: relative;
-  max-width: 100vw;
-  list-style: none;
-  overflow-x: scroll;
-  white-space: nowrap;
-  background: rgba(0 0 0 / 0.5);
-}
-
-.cards {
-	scroll-snap-type: x mandatory;
-}
-.cards li {
-	scroll-snap-align: center;
-	display: inline-block;
-  view-timeline-name: --li-in-and-out-of-view;
-  view-timeline-axis: inline;
-  animation: linear adjust-z-index both;
-  animation-timeline: --li-in-and-out-of-view;
-  perspective: 40em;
-  position: relative;
-  z-index: 1;
-  will-change: z-index;
-  user-select: none;
-  &:last-of-type {
-    margin-right: calc(50% - (var(--cover-size) / 2));
+  &__slider{
+    width: 240px;
+    height: 240px;
+    perspective: 40em;
+    position: relative;
+    z-index: 1;
+    will-change: z-index;
+    user-select: none;
+    display: flex !important;
+    justify-content: center;
+    & img{
+      object-fit: cover;
+      width: 240px;
+      height: 240px;
+      perspective: 40em;
+      transition: transform 0.5s, scale .5s;
+      animation: linear rotate-cover both;
+      animation-timeline: --li-in-and-out-of-view;
+      transform: translateX(0%) rotateY(-45deg);
+      will-change: transform;
+      -webkit-box-reflect: below 0.5em linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / 0.25));
+    }
   }
-  &:first-of-type {
-    margin-left: calc(50% - (var(--cover-size) / 2));
+  & .slick-track{
+    height: 450px;
   }
-}
-
-.cards li img {
-	max-width: 240px;
-	max-height: 240px;
-	-webkit-box-reflect: below 0.5em linear-gradient(rgb(0 0 0 / 0), rgb(0 0 0 / 0.25));
-}
-.cards li > img {
-	/* Link an animation to the established view-timeline (of the parent li) and have it run during the contain phase */
-	animation: linear rotate-cover both;
-	animation-timeline: --li-in-and-out-of-view;
-}
-@keyframes adjust-z-index {
-	0% {
-		z-index: 1;
-	}
-	50% {
-    z-index: 100;
-	}
-	100% {
-		z-index: 1;
-	}
-}
-@keyframes rotate-cover {
-	0% {
-		transform: translateX(-100%) rotateY(-45deg);
-	}
-	35% {
-		transform: translateX(0) rotateY(-45deg);
-	}
-	50% {
-		transform: rotateY(0deg) translateZ(1em) scale(1.5);
-	}
-	65% {
-		transform: translateX(0) rotateY(45deg);
-	}
-	100% {
-		transform: translateX(100%) rotateY(45deg);
-	}
+  & .slick-slide{
+    margin: 100px 0px 50px;
+  }
+  & .slick-center{
+    & img{
+      z-index: 10;
+      transition: transform 0.5s, scale .5s;
+      scale: 1.4;
+      transform: translateX(0%) rotateY(0deg);
+    }
+  }
 }
