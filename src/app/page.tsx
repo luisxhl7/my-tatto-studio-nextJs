@@ -1,10 +1,53 @@
+"use client";
+
 import { Banner } from "@/components/molecules/banner";
 import { imagesList } from "@/data/tattoo-artist";
 import Image from "next/image";
-import images from "@/assets";
 import Link from "next/link";
 import {Facebook, WhatsApp, Instagram} from '@mui/icons-material';
+import { SimpleSlider } from "@/components/atoms/simpleSlider";
+import images from "@/assets";
+import sponsors from "@/assets/sponsors";
 import "./home-page.scss";
+
+const customSettings = {
+  infinite: true,
+  centerMode: true,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  autoplay: true,
+  speed: 4000,
+  autoplaySpeed: 100,
+  cssEase: "linear",
+  arrows: false,
+  swipeToSlide: true,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    }
+  ]
+};
 
 export default function Home() {
   return (
@@ -142,6 +185,18 @@ export default function Home() {
             <Instagram/> 
           </div>
         </div>
+      </section>
+
+      <section className="home-page__section-sponsors">
+        <h2>Patrocinadores</h2>
+        
+        <SimpleSlider  customSettings={customSettings}>
+          {sponsors?.map((item, idx) => (
+            <div className="" key={idx}>
+              <img src={item.src} alt={`imagen`}/>
+            </div>
+          ))}
+        </SimpleSlider>
       </section>
     </main>
   );

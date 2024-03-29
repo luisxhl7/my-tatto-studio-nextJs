@@ -187,4 +187,19 @@
             }
         }
     }
+    &__section-sponsors{
+        & h2{
+            text-align: center;
+        }
+    }
+    & .slick-track{
+        display: flex;
+        align-items: center;
+        & img{
+            width: 200px;
+            @include FromMax($x-large) {
+                width: 100px;
+            }
+        }
+    }
 }

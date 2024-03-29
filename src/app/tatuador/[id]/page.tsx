@@ -109,7 +109,7 @@ const Page = ({ params }: { params: PageParams }) => {
         <SimpleSlider customSettings={customSettings}>
           {tatuador?.disenos.map((item, idx) => (
             <div className="tatuadorPage__slider" key={item}>
-              <img src={item} alt={`imagen`} />
+              <img src={item} alt={`imagen`} onClick={() => handleOpenModal(idx, tatuador?.disenos)}/>
             </div>
           ))}
         </SimpleSlider>
