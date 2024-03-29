@@ -1,10 +1,10 @@
 "use client";
 
 import { Banner } from "@/components/molecules/banner";
-import { imagesList } from "@/data/tattoo-artist";
-import Image from "next/image";
-import Link from "next/link";
 import {Facebook, WhatsApp, Instagram} from '@mui/icons-material';
+import Link from "next/link";
+import Image from "next/image";
+import { imagesList } from "@/data/tattoo-artist";
 import { SimpleSlider } from "@/components/atoms/simpleSlider";
 import images from "@/assets";
 import sponsors from "@/assets/sponsors";

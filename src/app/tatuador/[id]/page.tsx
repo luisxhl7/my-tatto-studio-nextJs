@@ -27,11 +27,12 @@ const customSettings = {
   slidesToShow: 5,
   slidesToScroll: 1,
   autoplay: true,
-  speed: 2000,
-  autoplaySpeed: 2000,
+  speed: 3000,
+  autoplaySpeed: 100,
   cssEase: "linear",
   arrows: false,
   swipeToSlide: true,
+  pauseOnHover: false,
   responsive: [
     {
       breakpoint: 1024,
