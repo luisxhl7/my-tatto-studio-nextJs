@@ -23,6 +23,7 @@ const ModalImage: FC<ModalImageProps> = ({ handleOpenModal, images, actualImage,
         <button
           onClick={() => handleOpenModal(undefined)}
           className="modal-image__button-close"
+          title="cerrar"
         >
           x
         </button>
@@ -30,6 +31,7 @@ const ModalImage: FC<ModalImageProps> = ({ handleOpenModal, images, actualImage,
         <button
           onClick={() => handleImageChange(actualImage - 1)}
           className={`modal-image__button-arrow ${actualImage === 0 ? '--disabled' : ''}`}
+          title="anterior"
         >
           <KeyboardArrowLeft />
         </button>
@@ -39,6 +41,7 @@ const ModalImage: FC<ModalImageProps> = ({ handleOpenModal, images, actualImage,
         <button
           onClick={() => handleImageChange(actualImage + 1)}
           className={`modal-image__button-arrow ${actualImage + 1 === images.length ? '--disabled' : ''}`}
+          title="siguiente"
         >
           <KeyboardArrowRight />
         </button>

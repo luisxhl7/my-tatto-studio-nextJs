@@ -177,12 +177,22 @@ export default function Home() {
         <div className="home-page__section-end__content-contacts">
           <h2>¡Desata tu creatividad! <br /> ¡Estamos aquí para convertir tus ideas en arte!</h2>
           <p>
-            ¡Contáctanos ahora y déjanos llevar tus sueños a la vida a través de tinta y pasión!
+            ¡Contáctenos ahora y déjanos llevar tus sueños a la vida a través de tinta y pasión!
           </p>
           <div className="home-page__section-end__social-networks">
-            <Facebook/> 
-            <WhatsApp/>
-            <Instagram/> 
+            
+            <a href="https://www.facebook.com/" title="Facebook">
+              <Facebook/> 
+            </a>
+            
+            <a href="https://web.whatsapp.com/" title="WhatsApp">
+              <WhatsApp/>
+            </a>
+            
+            <a href="https://www.instagram.com/" title="Instagram">
+              <Instagram/> 
+            </a>
+
           </div>
         </div>
       </section>
@@ -190,7 +200,7 @@ export default function Home() {
       <section className="home-page__section-sponsors">
         <h2>Patrocinadores</h2>
         
-        <SimpleSlider  customSettings={customSettings}>
+        <SimpleSlider customSettings={customSettings}>
           {sponsors?.map((item, idx) => (
             <div className="" key={idx}>
               <img src={item.src} alt={`imagen`}/>

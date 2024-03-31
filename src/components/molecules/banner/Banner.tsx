@@ -22,6 +22,7 @@ export const Banner: React.FC<BannerProps> = ({ imagesList, title }) => {
   const handleMouseLeave = () => {
     setHoveredImage(null);
   };
+  
 
   useEffect(() => {
     if (imagesList) {
@@ -58,17 +59,17 @@ export const Banner: React.FC<BannerProps> = ({ imagesList, title }) => {
               }`}
             >
               <span className="banner__content-image__name">{item?.name}</span>
-              <img src={item?.image} alt="" title={`Ver mas de ${item?.name}`} />
+              <img src={item?.image} alt="imagen tatuador" title={`Ver mas de ${item?.name}`} />
             </Link>
           ))
         ) : (
-          <img src={typeof imagesList === "string" ? imagesList : ""} alt="" className="banner__content-image__animation-filter"/>
+          <img src={typeof imagesList === "string" ? imagesList : ""} alt="imagen tatuador" className="banner__content-image__animation-filter"/>
         )}
       </div>
 
       <div className="banner__divisor-section">
         {title && <h1>{title}</h1>}
-        <Image src={images.rasgado_con_negro} alt="" />
+        <Image src={images.rasgado_con_negro} alt="imagen separador" />
       </div>
     </div>
   );

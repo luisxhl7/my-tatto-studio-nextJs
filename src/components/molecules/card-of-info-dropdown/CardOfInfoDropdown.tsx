@@ -8,7 +8,7 @@ interface CardOfInfoDropdownProps {
 }
 
 export const CardOfInfoDropdown: React.FC<CardOfInfoDropdownProps> = ({ children, title }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false); // Asegura que 'isOpen' sea un booleano
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleIsOpen = () => {
     setIsOpen(!isOpen);
