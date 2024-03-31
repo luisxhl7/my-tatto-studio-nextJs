@@ -43,6 +43,7 @@ export const NavbarMobile = () => {
     return (
         <div className="navBar__menu-mobile">
             <button
+                title="Menu"
                 className={`navBar__menu-mobile__hamburger ${openMenu ? "--open" : ""}`}
                 onClick={handleOpenMenu}
             >
@@ -66,12 +67,13 @@ export const NavbarMobile = () => {
                         </Link>
                     </li>
                     <li>
-                        <button onClick={toggleSubMenu}>
+                        <button onClick={toggleSubMenu} title="Trabajos">
                             Trabajos
                             {isSubMenuOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
                         </button>
                         <ol
-                            className={`navBar__menu-mobile__options-list ${
+                            title="subMenu"
+                            className={`navBar__menu-mobile__options-list__subMenu ${
                                 isSubMenuOpen ? "--open" : ""
                             }`}
                         >

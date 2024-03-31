@@ -12,6 +12,7 @@ import "./navBar.scss";
 export const NavBar = () => {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<boolean>(false);
   const { isMobile } = useMobileDetect();
+  
   const toggleSubMenu = () => {
     setIsSubMenuOpen(!isSubMenuOpen);
   };
