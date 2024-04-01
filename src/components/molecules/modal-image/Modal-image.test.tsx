@@ -18,7 +18,7 @@ describe('Testing of Footer', () => {
       />
     );
 
-    expect(screen.getByAltText("")).toHaveAttribute("src", "image2.jpg");
+    expect(screen.getByAltText("imagen modal")).toHaveAttribute("src", "image2.jpg");
     expect(screen.getByTitle("cerrar")).toBeInTheDocument();
     expect(screen.getByTitle("anterior")).toBeInTheDocument();
     expect(screen.getByTitle("siguiente")).toBeInTheDocument();

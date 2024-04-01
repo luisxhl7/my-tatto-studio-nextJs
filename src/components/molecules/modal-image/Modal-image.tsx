@@ -36,7 +36,7 @@ const ModalImage: FC<ModalImageProps> = ({ handleOpenModal, images, actualImage,
           <KeyboardArrowLeft />
         </button>
 
-        <img src={images[actualImage]} alt="" className={`modal-image__content-image__image`} />
+        <img src={images[actualImage]} alt="imagen modal" className={`modal-image__content-image__image`} />
         
         <button
           onClick={() => handleImageChange(actualImage + 1)}

@@ -2,7 +2,6 @@ import 'matchmedia-polyfill';
 import { render, screen } from "@testing-library/react";
 import Home from '@/app/page';
 
-
 describe('Testing of HomePage', () => {
     
   beforeAll(() => {

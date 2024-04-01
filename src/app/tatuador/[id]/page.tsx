@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Banner } from "@/components/molecules/banner";
 import { tattooArtist } from "@/data/tattoo-artist";
 import ModalImage from "@/components/molecules/modal-image/Modal-image";
-import "./tatuador-page.scss";
 import { SimpleSlider } from "@/components/atoms/simpleSlider/SimpleSlider";
+import "./tatuador-page.scss";
 
 interface TatuadorPageProps {
   name: string;
@@ -40,28 +40,28 @@ const customSettings = {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
-        dots: true
-      }
+        dots: true,
+      },
     },
     {
       breakpoint: 600,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        initialSlide: 2
-      }
+        initialSlide: 2,
+      },
     },
     {
       breakpoint: 480,
       settings: {
         slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
+        slidesToScroll: 1,
+      },
+    },
+  ],
 };
 
-const Page = ({ params }: { params: PageParams }) => {
+const Tatuador = ({ params }: { params: PageParams }) => {
   const [tatuador, setTatuador] = useState<TatuadorPageProps | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [actualImage, setActualImage] = useState<number>(0);
@@ -98,7 +98,7 @@ const Page = ({ params }: { params: PageParams }) => {
           <img
             key={idx}
             src={item}
-            alt=""
+            alt={`imagen de proyectos realizados ${idx}`}
             className="tatuadorPage__images"
             onClick={() => handleOpenModal(idx, tatuador?.portafolio)}
           />
@@ -110,7 +110,11 @@ const Page = ({ params }: { params: PageParams }) => {
         <SimpleSlider customSettings={customSettings}>
           {tatuador?.disenos.map((item, idx) => (
             <div className="tatuadorPage__slider" key={item}>
-              <img src={item} alt={`imagen`} onClick={() => handleOpenModal(idx, tatuador?.disenos)}/>
+              <img
+                src={item}
+                alt={`imagen de diseños realizados ${idx}`}
+                onClick={() => handleOpenModal(idx, tatuador?.disenos)}
+              />
             </div>
           ))}
         </SimpleSlider>
@@ -128,4 +132,4 @@ const Page = ({ params }: { params: PageParams }) => {
   );
 };
 
-export default Page;
+export default Tatuador;
