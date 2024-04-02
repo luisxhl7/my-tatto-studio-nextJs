@@ -69,7 +69,7 @@ export const NavbarMobile = () => {
                     <li>
                         <button onClick={toggleSubMenu} title="Trabajos">
                             Trabajos
-                            {isSubMenuOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                            {isSubMenuOpen ? <KeyboardArrowUp className="navBar__menu-mobile-arrow"/> : <KeyboardArrowDown className="navBar__menu-mobile-arrow"/>}
                         </button>
                         <ol
                             title="subMenu"
