@@ -16,7 +16,9 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    animation: zoomBackground 15s;
+    @include FromMin($large) {
+      animation: zoomBackground 15s;
+    }
     @keyframes zoomBackground {
         from{
             background-size: 100%;
