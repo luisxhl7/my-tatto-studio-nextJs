@@ -19,6 +19,7 @@ export const NavbarMobile = () => {
     const handleLinkClick = () => {
         window.scrollTo(0, 0);
         setOpenMenu(false);
+        setIsSubMenuOpen(false);
     };
 
     useEffect(() => {
@@ -31,6 +32,7 @@ export const NavbarMobile = () => {
             !optionsContainerMobile.contains(event.target) 
         ) {
             setOpenMenu(false);
+            setIsSubMenuOpen(false);
         }
         };
 

@@ -128,10 +128,12 @@
             right: 0px;
             width: 0px;
             height: calc(100vh - 80px);
+            opacity: 0;
             transition: .5s ease-out;
             overflow: hidden;
             background-color: #000000;
             &.--open {
+                opacity: 1;
                 width: 200px;
             }
             & li{
