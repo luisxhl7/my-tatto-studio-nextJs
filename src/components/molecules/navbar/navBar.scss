@@ -174,6 +174,19 @@
                     align-items: center;
                     padding: 15px 0px;
                     z-index: 1;
+                    & span{
+                        width: 75px;
+                        height: 24px;
+                        text-align: start;
+                        display: flex;
+                        align-items: center;
+                        position: relative;
+                        & svg{
+                            z-index: -1;
+                            position: absolute;
+                            right: 0px;
+                        }
+                    }
                     &:hover{
                         color: #ffffff;
                         background-color: rgba(58, 58, 58, 0.486);

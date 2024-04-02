@@ -18,6 +18,7 @@ export const NavbarMobile = () => {
 
     const handleLinkClick = () => {
         window.scrollTo(0, 0);
+        setOpenMenu(false);
     };
 
     useEffect(() => {
@@ -25,13 +26,9 @@ export const NavbarMobile = () => {
         const optionsContainerMobile = document.querySelector(
             ".navBar__menu-mobile"
         );
-        const buttonArrow = document.querySelector(
-            ".navBar__menu-mobile-arrow"
-        );
         if (
             optionsContainerMobile &&
-            !optionsContainerMobile.contains(event.target) && buttonArrow &&
-            !buttonArrow.contains(event.target)
+            !optionsContainerMobile.contains(event.target) 
         ) {
             setOpenMenu(false);
         }
@@ -72,8 +69,10 @@ export const NavbarMobile = () => {
                     </li>
                     <li>
                         <button onClick={toggleSubMenu} title="Trabajos">
-                            Trabajos
-                            {isSubMenuOpen ? <KeyboardArrowUp className="navBar__menu-mobil-arrow"/> : <KeyboardArrowDown className="navBar__menu-mobil-arrow"/>}
+                            <span>
+                                Trabajos
+                                {isSubMenuOpen ? <KeyboardArrowUp className="navBar__menu-mobil-arrow"/> : <KeyboardArrowDown className="navBar__menu-mobil-arrow"/>}
+                            </span>
                         </button>
                         <ol
                             title="subMenu"
