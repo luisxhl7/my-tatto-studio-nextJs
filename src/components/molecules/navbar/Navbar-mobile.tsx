@@ -25,9 +25,13 @@ export const NavbarMobile = () => {
         const optionsContainerMobile = document.querySelector(
             ".navBar__menu-mobile"
         );
+        const buttonArrow = document.querySelector(
+            ".navBar__menu-mobile-arrow"
+        );
         if (
             optionsContainerMobile &&
-            !optionsContainerMobile.contains(event.target)
+            !optionsContainerMobile.contains(event.target) && buttonArrow &&
+            !buttonArrow.contains(event.target)
         ) {
             setOpenMenu(false);
         }
@@ -69,7 +73,7 @@ export const NavbarMobile = () => {
                     <li>
                         <button onClick={toggleSubMenu} title="Trabajos">
                             Trabajos
-                            {isSubMenuOpen ? <KeyboardArrowUp className="navBar__menu-mobile-arrow"/> : <KeyboardArrowDown className="navBar__menu-mobile-arrow"/>}
+                            {isSubMenuOpen ? <KeyboardArrowUp className="navBar__menu-mobil-arrow"/> : <KeyboardArrowDown className="navBar__menu-mobil-arrow"/>}
                         </button>
                         <ol
                             title="subMenu"
