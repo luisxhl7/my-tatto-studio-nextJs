@@ -202,7 +202,7 @@ export default function Home() {
         
         <SimpleSlider customSettings={customSettings}>
           {sponsors?.map((item, idx) => (
-            <div className="" key={idx}>
+            <div className="home-page__section-sponsors__content-image" key={idx}>
               <img src={item.src} alt={`imagen`}/>
             </div>
           ))}

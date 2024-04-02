@@ -56,7 +56,7 @@ export const NavBar = () => {
             onClick={toggleSubMenu}
           >
             Trabajos
-            {isSubMenuOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+            {isSubMenuOpen ? <KeyboardArrowUp onClick={() => () => {window.alert('funciona')}}/> : <KeyboardArrowDown />}
             <ol>
               <li>
                 <Link href="/tatuador/keneth" onClick={handleLinkClick}>

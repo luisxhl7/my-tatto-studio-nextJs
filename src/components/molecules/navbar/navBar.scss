@@ -48,6 +48,9 @@
     &__sub-Menu {
         position: relative;
         text-align: center;
+        & svg{
+            z-index: -1;
+        }
         & ol {
           width: 100%;
           position: absolute;

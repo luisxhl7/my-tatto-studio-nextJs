@@ -192,6 +192,11 @@
         & h2{
             text-align: center;
         }
+        &__content-image{
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
     }
     & .slick-track{
         display: flex;
