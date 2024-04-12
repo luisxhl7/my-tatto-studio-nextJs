@@ -8,6 +8,7 @@ import { imagesList } from "@/data/tattoo-artist";
 import { SimpleSlider } from "@/components/atoms/simpleSlider";
 import images from "@/assets";
 import sponsors from "@/assets/sponsors";
+import { useAppSelector } from "@/store/hooks";
 import "./home-page.scss";
 
 const customSettings = {
@@ -50,6 +51,9 @@ const customSettings = {
 };
 
 export default function Home() {
+  const { user, status } = useAppSelector(state => state.auth)
+  // console.log({user, status});
+  
   return (
     <main className="home-page">
       <Banner imagesList={imagesList} title="my studio tattoo" />

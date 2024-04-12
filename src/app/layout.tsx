@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Grenze_Gotisch } from "next/font/google";
 import { Footer } from "@/components/molecules/footer";
 import { NavBar } from "@/components/molecules/navbar";
+import { Providers } from "@/store/providers";
 import "./globals.scss";
 
 const GrenzeGotisch = Grenze_Gotisch({
@@ -23,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={GrenzeGotisch.className}>
-        <NavBar/>
-        {children}
-        <Footer/>
+        <Providers>
+          <NavBar/>
+          {children}
+          <Footer/>
+        </Providers>
       </body>
     </html>
   );
