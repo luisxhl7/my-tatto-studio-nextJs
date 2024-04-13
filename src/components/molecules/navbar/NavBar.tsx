@@ -3,16 +3,27 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
-import { useMobileDetect } from "../../../hook";
+import {
+  KeyboardArrowDown,
+  KeyboardArrowUp,
+  AccountCircle,
+} from "@mui/icons-material";
+import { useMobileDetect } from "@/hook";
+
 import { NavbarMobile } from "./Navbar-mobile";
-import images from "../../../assets";
+import { useRouter } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { logout_thunks, validateUser_thunks } from "@/store/thunks/auth";
+import images from "@/assets";
 import "./navBar.scss";
 
 export const NavBar = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useRouter()
+  const { status, auth } = useAppSelector((state) => state.auth);
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<boolean>(false);
   const { isMobile } = useMobileDetect();
-  
+
   const toggleSubMenu = () => {
     setIsSubMenuOpen(!isSubMenuOpen);
   };
@@ -20,6 +31,14 @@ export const NavBar = () => {
   const handleLinkClick = () => {
     window.scrollTo(0, 0);
   };
+
+  const handleOnLogout = async() => {
+    const resp = await dispatch(logout_thunks())
+
+    if (resp) {
+      navigate.replace('/')
+    } 
+  }
 
   useEffect(() => {
     const handleDocumentClick = (event: any) => {
@@ -35,6 +54,10 @@ export const NavBar = () => {
     return () => {
       document.removeEventListener("click", handleDocumentClick);
     };
+  }, []);
+
+  useEffect(() => {
+    dispatch(validateUser_thunks());
   }, []);
 
   return (
@@ -56,7 +79,15 @@ export const NavBar = () => {
             onClick={toggleSubMenu}
           >
             Trabajos
-            {isSubMenuOpen ? <KeyboardArrowUp onClick={() => () => {window.alert('funciona')}}/> : <KeyboardArrowDown />}
+            {isSubMenuOpen ? (
+              <KeyboardArrowUp
+                onClick={() => () => {
+                  window.alert("funciona");
+                }}
+              />
+            ) : (
+              <KeyboardArrowDown />
+            )}
             <ol>
               <li>
                 <Link href="/tatuador/keneth" onClick={handleLinkClick}>
@@ -95,6 +126,21 @@ export const NavBar = () => {
               Cuidados
             </Link>
           </li>
+          {/* <li className="navBar__content-login">
+            {status === "authenticated" && "name" in auth ? (
+              <div className="navBar__content-login-user">
+                <span>{auth.name}</span>
+                <AccountCircle />
+                <div className="navBar__content-login-user__options">
+                <button onClick={handleOnLogout}>cerrar sesión</button>
+                </div>
+              </div>
+            ) : (
+              <Link href="/login" className="button-login">
+                {status === "checking" ? "Cargando" : "Login"}
+              </Link>
+            )}
+          </li> */}
         </ul>
       ) : (
         <NavbarMobile />

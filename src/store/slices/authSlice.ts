@@ -1,34 +1,47 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const authSlice = createSlice({
-    name: 'auth',
-    initialState: {
-        status: 'not-authenticated',  //'authenticated', 'not-authenticated'
-        user: {},
-        errorMessage: undefined
-    },
-    reducers: {
-        onChecking: ( state ) => {
-            state.status = 'checking';
-            state.user = {};
-            state.errorMessage = undefined
-        },
-        onLogin: ( state, {payload} ) => {
-            state.status = 'authenticated';
-            state.user = payload;
-            state.errorMessage = undefined
-        },
-        onLogout: ( state, { payload  } ) => {
-            state.status = 'not-authenticated';
-            state.user = {};
-            state.errorMessage = payload;
-        },
-        clearError: ( state ) => {
-            state.errorMessage = undefined;
-        }
-    }
-})
+interface Auth {
+  name: string,
+  uid: string,
+}
 
+interface AuthState {
+  status: string;
+  auth: Auth | {};
+  errorMessage?: string | undefined;
+}
+
+const initialState: AuthState = {
+  status: 'checking',
+  auth: {},
+  errorMessage: undefined
+};
+
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    onChecking: (state) => {
+      state.status = 'checking';
+      state.auth = {};
+      state.errorMessage = undefined;
+    },
+    onLogin: (state, { payload }) => {
+      state.status = 'authenticated';
+      state.auth = payload;
+      state.errorMessage = undefined;
+    },
+    onLogout: (state, { payload }) => {
+      state.status = 'not-authenticated';
+      state.auth = {};
+      state.errorMessage = payload;
+    },
+    clearError: (state) => {
+      state.errorMessage = undefined;
+    }
+  }
+});
+  
 export const { onChecking, onLogin, onLogout, clearError } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,27 +1,24 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { jwtVerify } from 'jose'
  
-// This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-//   return NextResponse.redirect(new URL('/home', request.url))
 
     const jwt = request.cookies.get('token')
 
-    if (request.nextUrl.pathname.includes('/cuidados')) {
-        if (jwt === undefined) {
-            // return NextResponse.redirect(new URL('/login', request.url))
-        }
-    }
-    if (request.nextUrl.pathname.includes('/login')) {
-        if (jwt !== undefined) {
-            // return NextResponse.redirect(new URL('/', request.url))
-        }
+    if (jwt === undefined) {
+        return NextResponse.redirect(new URL('/login', request.url))
     }
 
-    return NextResponse.next()
+    try {
+        await jwtVerify(jwt.value, new TextEncoder().encode(process.env.NEXT_SECRET_JWT_SEED))
+        return NextResponse.next()
+    } catch (error) {
+        console.log(error);
+        return NextResponse.redirect(new URL('/login', request.url))
+    }
 }
  
-// // See "Matching Paths" below to learn more
-// export const config = {
-//   matcher: '/about/:path*',
-// }
+export const config = {
+  matcher: '/cuidados',
+}

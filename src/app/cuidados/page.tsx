@@ -1,5 +1,6 @@
-import { Banner } from "@/components/molecules/banner";
 import React from "react";
+import { Banner } from "@/components/molecules/banner";
+
 import "./cuidados-page.scss";
 
 const Cuidados = () => {

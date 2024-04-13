@@ -1,8 +1,10 @@
 "use client";
 
 import { useForm } from "@/hook/useForm";
+import { useRouter } from "next/navigation";
+import { auth_thunks } from "@/store/thunks/auth";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import "./login-page.scss";
-import { setCookie } from "@/helpers/setCookie";
 
 interface formDataProps {
     email: string;
@@ -15,14 +17,23 @@ const initialForm = {
 };
 
 export default function Home() {
+    const dispatch = useAppDispatch()
+    const navigate = useRouter();
     const { email, password, onInputChange } = useForm<formDataProps>(initialForm);
+    const { status } = useAppSelector( state => state.auth)
     
     const handleOnSubmit = async(event:any) => {
         event.preventDefault()
-        console.log({email, password});
-        await setCookie('token', 'valor de la cookie', 7);
-        location.reload();
-
+        
+        const resp = await dispatch(auth_thunks(email, password))
+        try {
+            if ( resp?.status === 200 ) {
+                navigate.push('/')
+                navigate.refresh()
+            }
+        } catch (error) {
+            
+        }
     }
 
   return (
@@ -31,7 +42,7 @@ export default function Home() {
         <form  className="login-page__form">
             <input type="email" className="login-page__form__input" name="email" value={email} onChange={onInputChange}/>
             <input type="password" className="login-page__form__input" name="password" value={password} onChange={onInputChange}/>
-            <button type="submit">Iniciar sesión</button>
+            <button type="submit" disabled={status === 'checking'}>Iniciar sesión</button>
         </form>
     </main>
   );

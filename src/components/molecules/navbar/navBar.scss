@@ -18,7 +18,7 @@
         justify-content: space-around;
         & li{
             height: 100%;
-            width: 150px;
+            width: 130px;
             display: flex;
             color: #9b9b9b;
             cursor: pointer;
@@ -35,14 +35,21 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            };
-            &:hover{
-                color: #ffffff;
-                background-color: rgba(58, 58, 58, 0.486);
-                & a{
+                &:hover{
                     color: #ffffff;
+                    background-color: rgba(58, 58, 58, 0.486);
+                    & a{
+                        color: #ffffff;
+                    }
                 }
-            }
+            };
+        }
+        & .button-login{
+            background-color: rgb(80, 80, 80);
+            color: #000000;
+            border-radius: 15px;
+            height: 60%;
+            width: 100px;
         }
     }
     &__sub-Menu {
@@ -83,6 +90,13 @@
             ol {
                 max-height: 300px;
                 display: block;
+            }
+        }
+        &:hover{
+            color: #ffffff;
+            background-color: rgba(58, 58, 58, 0.486);
+            & a{
+                color: #ffffff;
             }
         }
     }
@@ -221,6 +235,32 @@
       
                 }
             }
+        }
+    }
+    &__content-login{
+        margin: 10px;
+    }
+    &__content-login-user{
+        display: flex;
+        height: 70%;
+        width: 100%;
+        border-radius: 15px;
+        align-items: center;
+        justify-content: space-evenly;
+        transition: color .5s linear;
+        text-transform: capitalize;
+        background-color: rgba(58, 58, 58, 0.486);
+        position: relative;
+        &__options{
+            position: absolute;
+            top: 80px;
+        }
+        & svg{
+            font-size: 35px;
+            color: #ffffff;
+        }
+        &:hover{
+            color: #ffffff;
         }
     }
     @keyframes enhance-header {
