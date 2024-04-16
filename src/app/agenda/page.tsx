@@ -54,30 +54,29 @@ const myEventsList = [
 ];
 
 const DiaryPage: React.FC<DiaryPageProps> = (props) => {
+  const { params } = props;
+  const router = useRouter();
+  
   const [view, setView] = useState<View>("month");
   const [date, setDate] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
 
-  const [age, setAge] = React.useState("todos");
-  const { params } = props;
+  const [artist, setArtist] = useState<string>(params.id ? params.id : "todos");
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+    setArtist(event.target.value as string);
   };
 
-  const router = useRouter();
 
   useEffect(() => {
-    if (age !== "todos") {
-      localStorage.setItem('tatuador', age)
-      router.push(`/agenda/${age}`);
+    if (artist !== "todos") {
+      router.push(`/agenda/${artist}`);
     }else{
-      localStorage.setItem('tatuador', age)
       router.push(`/agenda`);
     }
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [age]);
+  }, [artist]);
 
   useEffect(() => {
     if (params.id) {
@@ -225,7 +224,7 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={age}
+                value={artist}
                 label="Age"
                 onChange={handleChange}
               >
