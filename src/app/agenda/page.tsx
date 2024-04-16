@@ -17,7 +17,6 @@ import {
   SelectChangeEvent,
   createTheme,
 } from "@mui/material";
-import Tatuador from "../tatuador/[id]/page";
 import { ThemeProvider } from "@emotion/react";
 import { useRouter } from "next/navigation";
 
@@ -59,7 +58,7 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const [date, setDate] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
 
-  const [age, setAge] = React.useState(localStorage.getItem('tatuador') || "todos");
+  const [age, setAge] = React.useState("todos");
   const { params } = props;
 
   const handleChange = (event: SelectChangeEvent) => {
