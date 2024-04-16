@@ -50,7 +50,7 @@ const customSettings = {
 };
 
 export default function Home() {
-  
+    
   return (
     <main className="home-page">
       <Banner imagesList={imagesList} title="my studio tattoo" />
