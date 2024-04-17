@@ -67,7 +67,6 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     setArtist(event.target.value as string);
   };
 
-
   useEffect(() => {
     if (artist !== "todos") {
       router.push(`/agenda/${artist}`);

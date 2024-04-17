@@ -126,7 +126,12 @@ export const NavBar = () => {
               Cuidados
             </Link>
           </li>
-          {/* <li className="navBar__content-login">
+          <li>
+            <Link href="/agenda" onClick={handleLinkClick}>
+              Agenda
+            </Link>
+          </li>
+          <li className="navBar__content-login">
             {status === "authenticated" && "name" in auth ? (
               <div className="navBar__content-login-user">
                 <span>{auth.name}</span>
@@ -140,7 +145,7 @@ export const NavBar = () => {
                 {status === "checking" ? "Cargando" : "Login"}
               </Link>
             )}
-          </li> */}
+          </li>
         </ul>
       ) : (
         <NavbarMobile />

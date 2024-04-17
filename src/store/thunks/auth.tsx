@@ -48,12 +48,9 @@ export const validateUser_thunks = () => {
 
             const { data } = await myTattoStudioApi.get('/auth/renew');
             
-            setTimeout(async() => {
-                await localStorage.setItem('token', data.token);
-                await setCookie('token', data.token, 7);
-                dispatch( onLogin({ name: data.name, uid: data.uid }) );
-                
-            }, 1000);
+            await localStorage.setItem('token', data.token);
+            await setCookie('token', data.token, 7);
+            dispatch( onLogin({ name: data.name, uid: data.uid }) );
             
         } catch (error) {
             localStorage.clear()

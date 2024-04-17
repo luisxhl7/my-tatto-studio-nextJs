@@ -2,23 +2,29 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { jwtVerify } from 'jose'
  
-export async function middleware(request: NextRequest) {
+export async function middleware(req: NextRequest) {
 
-    const jwt = request.cookies.get('token')
-
+    const jwt = await req.cookies.get('token')
+    console.log(req);
+    
     if (jwt === undefined) {
-        return NextResponse.redirect(new URL('/login', request.url))
+        const requestedPage = req.nextUrl.pathname
+        const url = req.nextUrl.clone()
+        url.pathname = '/login'
+        url.search = `p=${requestedPage}`
+        
+        return NextResponse.redirect( url )
     }
-
     try {
-        await jwtVerify(jwt.value, new TextEncoder().encode(process.env.NEXT_SECRET_JWT_SEED))
+        const state = await jwtVerify(jwt.value, new TextEncoder().encode(process.env.JWT_SECRET_SEED))
+
         return NextResponse.next()
     } catch (error) {
         console.log(error);
-        return NextResponse.redirect(new URL('/login', request.url))
+        return NextResponse.redirect(new URL('/login', req.url))
     }
 }
  
 export const config = {
-  matcher: '/agenda',
+    matcher: '/agenda/:path*',
 }

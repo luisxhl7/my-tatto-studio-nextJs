@@ -16,7 +16,17 @@ const initialForm = {
     password: "",
 };
 
-export default function Home() {
+interface Params {
+    p?: string;
+}
+
+interface HomeProps {
+    searchParams: Params;
+}
+
+
+const Home: React.FC<HomeProps>  = (props) => {
+    
     const dispatch = useAppDispatch()
     const navigate = useRouter();
     const { email, password, onInputChange } = useForm<formDataProps>(initialForm);
@@ -28,8 +38,13 @@ export default function Home() {
         const resp = await dispatch(auth_thunks(email, password))
         try {
             if ( resp?.status === 200 ) {
-                navigate.push('/')
-                navigate.refresh()
+                if (props.searchParams.p) {
+                    navigate.push(props.searchParams.p)
+                    navigate.refresh()
+                }else{
+                    navigate.push('/')
+                    navigate.refresh()
+                }
             }
         } catch (error) {
             
@@ -47,3 +62,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default Home
