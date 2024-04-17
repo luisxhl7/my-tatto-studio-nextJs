@@ -22,6 +22,7 @@ export const NavBar = () => {
   const navigate = useRouter()
   const { status, auth } = useAppSelector((state) => state.auth);
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<boolean>(false);
+  const [optionsUserOpen, setOptionsUserOpen] = useState<boolean>(false);
   const { isMobile } = useMobileDetect();
 
   const toggleSubMenu = () => {
@@ -39,14 +40,17 @@ export const NavBar = () => {
       navigate.replace('/')
     } 
   }
+  const handleOpenOptionsUser = () => {
+    setOptionsUserOpen(!optionsUserOpen)
+  }
 
   useEffect(() => {
     const handleDocumentClick = (event: any) => {
-      const optionsContainer = document.querySelector(".navBar__options-list");
-
-      if (optionsContainer && !optionsContainer.contains(event.target)) {
+      const subMenuContainer = document.querySelector(".navBar__options-list");
+      if (subMenuContainer && !subMenuContainer.contains(event.target)) {
         setIsSubMenuOpen(false);
-      }
+        setOptionsUserOpen(false);
+      } 
     };
 
     document.addEventListener("click", handleDocumentClick);
@@ -133,11 +137,11 @@ export const NavBar = () => {
           </li>
           <li className="navBar__content-login">
             {status === "authenticated" && "name" in auth ? (
-              <div className="navBar__content-login-user">
+              <div className="navBar__content-login-user" onClick={handleOpenOptionsUser}>
                 <span>{auth.name}</span>
                 <AccountCircle />
-                <div className="navBar__content-login-user__options">
-                <button onClick={handleOnLogout}>cerrar sesión</button>
+                <div className={`navBar__content-login-user__options ${optionsUserOpen ? '--isOpen' : ''}`}>
+                  <button onClick={handleOnLogout}>cerrar sesión</button>
                 </div>
               </div>
             ) : (

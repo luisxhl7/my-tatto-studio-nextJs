@@ -59,19 +59,19 @@
             z-index: -1;
         }
         & ol {
-          width: 100%;
-          position: absolute;
-          top: 80px;
-          left: 0px;
-          list-style-type: none;
-          margin: 0;
-          padding: 0;
+            width: 100%;
+            position: absolute;
+            top: 80px;
+            left: 0px;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
             max-height: 0px;
             border-radius: 0px 0px 15px 15px;
-          background: #000000a2;
-          color: #9b9b9b;
-          transition: .3s linear;
+            background: #000000a2;
+            color: #9b9b9b;
+            transition: .3s linear;
 
           & li {
             height: 40px;
@@ -253,7 +253,28 @@
         position: relative;
         &__options{
             position: absolute;
-            top: 80px;
+            width: 100%;
+            top: 68px;
+            overflow: hidden;
+            height: 0px;
+            background-color: #000000;
+            transition: .3s linear;
+
+            &.--isOpen{
+                height: 100px;
+                border-radius: 0px 0px 7px 7px;
+            }
+            & button{
+              background-color: transparent;
+              color: #ffffff;
+              transition: .5s linear;
+              margin-top: 10px;
+              width: 100%;
+              border-radius: 0px;
+              &:hover{
+                background-color: #3d3d3d;
+              }
+            }
         }
         & svg{
             font-size: 35px;
