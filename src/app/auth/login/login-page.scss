@@ -1,5 +1,5 @@
-@import '../../style/mixins.scss';
-@import '../../style/variables.scss';
+@import '../../../style/mixins.scss';
+@import '../../../style/variables.scss';
 
 .login-page {
   width: 100%;
@@ -34,6 +34,18 @@
       padding: 10px 15px;
       font-size: 20px;
       margin-top: 15px;
+    }
+  }
+  &__content-link-register{
+    margin-top: 10px;
+    font-size: 20px;
+    & a{
+      color: #9b9b9b;
+      text-decoration: underline;
+      transition: .5s linear;
+      &:hover{
+        color: #ffffff;
+      }
     }
   }
 }

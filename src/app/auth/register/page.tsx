@@ -4,7 +4,7 @@ import { useForm } from "@/hook/useForm";
 import { useRouter } from "next/navigation";
 import { auth_thunks } from "@/store/thunks/auth";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import "./login-page.scss";
+import "./register-page.scss";
 
 interface formDataProps {
     email: string;
@@ -20,12 +20,12 @@ interface Params {
     p?: string;
 }
 
-interface HomeProps {
+interface RegisterPageProps {
     searchParams: Params;
 }
 
 
-const Home: React.FC<HomeProps>  = (props) => {
+const RegisterPage: React.FC<RegisterPageProps>  = (props) => {
     
     const dispatch = useAppDispatch()
     const navigate = useRouter();
@@ -52,15 +52,15 @@ const Home: React.FC<HomeProps>  = (props) => {
     }
 
   return (
-    <main className="login-page" onSubmit={(event) => handleOnSubmit(event)}>
-        <h1>Inicia sesión</h1>
-        <form  className="login-page__form">
-            <input type="email" className="login-page__form__input" name="email" value={email} onChange={onInputChange}/>
-            <input type="password" className="login-page__form__input" name="password" value={password} onChange={onInputChange}/>
-            <button type="submit" disabled={status === 'checking'}>Iniciar sesión</button>
+    <main className="register-page" onSubmit={(event) => handleOnSubmit(event)}>
+        <h1>Regístrate ahora</h1>
+        <form  className="register-page__form" >
+            <input type="email" className="register-page__form__input" name="email" value={email} onChange={onInputChange}/>
+            <input type="password" className="register-page__form__input" name="password" value={password} onChange={onInputChange}/>
+            <button type="submit" disabled={status === 'checking'}>Registrar</button>
         </form>
     </main>
   );
 }
 
-export default Home
+export default RegisterPage

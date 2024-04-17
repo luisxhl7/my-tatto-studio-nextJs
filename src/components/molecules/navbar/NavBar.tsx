@@ -145,7 +145,7 @@ export const NavBar = () => {
                 </div>
               </div>
             ) : (
-              <Link href="/login" className="button-login">
+              <Link href="/auth/login" className="button-login">
                 {status === "checking" ? "Cargando" : "Login"}
               </Link>
             )}

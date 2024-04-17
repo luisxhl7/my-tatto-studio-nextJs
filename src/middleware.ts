@@ -5,12 +5,11 @@ import { jwtVerify } from 'jose'
 export async function middleware(req: NextRequest) {
 
     const jwt = await req.cookies.get('token')
-    console.log(req);
     
     if (jwt === undefined) {
         const requestedPage = req.nextUrl.pathname
         const url = req.nextUrl.clone()
-        url.pathname = '/login'
+        url.pathname = '/auth/login'
         url.search = `p=${requestedPage}`
         
         return NextResponse.redirect( url )
@@ -21,7 +20,7 @@ export async function middleware(req: NextRequest) {
         return NextResponse.next()
     } catch (error) {
         console.log(error);
-        return NextResponse.redirect(new URL('/login', req.url))
+        return NextResponse.redirect(new URL('/auth/login', req.url))
     }
 }
  
