@@ -1,19 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useForm } from "@/hook/useForm";
 import { useAppSelector } from "@/store/hooks";
 import { InputText } from "@/components/atoms/input";
 import "./register-page.scss";
-import { useEffect } from "react";
 
 interface formDataProps {
   email: string;
-  nameUser: string;
-  lasNameUser: string;
+  name: string;
+  lastName: string;
   numberPhone: number | undefined;
   document: number | undefined;
-  password1: string;
-  password2: string;
+  password: string;
+  passwordCompare: string;
 }
 
 interface Params {
@@ -24,46 +24,82 @@ interface RegisterPageProps {
   searchParams: Params;
 }
 
-const initialForm1 = {
-  nameUser: "",
-  lasNameUser: "",
+const initialForm = {
+  name: "",
+  lastName: "",
   numberPhone: undefined,
   document: undefined,
   email: "",
-  password1: "",
-  password2: "",
+  password: "",
+  passwordCompare: "",
 };
 
 const RegisterPage: React.FC<RegisterPageProps> = (props) => {
   const {
-    nameUser,
-    lasNameUser,
+    name,
+    lastName,
     numberPhone,
     document,
     email,
-    password1,
-    password2,
-    onInputChange,
-    onResetForm
-  } = useForm<formDataProps>(initialForm1);
+    password,
+    passwordCompare,
+    onInputChange
+  } = useForm<formDataProps>(initialForm);
   const { status } = useAppSelector((state) => state.auth);
+  const [haveMessage, setHaveMessage] = useState('')
 
   const handleOnSubmit = async (event: any) => {
     event.preventDefault();
-    console.log({
-      nameUser,
-      lasNameUser,
-      numberPhone,
-      document,
-      email,
-      password1,
-      password2,
-    });
-  };
-  useEffect(() => {
-    onResetForm()
-  }, [])
+
+    const isValid = () => {
+      if (
+        name.trim() === "" ||
+        lastName.trim() === "" ||
+        !numberPhone ||
+        !document ||
+        email.trim() === "" ||
+        password.trim() === "" ||
+        passwordCompare.trim() === ""
+      ) {
+        setHaveMessage('Por favor, completa todos los campos')
+        return false;
+      }
   
+      if (
+        password.length <= 5 ||
+        !/^[a-zA-ZÀ-ÿ\s']+$/.test(name) ||
+        !/^[a-zA-ZÀ-ÿ\s']+$/.test(lastName) ||
+        !/^\d{10}$/.test(numberPhone.toString()) ||
+        !/^\d{9,11}$/.test(document.toString()) ||
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+        !/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d.*\d.*\d)[A-Za-z\d]{8,}$/.test(password) ||
+        !/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d.*\d.*\d)[A-Za-z\d]{8,}$/.test(passwordCompare)
+      ) {
+        setHaveMessage('Por favor, verifica los campos ingresados.')
+        return false;
+      }
+      if (password === passwordCompare) {
+        setHaveMessage('')
+        return true;
+      }else{
+        setHaveMessage('las Contraseñas no coinciden')
+      }
+    };
+  
+    if (isValid()) {
+      console.log({
+        name,
+        lastName,
+        numberPhone,
+        document,
+        email,
+        password,
+      });
+  
+    } else {
+      console.log("Por favor, completa todos los campos correctamente.");
+    }
+  };
 
   return (
     <main className="register-page">
@@ -76,20 +112,20 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
         <InputText
           nameLabel="Nombre:"
           type="text"
-          value={nameUser}
-          idInput="nameUser"
+          value={name}
+          idInput="name"
           onInputChange={onInputChange}
-          validationRegex={/^[a-zA-ZÀ-ÿ']+$/}
+          validationRegex={/^[a-zA-ZÀ-ÿ\s']+$/}
           alertMessage="Por favor, introduce tu nombre sin caracteres especiales ni números."
           placeholder="Nombre"
         />
         <InputText
-          nameLabel="Apellidos:"
+          nameLabel="Apellido:"
           type="text"
-          value={lasNameUser}
-          idInput="lasNameUser"
+          value={lastName}
+          idInput="lastName"
           onInputChange={onInputChange}
-          validationRegex={/^[a-zA-ZÀ-ÿ']+$/}
+          validationRegex={/^[a-zA-ZÀ-ÿ\s']+$/}
           alertMessage="Por favor, introduce tu apellido sin caracteres especiales ni números."
           placeholder="Apellido"
         />
@@ -126,20 +162,27 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
         <InputText
           nameLabel="Contraseña:"
           type="password"
-          value={password1}
-          idInput="password1"
+          value={password}
+          idInput="password"
           onInputChange={onInputChange}
+          validationRegex={/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d.*\d.*\d)[A-Za-z\d]{8,}$/}
+          alertMessage="La contraseña requiere: 1 mayúscula, 1 minúscula, 3 números, y mínimo 8 caracteres."
           placeholder="Ingresa tu contraseña"
         />
         <InputText
           nameLabel="Contraseña:"
           type="password"
-          value={password2}
-          idInput="password2"
+          value={passwordCompare}
+          idInput="passwordCompare"
           onInputChange={onInputChange}
+          validationRegex={/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d.*\d.*\d)[A-Za-z\d]{8,}$/}
+          alertMessage="La contraseña requiere: 1 mayúscula, 1 minúscula, 3 números, y mínimo 8 caracteres."
           placeholder="Repite tu contraseña"
         />
-
+        {haveMessage && 
+        <span className="register-page__form__message-alert">
+          {haveMessage}
+        </span>}
         <button type="submit" disabled={status === "checking"}>
           Registrar
         </button>

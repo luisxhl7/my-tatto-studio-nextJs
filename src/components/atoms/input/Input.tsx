@@ -43,7 +43,7 @@ export const InputText: React.FC<InputTextProps> = ({
       <label htmlFor={idInput}>{nameLabel}</label>
       <input
         type={type}
-        className="inputText__input"
+        className={`inputText__input ${haveError ? '--error' : ''}`}
         name={idInput}
         id={idInput}
         value={value}
@@ -52,7 +52,7 @@ export const InputText: React.FC<InputTextProps> = ({
         placeholder={placeholder}
       />
       {haveError &&
-        <span>{alertMessage}</span>
+        <span className="inputText__message-error">{alertMessage}</span>
       }
 
     </div>

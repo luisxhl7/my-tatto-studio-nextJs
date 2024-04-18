@@ -3,6 +3,7 @@
 
 .register-page {
   width: 100%;
+  padding: 50px 0px 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,6 +12,7 @@
   flex-wrap: wrap;
   & h1{
     font-size: 40px;
+    color: #ffffff;
   }
   &__form{
     display: flex;
@@ -19,8 +21,14 @@
     align-content: center;
     align-items: center;
     width: 300px;
-    & span{
-      color: #c00000;
+    &__message-alert{
+      background-color: #c00000;
+      color: #ffffff;
+      width: 100%;
+      text-align: center;
+      padding: 5px 0px;
+      border-radius: 7px;
+      margin-top: 5px;
     }
     & button{
       border-radius: 15px;
