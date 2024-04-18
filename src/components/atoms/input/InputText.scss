@@ -1,0 +1,15 @@
+.inputText{
+  & label{
+    font-size: 20px;
+  }
+  &__input{
+    width: 100%;
+    height: 40px;
+    border: none;
+    margin: 10px 0px;
+    border-radius: 15PX;
+    padding: 5px 10px;
+    font-size: 19px;
+  }
+}
+

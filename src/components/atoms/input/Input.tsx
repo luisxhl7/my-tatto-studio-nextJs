@@ -1,29 +1,60 @@
+import { useState } from "react";
+import './inputText.scss'
+
 interface InputTextProps {
-  value: string | number;
+  value: string | number | undefined;
   nameLabel: string;
   idInput: string;
   type: string;
   onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  validationRegex?: RegExp;
+  alertMessage?: string;
+  autoComplete?: string;
+  placeholder?: string;
 }
 
 export const InputText: React.FC<InputTextProps> = ({
-  value,
+  value = '',
   nameLabel,
   idInput,
   onInputChange,
   type,
-}: any) => {
+  validationRegex,
+  alertMessage,
+  autoComplete= "new-password",
+  placeholder
+}) => {
+  const [haveError, setHaveError] = useState<boolean>(false)
+  
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value: inputValue } = event.target;
+
+    if (validationRegex && !validationRegex.test(inputValue)) {
+      setHaveError(true)
+    }else{
+      setHaveError(false)
+    }
+
+    onInputChange(event);
+  };
+
   return (
-    <div>
+    <div className="inputText">
       <label htmlFor={idInput}>{nameLabel}</label>
       <input
         type={type}
-        className="register-page__form__input"
+        className="inputText__input"
         name={idInput}
         id={idInput}
-        value={value === 0 ? undefined : value}
-        onChange={onInputChange}
+        value={value}
+        onChange={handleChange}
+        autoComplete={autoComplete}
+        placeholder={placeholder}
       />
+      {haveError &&
+        <span>{alertMessage}</span>
+      }
+
     </div>
   );
 };

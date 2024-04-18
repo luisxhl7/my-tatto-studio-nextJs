@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useForm } from "@/hook/useForm";
 import { useRouter } from "next/navigation";
 import { auth_thunks } from "@/store/thunks/auth";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { InputText } from "@/components/atoms/input";
 import "./login-page.scss";
-import Link from "next/link";
 
 interface formDataProps {
     email: string;
@@ -53,16 +54,32 @@ const LoginPage: React.FC<LoginPageProps>  = (props) => {
     }
 
   return (
-    <main className="login-page" onSubmit={(event) => handleOnSubmit(event)}>
+    <main className="login-page" >
         <h1>Inicia sesión</h1>
-        <form  className="login-page__form">
-            <input type="email" className="login-page__form__input" name="email" value={email} onChange={onInputChange}/>
-            <input type="password" className="login-page__form__input" name="password" value={password} onChange={onInputChange}/>
+        <form  className="login-page__form" onSubmit={(event) => handleOnSubmit(event)}>
+            <InputText
+                nameLabel="Email:"
+                type="text"
+                value={email}
+                idInput="email"
+                onInputChange={onInputChange}
+                autoComplete= 'on'
+            />
+            <InputText
+                nameLabel="Contraseña:"
+                type="password"
+                value={password}
+                idInput="password"
+                onInputChange={onInputChange}
+                autoComplete= 'on'
+            />
             <button type="submit" disabled={status === 'checking'}>Iniciar sesión</button>
+
             <div className="login-page__content-link-register">
                 <span>
                     ¿Aún no estás registrado?{' '}
                 </span>
+                <br />
                 <Link href="/auth/register" className="login-page__link-register">
                     Crear cuenta nueva
                 </Link>
