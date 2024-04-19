@@ -5,7 +5,7 @@ import { useForm } from "@/hook/useForm";
 import { useRouter } from "next/navigation";
 import { auth_thunks } from "@/store/thunks/auth";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { InputText } from "@/components/atoms/input";
+import { InputText } from "@/components/atoms/inputText";
 import "./login-page.scss";
 
 interface formDataProps {

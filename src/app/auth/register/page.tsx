@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "@/hook/useForm";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { InputText } from "@/components/atoms/input";
+import { InputText } from "@/components/atoms/inputText";
 import "./register-page.scss";
 import { register_thunks } from "@/store/thunks/auth";
 import { useRouter } from "next/navigation";

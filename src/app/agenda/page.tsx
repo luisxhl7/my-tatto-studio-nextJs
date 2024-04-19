@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import { useRouter } from "next/navigation";
-import { InputText } from "@/components/atoms/input";
+import { InputText } from "@/components/atoms/inputText";
 import { useForm } from "@/hook/useForm";
 import { MenuCalendar } from "@/components/molecules/menu-calendar";
 
