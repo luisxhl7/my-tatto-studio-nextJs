@@ -6,7 +6,6 @@ import { addHours } from "date-fns";
 import { CardEvent } from "@/components/molecules/card-event/Card-event";
 import { getMessagesES, localizer } from "@/helpers";
 import React, { useEffect, useState } from "react";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { Modal } from "@/components/atoms/modal/Modal";
 import "./agenda-page.scss";
 import {
@@ -19,6 +18,9 @@ import {
 } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import { useRouter } from "next/navigation";
+import { InputText } from "@/components/atoms/input";
+import { useForm } from "@/hook/useForm";
+import { MenuCalendar } from "@/components/molecules/menu-calendar";
 
 interface Params {
   id?: string;
@@ -27,6 +29,22 @@ interface Params {
 interface DiaryPageProps {
   params: Params;
 }
+
+interface formDataProps {
+  appointmentType: string;
+  title: string;
+  notes: string;
+  dateInit: number;
+  dateEnd: number;
+}
+
+const initialForm = {
+  appointmentType: "",
+  title: "",
+  notes: "",
+  dateInit: 0,
+  dateEnd: 0,
+};
 
 const myEventsList = [
   {
@@ -56,24 +74,25 @@ const myEventsList = [
 const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const { params } = props;
   const router = useRouter();
-  
+
   const [view, setView] = useState<View>("month");
   const [date, setDate] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
 
   const [artist, setArtist] = useState<string>(params.id ? params.id : "todos");
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setArtist(event.target.value as string);
-  };
+  const { title, notes, dateInit, dateEnd, appointmentType, onInputChange } =
+    useForm<formDataProps>(initialForm);
+
+
 
   useEffect(() => {
     if (artist !== "todos") {
       router.push(`/agenda/${artist}`);
-    }else{
+    } else {
       router.push(`/agenda`);
     }
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artist]);
 
@@ -81,10 +100,9 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     if (params.id) {
       console.log(`consulta personalizada de ${params.id}`);
     } else {
-      console.log('consulta general');
+      console.log("consulta general");
     }
-  }, [params])
-  
+  }, [params]);
 
   const onViewChanged = (event: any) => {
     localStorage.setItem("lastView", event);
@@ -106,64 +124,6 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     };
   };
 
-  const handlePrev = () => {
-    if (view === "month") {
-      setDate(
-        (prevDate) =>
-          new Date(prevDate.getFullYear(), prevDate.getMonth() - 1, 1)
-      );
-    } else if (view === "week") {
-      setDate(
-        (prevDate) =>
-          new Date(
-            prevDate.getFullYear(),
-            prevDate.getMonth(),
-            prevDate.getDate() - 7
-          )
-      );
-    } else if (view === "day") {
-      setDate(
-        (prevDate) =>
-          new Date(
-            prevDate.getFullYear(),
-            prevDate.getMonth(),
-            prevDate.getDate() - 1
-          )
-      );
-    }
-  };
-
-  const handleNext = () => {
-    if (view === "month") {
-      setDate(
-        (prevDate) =>
-          new Date(prevDate.getFullYear(), prevDate.getMonth() + 1, 1)
-      );
-    } else if (view === "week") {
-      setDate(
-        (prevDate) =>
-          new Date(
-            prevDate.getFullYear(),
-            prevDate.getMonth(),
-            prevDate.getDate() + 7
-          )
-      );
-    } else if (view === "day") {
-      setDate(
-        (prevDate) =>
-          new Date(
-            prevDate.getFullYear(),
-            prevDate.getMonth(),
-            prevDate.getDate() + 1
-          )
-      );
-    }
-  };
-
-  const handleInitValue = () => {
-    setDate(new Date());
-  };
-
   const handleNavigate = (newDate: Date) => {
     setDate(newDate);
   };
@@ -180,64 +140,7 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
 
   return (
     <main className="agenda-page">
-      <div className="agenda-page__menu">
-        <div className="agenda-page__menu__content-arrows">
-          <button
-            onClick={handlePrev}
-            className="agenda-page__menu__content-arrows__button-arrow"
-          >
-            <KeyboardArrowLeft />
-          </button>
-          <button onClick={handleInitValue}>Hoy</button>
-          <button
-            onClick={handleNext}
-            className="agenda-page__menu__content-arrows__button-arrow"
-          >
-            <KeyboardArrowRight />
-          </button>
-        </div>
-        <div className="agenda-page__menu__content-date">
-          <button
-            onClick={() => setView("day")}
-            className="agenda-page__menu__content-date__btn"
-          >
-            Día
-          </button>
-          <button
-            onClick={() => setView("week")}
-            className="agenda-page__menu__content-date__btn"
-          >
-            Semana
-          </button>
-          <button
-            onClick={() => setView("month")}
-            className="agenda-page__menu__content-date__btn"
-          >
-            Mes
-          </button>
-        </div>
-        <div className="agenda-page__menu__content-selected">
-          <ThemeProvider theme={darkTheme}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Tatuador</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={artist}
-                label="Age"
-                onChange={handleChange}
-              >
-                <MenuItem value={"todos"}>Todos</MenuItem>
-                <MenuItem value={"keneth"}>Keneth</MenuItem>
-                <MenuItem value={"luis"}>Luis</MenuItem>
-                <MenuItem value={"veronica"}>Veronica</MenuItem>
-                <MenuItem value={"yeison"}>Yeison</MenuItem>
-                <MenuItem value={"juan"}>Juan</MenuItem>
-              </Select>
-            </FormControl>
-          </ThemeProvider>
-        </div>
-      </div>
+      <MenuCalendar setDate={setDate} setView={setView} setArtist={setArtist} artist={artist} view={view}/>
       <div className="agenda-page__content-agenda">
         <Calendar
           culture="es"
@@ -264,13 +167,62 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
       </button>
       {openModal && (
         <Modal>
-          <div>
+          <div className="modal-content-form">
             <form action="">
-              <h2>Cita</h2>
-              <input type="text" />
-              <input type="text" />
-              <input type="text" />
-              <input type="text" />
+              <h2>Agenda tu cita</h2>
+              <InputText
+                value={title}
+                nameLabel="Fecha inicial"
+                idInput="dateInit"
+                type="text"
+                onInputChange={onInputChange}
+              />
+              <InputText
+                value={title}
+                nameLabel="Fecha inicial"
+                idInput="dateInit"
+                type="text"
+                onInputChange={onInputChange}
+              />
+              <InputText
+                value={title}
+                nameLabel="Fecha inicial"
+                idInput="dateInit"
+                type="text"
+                onInputChange={onInputChange}
+              />
+              <InputText
+                value={title}
+                nameLabel="Fecha inicial"
+                idInput="dateInit"
+                type="text"
+                onInputChange={onInputChange}
+              />
+              <ThemeProvider theme={darkTheme}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Cita</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={appointmentType}
+                    label="Age"
+                    // onChange={onInputChange}
+                  >
+                    <MenuItem value={"Consultas Iniciales"}>
+                      Consultas Iniciales
+                    </MenuItem>
+                    <MenuItem value={"Citas para Diseño Personalizado"}>
+                      Citas para Diseño Personalizado
+                    </MenuItem>
+                    <MenuItem value={"Citas para Sesiones de Tatuaje"}>
+                      Citas para Sesiones de Tatuaje
+                    </MenuItem>
+                    <MenuItem value={"Citas de Retoque"}>
+                      Citas de Retoque
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </ThemeProvider>
             </form>
           </div>
         </Modal>
