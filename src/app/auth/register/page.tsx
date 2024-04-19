@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useForm } from "@/hook/useForm";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { InputText } from "@/components/atoms/input";
 import "./register-page.scss";
+import { register_thunks } from "@/store/thunks/auth";
+import { useRouter } from "next/navigation";
 
 interface formDataProps {
   email: string;
@@ -35,6 +37,8 @@ const initialForm = {
 };
 
 const RegisterPage: React.FC<RegisterPageProps> = (props) => {
+  const dispatch = useAppDispatch()
+  const navigate = useRouter();
   const {
     name,
     lastName,
@@ -87,17 +91,21 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
     };
   
     if (isValid()) {
-      console.log({
+      const user = {
         name,
         lastName,
         numberPhone,
         document,
         email,
         password,
-      });
-  
-    } else {
-      console.log("Por favor, completa todos los campos correctamente.");
+      };
+      const resp = await dispatch(register_thunks(user))
+      if ( resp?.status === 201 ) {
+        navigate.push('/')
+        navigate.refresh()
+      }else{
+        setHaveMessage(resp.message)
+      }
     }
   };
 

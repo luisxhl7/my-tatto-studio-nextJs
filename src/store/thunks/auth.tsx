@@ -5,6 +5,15 @@ import { setCookie } from "@/helpers/setCookie";
 import { myTattoStudioApi } from "@/api";
 import { clearCookie } from "@/helpers/clearCookie";
 
+interface User {
+    name: string;
+    lastName: string;
+    numberPhone: number | undefined;
+    document: number | undefined;
+    email: string;
+    password: string;
+}
+
 export const auth_thunks = (email: string, password:string) => {
     return async(dispatch: Dispatch, getState: () => RootState) => {
         try {
@@ -74,6 +83,34 @@ export const logout_thunks = () => {
 
         } catch (error) {
             console.log(error);
+        }
+            
+    }
+}
+
+export const register_thunks = (user: User) => {
+    return async(dispatch: Dispatch, getState: () => RootState) => {
+        try {
+            await dispatch(onChecking())
+
+            const resp = await myTattoStudioApi.post('/auth/register', user);
+
+            await setCookie('token', resp.data.user.token, 7);
+            await localStorage.setItem('token', resp.data.user.token);
+            
+            dispatch(onLogin({
+                name: resp.data.user.name,
+                uid: resp.data.user.uid,
+            }))
+            
+            return resp
+
+        } catch (error:any) {
+            dispatch( onLogout('Credenciales incorrectas'))
+            setTimeout(() => {
+                dispatch(clearError()) 
+            }, 2000);
+            return error.response.data
         }
             
     }
