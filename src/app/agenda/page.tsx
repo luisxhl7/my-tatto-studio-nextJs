@@ -171,30 +171,30 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
             <form action="">
               <h2>Agenda tu cita</h2>
               <InputText
-                value={title}
+                value={dateInit}
                 nameLabel="Fecha inicial"
                 idInput="dateInit"
                 type="text"
                 onInputChange={onInputChange}
               />
               <InputText
-                value={title}
+                value={dateEnd}
                 nameLabel="Fecha inicial"
-                idInput="dateInit"
+                idInput="dateEnd"
                 type="text"
                 onInputChange={onInputChange}
               />
               <InputText
                 value={title}
                 nameLabel="Fecha inicial"
-                idInput="dateInit"
+                idInput="title"
                 type="text"
                 onInputChange={onInputChange}
               />
               <InputText
-                value={title}
+                value={notes}
                 nameLabel="Fecha inicial"
-                idInput="dateInit"
+                idInput="notes"
                 type="text"
                 onInputChange={onInputChange}
               />
