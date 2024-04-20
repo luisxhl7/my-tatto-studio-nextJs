@@ -7,7 +7,7 @@ import { CardEvent } from "@/components/molecules/card-event/Card-event";
 import { getMessagesES, localizer } from "@/helpers";
 import React, { useEffect, useState } from "react";
 import { Modal } from "@/components/atoms/modal/Modal";
-import "./agenda-page.scss";
+import DatePicker, { registerLocale } from "react-datepicker";
 import {
   FormControl,
   InputLabel,
@@ -21,6 +21,12 @@ import { useRouter } from "next/navigation";
 import { InputText } from "@/components/atoms/inputText";
 import { useForm } from "@/hook/useForm";
 import { MenuCalendar } from "@/components/molecules/menu-calendar";
+import "react-datepicker/dist/react-datepicker.css";
+import "./agenda-page.scss";
+import { es } from "date-fns/locale";
+import { ModalFormAgenda } from "@/components/molecules/modal-form-agenda/ModalFormAgenda";
+
+registerLocale("es", es);
 
 interface Params {
   id?: string;
@@ -29,22 +35,6 @@ interface Params {
 interface DiaryPageProps {
   params: Params;
 }
-
-interface formDataProps {
-  appointmentType: string;
-  title: string;
-  notes: string;
-  dateInit: number;
-  dateEnd: number;
-}
-
-const initialForm = {
-  appointmentType: "",
-  title: "",
-  notes: "",
-  dateInit: 0,
-  dateEnd: 0,
-};
 
 const myEventsList = [
   {
@@ -74,16 +64,11 @@ const myEventsList = [
 const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const { params } = props;
   const router = useRouter();
-
+  
   const [view, setView] = useState<View>("month");
   const [date, setDate] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
-
   const [artist, setArtist] = useState<string>(params.id ? params.id : "todos");
-
-  const { title, notes, dateInit, dateEnd, appointmentType, onInputChange } =
-    useForm<formDataProps>(initialForm);
-
 
 
   useEffect(() => {
@@ -132,15 +117,16 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     setOpenModal(true);
   };
 
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });
-
   return (
     <main className="agenda-page">
-      <MenuCalendar setDate={setDate} setView={setView} setArtist={setArtist} artist={artist} view={view}/>
+      <MenuCalendar
+        setDate={setDate}
+        setView={setView}
+        setArtist={setArtist}
+        artist={artist}
+        view={view}
+      />
+
       <div className="agenda-page__content-agenda">
         <Calendar
           culture="es"
@@ -159,74 +145,16 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
           date={date}
           onView={onViewChanged}
           onNavigate={handleNavigate}
-          // toolbar={false}
         />
       </div>
+      
+      {openModal && (
+        <ModalFormAgenda/>
+      )}
+
       <button className="agenda-page__button-adding" onClick={handleOpenModal}>
         +
       </button>
-      {openModal && (
-        <Modal>
-          <div className="modal-content-form">
-            <form action="">
-              <h2>Agenda tu cita</h2>
-              <InputText
-                value={dateInit}
-                nameLabel="Fecha inicial"
-                idInput="dateInit"
-                type="text"
-                onInputChange={onInputChange}
-              />
-              <InputText
-                value={dateEnd}
-                nameLabel="Fecha inicial"
-                idInput="dateEnd"
-                type="text"
-                onInputChange={onInputChange}
-              />
-              <InputText
-                value={title}
-                nameLabel="Fecha inicial"
-                idInput="title"
-                type="text"
-                onInputChange={onInputChange}
-              />
-              <InputText
-                value={notes}
-                nameLabel="Fecha inicial"
-                idInput="notes"
-                type="text"
-                onInputChange={onInputChange}
-              />
-              <ThemeProvider theme={darkTheme}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Cita</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={appointmentType}
-                    label="Age"
-                    // onChange={onInputChange}
-                  >
-                    <MenuItem value={"Consultas Iniciales"}>
-                      Consultas Iniciales
-                    </MenuItem>
-                    <MenuItem value={"Citas para Diseño Personalizado"}>
-                      Citas para Diseño Personalizado
-                    </MenuItem>
-                    <MenuItem value={"Citas para Sesiones de Tatuaje"}>
-                      Citas para Sesiones de Tatuaje
-                    </MenuItem>
-                    <MenuItem value={"Citas de Retoque"}>
-                      Citas de Retoque
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </ThemeProvider>
-            </form>
-          </div>
-        </Modal>
-      )}
     </main>
   );
 };

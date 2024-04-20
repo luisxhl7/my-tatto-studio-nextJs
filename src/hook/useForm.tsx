@@ -36,6 +36,13 @@ export const useForm = <T extends Record<string, any>>(
         setFormState(initialForm);
     };
 
+    const setDateInit = (newDate: Date | null, changing: string) => {
+        setFormState({
+          ...formState,
+          [changing]: newDate,
+        });
+      };
+
     const createValidators = () => {
         const formCheckedValues: { [key: string]: ValidationErrorMessage } = {};
 
@@ -51,9 +58,9 @@ export const useForm = <T extends Record<string, any>>(
 
     const isFormValid = useMemo(() => {
         for (const formValue of Object.keys(formValidation)) {
-        if (formValidation[formValue] !== null) {
-            return false;
-        }
+            if (formValidation[formValue] !== null) {
+                return false;
+            }
         }
 
         return true;
@@ -64,6 +71,7 @@ export const useForm = <T extends Record<string, any>>(
         formState,
         onInputChange,
         onResetForm,
+        setDateInit,
         isFormValid,
         ...formValidation,
     };
