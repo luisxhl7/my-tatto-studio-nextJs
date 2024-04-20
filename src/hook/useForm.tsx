@@ -18,6 +18,7 @@ export const useForm = <T extends Record<string, any>>(
 
     useEffect(() => {
         createValidators();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formState]);
 
     useEffect(() => {

@@ -1,30 +1,20 @@
 "use client";
 
 import { Calendar, View } from "react-big-calendar";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import { addHours } from "date-fns";
+import { addHours, set } from "date-fns";
 import { CardEvent } from "@/components/molecules/card-event/Card-event";
 import { getMessagesES, localizer } from "@/helpers";
 import React, { useEffect, useState } from "react";
-import { Modal } from "@/components/atoms/modal/Modal";
 import DatePicker, { registerLocale } from "react-datepicker";
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  createTheme,
-} from "@mui/material";
-import { ThemeProvider } from "@emotion/react";
 import { useRouter } from "next/navigation";
-import { InputText } from "@/components/atoms/inputText";
-import { useForm } from "@/hook/useForm";
 import { MenuCalendar } from "@/components/molecules/menu-calendar";
-import "react-datepicker/dist/react-datepicker.css";
-import "./agenda-page.scss";
-import { es } from "date-fns/locale";
 import { ModalFormAgenda } from "@/components/molecules/modal-form-agenda/ModalFormAgenda";
+
+import { es } from "date-fns/locale";
+
+import "react-datepicker/dist/react-datepicker.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "./agenda-page.scss";
 
 registerLocale("es", es);
 
@@ -116,7 +106,10 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const handleOpenModal = () => {
     setOpenModal(true);
   };
-
+  const realTime  = new Date();
+  const hourMin = set(realTime, { hours: 9, minutes: 0, seconds: 0 });
+  const hourMax = set(realTime, { hours: 18, minutes: 0, seconds: 0 });
+  
   return (
     <main className="agenda-page">
       <MenuCalendar
@@ -145,6 +138,8 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
           date={date}
           onView={onViewChanged}
           onNavigate={handleNavigate}
+          min={hourMin}
+          max={hourMax}
         />
       </div>
       

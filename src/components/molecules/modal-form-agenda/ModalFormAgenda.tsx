@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "@emotion/react";
-import { addHours } from "date-fns";
+import { set } from "date-fns";
 import { Modal } from "@/components/atoms/modal/Modal";
 import DatePicker, { registerLocale } from "react-datepicker";
 import {
@@ -10,16 +10,19 @@ import {
     InputLabel,
     MenuItem,
     Select,
-    SelectChangeEvent,
     createTheme,
 } from "@mui/material";
 import { InputText } from "@/components/atoms/inputText";
 import { useForm } from "@/hook/useForm";
-import "react-datepicker/dist/react-datepicker.css";
 
 import { es } from "date-fns/locale";
 
+import "react-datepicker/dist/react-datepicker.css";
+import './modalFormAgenda.scss'
+
 registerLocale("es", es);
+
+const realTime  = new Date();
 
 const darkTheme = createTheme({
     palette: {
@@ -39,13 +42,14 @@ const initialForm = {
     appointmentType: "Consultas Iniciales",
     title: "Consultas Iniciales",
     notes: "lo que sea",
-    dateInit: new Date(),
-    dateEnd: addHours(new Date(), 2),
+    dateInit: set(realTime, { hours: 9, minutes: 0, seconds: 0 }),
+    dateEnd: set(realTime, { hours: 11, minutes: 0, seconds: 0 }),
 };
 
-
 export const ModalFormAgenda = () => {
-    
+    const hourMin = set(realTime, { hours: 9, minutes: 0, seconds: 0 });
+    const hourMax = set(realTime, { hours: 17, minutes: 0, seconds: 0 });
+
     const {
         title,
         notes,
@@ -66,41 +70,46 @@ export const ModalFormAgenda = () => {
         dateEnd,
         });
     };
-
-    const horaMin = addHours(new Date(), 13);
-    const horaMax = addHours(new Date(), 24);
+    
+    useEffect(() => {
+        setDateInit(dateInit, "dateEnd")
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dateInit])
+    
 
     return (
         <Modal>
             <div className="modal-content-form">
                 <form onSubmit={(event) => handleOnSubmit(event)}>
-                <h2>Agenda tu cita</h2>
-                <DatePicker
-                    minDate={dateInit}
-                    minTime={horaMin}
-                    maxTime={horaMax}
-                    selected={dateInit}
-                    onChange={(event) => setDateInit(event, "dateInit")}
-                    className="inputText__input"
-                    dateFormat="Pp"
-                    showTimeSelect
-                    locale="es"
-                    timeCaption="Hora"
-                />
+                <h2 className="modal-content-form__title">Agenda tu cita</h2>
+                <div className="modal-content-form__content-inputs-date">
+                    <DatePicker
+                        minDate={realTime}
+                        minTime={hourMin}
+                        maxTime={hourMax}
+                        selected={dateInit}
+                        onChange={(event) => {setDateInit(event, "dateInit")}}
+                        className="inputText__input"
+                        dateFormat="Pp"
+                        showTimeSelect
+                        locale="es"
+                        timeCaption="Hora"
+                    />
 
-                <DatePicker
-                    minDate={dateInit}
-                    maxDate={dateInit}
-                    minTime={dateInit ? dateInit : undefined} // Hora mínima igual a la hora seleccionada en dateInit
-                    maxTime={horaMax} // Utilizar la hora máxima calculada anteriormente
-                    selected={dateEnd}
-                    onChange={(date) => setDateInit(date, "dateEnd")}
-                    className="inputText__input"
-                    dateFormat="Pp"
-                    showTimeSelect
-                    locale="es"
-                    timeCaption="Hora"
-                />
+                    <DatePicker
+                        minDate={dateInit}
+                        maxDate={dateInit}
+                        minTime={dateInit ? dateInit : undefined} 
+                        maxTime={hourMax}
+                        selected={dateEnd}
+                        onChange={(date) => setDateInit(date, "dateEnd")}
+                        className="inputText__input"
+                        dateFormat="Pp"
+                        showTimeSelect
+                        locale="es"
+                        timeCaption="Hora"
+                    />
+                </div>
 
                 <InputText nameLabel="Titulo"
                     value={title}

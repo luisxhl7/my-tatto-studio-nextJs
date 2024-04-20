@@ -78,14 +78,3 @@
         background-color: #3b3b3bb3;
     }
 }
-
-.modal-content-form{
-    background-color: #525252;
-    max-width: 700px;
-    width: 100%;
-    & form{
-        display: flex;
-        flex-direction: column;
-        padding: 30px 20px;
-    }
-}
