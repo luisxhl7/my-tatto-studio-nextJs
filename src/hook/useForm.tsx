@@ -33,6 +33,13 @@ export const useForm = <T extends Record<string, any>>(
         });
     };
 
+    const onSelectChange = (name:string, value:string) => {
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
+
     const onResetForm = () => {
         setFormState(initialForm);
     };
@@ -69,11 +76,12 @@ export const useForm = <T extends Record<string, any>>(
 
     return {
         ...formState,
+        ...formValidation,
         formState,
+        isFormValid,
         onInputChange,
         onResetForm,
         setDateInit,
-        isFormValid,
-        ...formValidation,
+        onSelectChange,
     };
 };

@@ -28,25 +28,27 @@ interface DiaryPageProps {
 
 const myEventsList = [
   {
-    title: "cumpleaños",
-    notes: "cumpleaños de fulano",
+    title: "Veronica - luis",
+    nameArtist: "Veronica",
+    notes: "busco algo diferente al resto",
     dateInit: new Date(),
     dateEnd: addHours(new Date(), 2),
     bgColor: "#fafafa",
     user: {
       _id: "123",
-      name: "Fernando",
+      name: "Veronica",
     },
   },
   {
-    title: "cumpleaños",
-    notes: "cumpleaños de fulano",
+    title: "Keneth - Daniel",
+    nameArtist: "Veronica",
+    notes: "busco algo diferente al resto",
     dateInit: new Date(),
     dateEnd: addHours(new Date(), 2),
     bgColor: "#fafafa",
     user: {
       _id: "123",
-      name: "Fernando",
+      name: "Daniel",
     },
   },
 ];

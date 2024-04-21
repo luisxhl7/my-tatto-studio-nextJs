@@ -5,7 +5,7 @@ export const CardEvent = (event: any) => {
     return (
         <>
             <strong>{ title }</strong>
-            <span> - { user?.name }</span>
+            {/* <span> - { user?.name }</span> */}
         </>
     )
 }
