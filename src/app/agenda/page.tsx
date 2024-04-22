@@ -1,13 +1,14 @@
 "use client";
 
-import { Calendar, View } from "react-big-calendar";
-import { addHours, set } from "date-fns";
-import { CardEvent } from "@/components/molecules/card-event/Card-event";
-import { getMessagesES, localizer } from "@/helpers";
 import React, { useEffect, useState } from "react";
-import DatePicker, { registerLocale } from "react-datepicker";
 import { useRouter } from "next/navigation";
+import { Calendar, View } from "react-big-calendar";
+import { registerLocale } from "react-datepicker";
+import { addHours, set } from "date-fns";
+import { getMessagesES, localizer } from "@/helpers";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { MenuCalendar } from "@/components/molecules/menu-calendar";
+import { CardEvent } from "@/components/molecules/card-event/Card-event";
 import { ModalFormAgenda } from "@/components/molecules/modal-form-agenda/ModalFormAgenda";
 
 import { es } from "date-fns/locale";
@@ -15,6 +16,7 @@ import { es } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./agenda-page.scss";
+import { getAgenda_thunks } from "@/store/thunks/agenda";
 
 registerLocale("es", es);
 
@@ -54,22 +56,23 @@ const myEventsList = [
 ];
 
 const DiaryPage: React.FC<DiaryPageProps> = (props) => {
+  const dispatch = useAppDispatch()
+  const { agenda } = useAppSelector( state => state.agenda)
   const { params } = props;
   const router = useRouter();
-  
   const [view, setView] = useState<View>("month");
   const [date, setDate] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
   const [artist, setArtist] = useState<string>(params.id ? params.id : "todos");
-
-
+  
+  console.log(agenda);
+  
   useEffect(() => {
     if (artist !== "todos") {
       router.push(`/agenda/${artist}`);
     } else {
       router.push(`/agenda`);
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artist]);
 
@@ -77,8 +80,9 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     if (params.id) {
       console.log(`consulta personalizada de ${params.id}`);
     } else {
-      console.log("consulta general");
+      dispatch(getAgenda_thunks())
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   const onViewChanged = (event: any) => {
