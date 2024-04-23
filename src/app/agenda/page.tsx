@@ -17,6 +17,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./agenda-page.scss";
 import { getAgenda_thunks } from "@/store/thunks/agenda";
+import { convertEventsToDateEvents } from "@/helpers/convertEventsToDateEvents";
 
 registerLocale("es", es);
 
@@ -32,7 +33,7 @@ const myEventsList = [
   {
     title: "Veronica - luis",
     nameArtist: "Veronica",
-    notes: "busco algo diferente al resto",
+    description: "busco algo diferente al resto",
     dateInit: new Date(),
     dateEnd: addHours(new Date(), 2),
     bgColor: "#fafafa",
@@ -44,7 +45,7 @@ const myEventsList = [
   {
     title: "Keneth - Daniel",
     nameArtist: "Veronica",
-    notes: "busco algo diferente al resto",
+    description: "busco algo diferente al resto",
     dateInit: new Date(),
     dateEnd: addHours(new Date(), 2),
     bgColor: "#fafafa",
@@ -57,15 +58,13 @@ const myEventsList = [
 
 const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const dispatch = useAppDispatch()
-  const { agenda } = useAppSelector( state => state.agenda)
+  const { agenda, isLoading } = useAppSelector( state => state.agenda)
   const { params } = props;
   const router = useRouter();
   const [view, setView] = useState<View>("month");
   const [date, setDate] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
   const [artist, setArtist] = useState<string>(params.id ? params.id : "todos");
-  
-  console.log(agenda);
   
   useEffect(() => {
     if (artist !== "todos") {
@@ -112,6 +111,7 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const handleOpenModal = () => {
     setOpenModal(true);
   };
+
   const realTime  = new Date();
   const hourMin = set(realTime, { hours: 9, minutes: 0, seconds: 0 });
   const hourMax = set(realTime, { hours: 18, minutes: 0, seconds: 0 });
@@ -130,7 +130,7 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
         <Calendar
           culture="es"
           localizer={localizer}
-          events={myEventsList}
+          events={isLoading ? [] : agenda}
           startAccessor="dateInit"
           endAccessor="dateEnd"
           style={{ height: "calc(100vh - 80px)" }}
@@ -150,7 +150,7 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
       </div>
       
       {openModal && (
-        <ModalFormAgenda/>
+        <ModalFormAgenda setOpenModal={setOpenModal}/>
       )}
 
       <button className="agenda-page__button-adding" onClick={handleOpenModal}>

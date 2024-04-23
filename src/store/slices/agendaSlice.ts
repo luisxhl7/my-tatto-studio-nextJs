@@ -38,7 +38,7 @@ export const agendaSlice = createSlice({
     },
   }
 });
-  
+
 export const { onLoading, onAddingAgenda } = agendaSlice.actions;
 
 export default agendaSlice.reducer;

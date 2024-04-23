@@ -12,8 +12,10 @@ import {
     Select,
     createTheme,
 } from "@mui/material";
-import { InputText } from "@/components/atoms/inputText";
+import { useAppDispatch } from "@/store/hooks";
+import { createAppointment__thunks } from "@/store/thunks/agenda";
 import { useForm } from "@/hook/useForm";
+import { InputText } from "@/components/atoms/inputText";
 
 import { es } from "date-fns/locale";
 
@@ -33,7 +35,7 @@ const darkTheme = createTheme({
 interface formDataProps {
     appointmentType: string;
     title: string;
-    notes: string;
+    description: string;
     nameArtist: string;
     dateInit: Date | null;
     dateEnd: Date | null;
@@ -42,18 +44,20 @@ interface formDataProps {
 const initialForm = {
     appointmentType: "",
     title: "",
-    notes: "",
+    description: "",
     nameArtist: '',
     dateInit: set(realTime, { hours: 9, minutes: 0, seconds: 0 }),
     dateEnd: set(realTime, { hours: 11, minutes: 0, seconds: 0 }),
 };
 
-export const ModalFormAgenda = () => {
+export const ModalFormAgenda = ({setOpenModal}:any) => {
+    const dispatch = useAppDispatch()
+
     const hourMin = set(realTime, { hours: 9, minutes: 0, seconds: 0 });
     const hourMax = set(realTime, { hours: 17, minutes: 0, seconds: 0 });
     const {
         title,
-        notes,
+        description,
         dateInit,
         dateEnd,
         appointmentType,
@@ -68,24 +72,28 @@ export const ModalFormAgenda = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dateInit])
 
-    const handleOnSubmit = (event: any) => {
+    const handleOnSubmit = async(event: any) => {
         event.preventDefault();
-        console.log({
-        appointmentType,
-        title,
-        notes,
-        nameArtist,
-        dateInit,
-        dateEnd,
-        });
-        const esto = {
-            appointmentType,
-            title,
-            notes,
-            nameArtist,
-            dateInit,
-            dateEnd,
+        try {
+            const appointment = {
+                appointmentType,
+                title,
+                description,
+                nameArtist,
+                dateInit,
+                dateEnd,
+            }
+            
+            const resp = await dispatch(createAppointment__thunks(appointment))
+            
+            if (resp) {
+                setOpenModal(false)
+            }            
+            
+        } catch (error) {
+            
         }
+        
     };
 
     return (
@@ -131,8 +139,8 @@ export const ModalFormAgenda = () => {
                     />
 
                     <InputText nameLabel="Descripción"
-                        value={notes}
-                        idInput="notes"
+                        value={description}
+                        idInput="description"
                         type="text"
                         onInputChange={onInputChange}
                     />
