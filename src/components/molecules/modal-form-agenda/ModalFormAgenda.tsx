@@ -86,12 +86,8 @@ export const ModalFormAgenda = ({setOpenModal}:any) => {
             
             const resp = await dispatch(createAppointment__thunks(appointment))
             
-            if (resp) {
-                setOpenModal(false)
-            }            
-            
         } catch (error) {
-            
+            console.log(error);
         }
         
     };
@@ -100,6 +96,7 @@ export const ModalFormAgenda = ({setOpenModal}:any) => {
         <Modal>
             <div className="modal-content-form">
                 <form onSubmit={(event) => handleOnSubmit(event)}>
+                    <button onClick={() => setOpenModal(false)}>x</button>
                     <h2 className="modal-content-form__title">Agenda tu cita</h2>
                     
                     <div className="modal-content-form__content-inputs-date">
