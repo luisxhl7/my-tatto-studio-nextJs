@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { parseISO } from 'date-fns';
 
 interface Agenda {
   title: string;
   nameArtist: string;
+  appointmentType: string;
   description: string;
   dateInit: Date;
   dateEnd: Date;
@@ -18,12 +18,14 @@ interface AgendaState {
   agenda: Agenda[];
   errorMessage?: string | undefined;
   isLoading: boolean
+  activeAgenda: Agenda | null,
 }
 
 const initialState: AgendaState = {
   agenda: [],
   errorMessage: undefined,
-  isLoading: false
+  isLoading: false,
+  activeAgenda: null,
 };
 
 export const agendaSlice = createSlice({
@@ -33,19 +35,20 @@ export const agendaSlice = createSlice({
     onLoading: (state) => {
       state.isLoading = true;
     },
+    onSetActiveAgenda: (state, { payload }) => {
+      state.activeAgenda = payload;
+    },
     onAddingAgenda: (state, { payload }) => {
       state.agenda = payload.agenda;
       state.isLoading = false;
     },
     onAddNewAgenda: (state, { payload }) => {
-      payload.dateInit = parseISO(payload.dateInit);
-      payload.dateEnd = parseISO(payload.dateEnd);
       state.agenda.push(payload);
       state.isLoading = false;
     },
   }
 });
 
-export const { onLoading, onAddingAgenda, onAddNewAgenda } = agendaSlice.actions;
+export const { onLoading, onSetActiveAgenda, onAddingAgenda, onAddNewAgenda } = agendaSlice.actions;
 
 export default agendaSlice.reducer;

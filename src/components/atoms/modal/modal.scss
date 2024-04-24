@@ -11,4 +11,8 @@
     z-index: 100;
     backdrop-filter: blur(4px);
     animation: open .5s linear both;
+    display: none;
+    &.--isOpen{
+        display: flex;
+    }
 }

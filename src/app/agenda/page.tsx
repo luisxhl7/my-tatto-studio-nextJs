@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Calendar, View } from "react-big-calendar";
 import { registerLocale } from "react-datepicker";
-import { set } from "date-fns";
+import { parseISO, set } from "date-fns";
 import { getMessagesES, localizer } from "@/helpers";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { getAgenda_thunks } from "@/store/thunks/agenda";
+import { getAgenda_thunks } from "@/store/thunks/agenda-thunks";
 import { MenuCalendar } from "@/components/molecules/menu-calendar";
 import { CardEvent } from "@/components/molecules/card-event/Card-event";
 import { ModalFormAgenda } from "@/components/molecules/modal-form-agenda/ModalFormAgenda";
@@ -17,6 +17,8 @@ import { es } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./agenda-page.scss";
+import { onSetActiveAgenda } from "@/store/slices/agendaSlice";
+import { onOpenDateModal } from "@/store/slices/uiSlice";
 
 registerLocale("es", es);
 
@@ -32,11 +34,11 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const dispatch = useAppDispatch()
   const authState = useAppSelector( state => state.auth)
   const { agenda, isLoading } = useAppSelector( state => state.agenda)
+  const [agenda2, setAgenda2] = useState<any>([]);
   const { params } = props;
   const router = useRouter();
   const [view, setView] = useState<View>("month");
   const [date, setDate] = useState(new Date());
-  const [openModal, setOpenModal] = useState(false);
   const [artist, setArtist] = useState<string>(params.id ? params.id : "todos");
   const auth = authState.auth;
 
@@ -57,6 +59,21 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
+
+  useEffect(() => {
+
+    const updatedAgenda = agenda.map(event => {
+      if (typeof event.dateInit === 'string' && typeof event.dateEnd === 'string') {
+        return {
+          ...event,
+          dateInit: parseISO(event.dateInit),
+          dateEnd: parseISO(event.dateEnd)
+        };
+      }
+      return event;
+    });
+    setAgenda2(updatedAgenda)
+  }, [agenda]);
 
   const onViewChanged = (event: any) => {
     localStorage.setItem("lastView", event);
@@ -84,8 +101,22 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   };
 
   const handleOpenModal = () => {
-    setOpenModal(true);
+    dispatch(onOpenDateModal())
   };
+
+  const HandleOnSelect = async(event:any) => {
+    const updatedEvent = await{
+      ...event,
+      dateInit: event.dateInit instanceof Date ? event.dateInit.toISOString() : event.dateInit,
+      dateEnd: event.dateEnd instanceof Date ? event.dateEnd.toISOString() : event.dateEnd
+    };
+  
+    dispatch(onSetActiveAgenda( updatedEvent ))
+  }
+
+  const onDoubleClick = () => {
+    dispatch(onOpenDateModal())
+  }
 
   const realTime  = new Date();
   const hourMin = set(realTime, { hours: 9, minutes: 0, seconds: 0 });
@@ -105,7 +136,7 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
         <Calendar
           culture="es"
           localizer={localizer}
-          events={isLoading ? [] : agenda}
+          events={isLoading ? [] : agenda2}
           startAccessor="dateInit"
           endAccessor="dateEnd"
           style={{ height: "calc(100vh - 80px)" }}
@@ -121,12 +152,12 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
           onNavigate={handleNavigate}
           min={hourMin}
           max={hourMax}
+          onSelectEvent={HandleOnSelect}
+          onDoubleClickEvent={onDoubleClick}
         />
       </div>
       
-      {openModal && (
-        <ModalFormAgenda setOpenModal={setOpenModal}/>
-      )}
+      <ModalFormAgenda/>
 
       <button className="agenda-page__button-adding" onClick={handleOpenModal}>
         +

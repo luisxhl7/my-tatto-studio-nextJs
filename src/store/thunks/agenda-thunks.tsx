@@ -25,8 +25,8 @@ export const getAgenda_thunks = () => {
       await dispatch(onLoading());
       const { data } = await myTattoStudioApi.get("/agenda");
 
-      const agenda = convertEventsToDateEvents(data.Appointments);
-
+      const agenda = data.Appointments;
+      
       dispatch(
         onAddingAgenda({
           agenda: agenda,

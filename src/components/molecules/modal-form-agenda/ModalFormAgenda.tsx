@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "@emotion/react";
-import { set } from "date-fns";
+import { parseISO, set } from "date-fns";
 import { Modal } from "@/components/atoms/modal/Modal";
 import DatePicker, { registerLocale } from "react-datepicker";
 import {
@@ -13,7 +13,8 @@ import {
   createTheme,
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { createAppointment__thunks } from "@/store/thunks/agenda";
+import { createAppointment__thunks } from "@/store/thunks/agenda-thunks";
+import { onCloseDateModal } from "@/store/slices/uiSlice";
 import { useForm } from "@/hook/useForm";
 import { InputText } from "@/components/atoms/inputText";
 
@@ -48,9 +49,10 @@ const initialForm = {
   dateEnd: set(realTime, { hours: 11, minutes: 0, seconds: 0 }),
 };
 
-export const ModalFormAgenda = ({ setOpenModal }: any) => {
+export const ModalFormAgenda = () => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector( state => state.agenda)
+  const { isLoading, activeAgenda } = useAppSelector( state => state.agenda)
+  const { isDateModalOpen } = useAppSelector( state => state.ui)
   const [isAlertDates, setIsAlertDates] = useState<boolean | string>(false)
   const [isAlert, setIsAlert] = useState<boolean>(false)
 
@@ -66,7 +68,7 @@ export const ModalFormAgenda = ({ setOpenModal }: any) => {
     onInputChange,
     setDateInit,
     onSelectChange,
-  } = useForm<formDataProps>(initialForm);
+  } = useForm<formDataProps>(activeAgenda ? activeAgenda : initialForm);
 
   useEffect(() => {
     setDateInit(dateInit, "dateEnd");
@@ -90,6 +92,7 @@ export const ModalFormAgenda = ({ setOpenModal }: any) => {
           dateInit,
           dateEnd,
         };
+        
         const resp = await dispatch(createAppointment__thunks(appointment));
         setIsAlertDates(false)
         
@@ -106,12 +109,17 @@ export const ModalFormAgenda = ({ setOpenModal }: any) => {
     }
   };
 
+  const handleCloseModal = () => {
+    dispatch(onCloseDateModal())
+  }
+
   return (
-    <Modal>
+    <Modal className={`${isDateModalOpen ? '--isOpen' : ''}`}>
       <div className="modal-content-form">
         <form onSubmit={(event) => handleOnSubmit(event)}>
           <button
-            onClick={() => setOpenModal(false)}
+            onClick={handleCloseModal}
+            type="button"
             className="modal-content-form__button-close"
           >
             x
@@ -120,12 +128,14 @@ export const ModalFormAgenda = ({ setOpenModal }: any) => {
 
           <div className="modal-content-form__content-inputs-date">
             <DatePicker
-              minDate={realTime}
-              minTime={hourMin}
-              maxTime={hourMax}
-              selected={dateInit}
-              onChange={(event) => {
-                setDateInit(event, "dateInit");
+              minDate={realTime ? new Date(realTime) : undefined}
+              minTime={hourMin ? new Date(hourMin) : undefined}
+              maxTime={hourMax ? new Date(hourMax) : undefined}
+              selected={dateInit ? new Date(dateInit) : null}
+              onChange={(date) => {
+                if (date) {
+                  setDateInit(date, "dateInit");
+                }
               }}
               className="inputText__input"
               dateFormat="Pp"
@@ -138,17 +148,21 @@ export const ModalFormAgenda = ({ setOpenModal }: any) => {
             />
 
             <DatePicker
-            minDate={dateInit}
-            maxDate={dateInit}
-            minTime={dateInit ? dateInit : undefined}
-            maxTime={hourMax}
-            selected={dateEnd}
-            onChange={(date) => setDateInit(date, "dateEnd")}
-            className="inputText__input"
-            dateFormat="Pp"
-            showTimeSelect
-            locale="es"
-            timeCaption="Hora"
+              minDate={dateInit ? new Date(dateInit) : undefined}
+              maxDate={dateInit ? new Date(dateInit) : undefined}
+              minTime={dateInit ? new Date(dateInit) : undefined}
+              maxTime={hourMax ? new Date(hourMax) : undefined}
+              selected={dateEnd ? new Date(dateEnd) : null}
+              onChange={(date) => {
+                if (date) {
+                  setDateInit(date, "dateEnd");
+                }
+              }}
+              className="inputText__input"
+              dateFormat="Pp"
+              showTimeSelect
+              locale="es"
+              timeCaption="Hora"
             />
           </div>
 
