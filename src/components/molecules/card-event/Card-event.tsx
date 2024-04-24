@@ -1,11 +1,12 @@
+import './Card-event.scss';
 
 export const CardEvent = (event: any) => {
-    const {title, user, notes} = event.event
+    const {title, appointmentType} = event.event
     
     return (
-        <>
-            <strong>{ title }</strong>
-            {/* <span> - { user?.name }</span> */}
-        </>
+        <div className="card-event">
+            <strong>{ appointmentType }</strong>
+            <span>{ title }</span>
+        </div>
     )
 }

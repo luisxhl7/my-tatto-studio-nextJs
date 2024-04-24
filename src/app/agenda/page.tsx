@@ -58,7 +58,6 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
 
   const onViewChanged = (event: any) => {
     localStorage.setItem("lastView", event);
-    console.log(event);
   };
 
   const eventStyleGetter = (event: any) => {

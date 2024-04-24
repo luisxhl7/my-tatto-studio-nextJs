@@ -38,7 +38,6 @@ export const agendaSlice = createSlice({
       state.isLoading = false;
     },
     onAddNewAgenda: (state, { payload }) => {
-      console.log(payload);
       payload.dateInit = parseISO(payload.dateInit);
       payload.dateEnd = parseISO(payload.dateEnd);
       state.agenda.push(payload);

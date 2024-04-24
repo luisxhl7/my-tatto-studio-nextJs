@@ -32,47 +32,20 @@
         height: 40px;
         border: none;
         border-radius: 10px;
-        background: linear-gradient(to right, #C0C0C0, #808080, #C0C0C0);
-        background-size: 250%;
-        background-position: left;
         color: #696864;
-        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition-duration: 1s;
-        overflow: hidden;
         margin: 30px auto 0px;
-        &::before {
-            position: absolute;
-            content: "SUBSCRIBE";
-            color: #a8a8a8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 97%;
-            height: 90%;
-            border-radius: 8px;
-            transition-duration: 1s;
-            background-color: rgba(0, 0, 0, 0.842);
-            background-size: 200%;
-        }
-        
+        background-color: rgba(0, 0, 0, 0.842);
         &:hover {
             background-position: right;
             transition-duration: 1s;
+            color: #ffffff;
         }
-        
-        &:hover::before {
-            color: #dddddd;
-            background-position: right;
-            transition-duration: 1s;
-        }
-        
-        &:active {
-            transform: scale(0.95);
-        }
+
     }
     &__button-close{
         top: 10px;
@@ -95,6 +68,25 @@
         text-align: center;
         padding: 5px 10px;
         border-radius: 7px;
+    }
+    &__alert{
+        background-color: green;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 20px;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 12px;
+        animation: vibrar .5s infinite alternate;
+        @keyframes vibrar {
+            0% {
+              transform: rotate(-3deg);
+            }
+            100% {
+              transform: rotate(3deg);
+            }
+        }
     }
 }
 

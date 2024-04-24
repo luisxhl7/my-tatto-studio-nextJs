@@ -12,7 +12,7 @@ import {
   Select,
   createTheme,
 } from "@mui/material";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createAppointment__thunks } from "@/store/thunks/agenda";
 import { useForm } from "@/hook/useForm";
 import { InputText } from "@/components/atoms/inputText";
@@ -50,7 +50,9 @@ const initialForm = {
 
 export const ModalFormAgenda = ({ setOpenModal }: any) => {
   const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector( state => state.agenda)
   const [isAlertDates, setIsAlertDates] = useState<boolean | string>(false)
+  const [isAlert, setIsAlert] = useState<boolean>(false)
 
   const hourMin = set(realTime, { hours: 9, minutes: 0, seconds: 0 });
   const hourMax = set(realTime, { hours: 17, minutes: 0, seconds: 0 });
@@ -90,6 +92,14 @@ export const ModalFormAgenda = ({ setOpenModal }: any) => {
         };
         const resp = await dispatch(createAppointment__thunks(appointment));
         setIsAlertDates(false)
+        
+        if (resp.status === 200) {
+          setIsAlert(true)
+          setTimeout(() => {
+          setIsAlert(false)
+          }, 2000);
+        }
+
       }
     } catch (error) {
       console.log(error);
@@ -211,11 +221,15 @@ export const ModalFormAgenda = ({ setOpenModal }: any) => {
           <button 
             type="submit"
             className="modal-content-form__button-submit"
+            disabled={isLoading}
           >
-            <p>Agendar</p>
+            <p>{isLoading ? 'cargando' : 'Agendar'}</p>
           </button>
         </form>
       </div>
+      {isAlert &&
+        <div className="modal-content-form__alert"> Éxito al guardar </div>
+      }
     </Modal>
   );
 };

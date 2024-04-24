@@ -39,27 +39,29 @@ export const getAgenda_thunks = () => {
 };
 
 export const createAppointment__thunks = (appointment: any) => {
-    return async (dispatch: Dispatch, getState: () => RootState) => {
-        try {
-            await dispatch(onLoading());
+  return async (dispatch: Dispatch, getState: () => RootState) => {
+    try {
+      await dispatch(onLoading());
 
-            const { auth } = getState() as { auth: AuthState };
+      const { auth } = getState() as { auth: AuthState };
 
-            if (auth.auth && "name" in auth.auth) {
-                const data = {
-                    ...appointment,
-                    title: `${appointment.nameArtist} - ${auth.auth.name}`,
-                };
+      if (auth.auth && "name" in auth.auth) {
+        const appointmentData = {
+          ...appointment,
+          title: `${appointment.nameArtist} - ${auth.auth.name}`,
+        };
 
-                const resp = await myTattoStudioApi.post("/agenda", data);
-                await dispatch(onAddNewAgenda({ ...resp.data.Appointment }));
-                
-            } else {
-                console.log("Nombre de usuario no disponible");
-            }
+        const { data } = await myTattoStudioApi.post("/agenda", appointmentData);
+        await dispatch(onAddNewAgenda({ ...data.Appointment }));
+        
+        return data
+        
+      } else {
+        console.log("Nombre de usuario no disponible");
+      }
 
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
