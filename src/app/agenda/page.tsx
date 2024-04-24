@@ -30,6 +30,7 @@ interface DiaryPageProps {
 
 const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const dispatch = useAppDispatch()
+  const authState = useAppSelector( state => state.auth)
   const { agenda, isLoading } = useAppSelector( state => state.agenda)
   const { params } = props;
   const router = useRouter();
@@ -37,7 +38,8 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const [date, setDate] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
   const [artist, setArtist] = useState<string>(params.id ? params.id : "todos");
-  
+  const auth = authState.auth;
+
   useEffect(() => {
     if (artist !== "todos") {
       router.push(`/agenda/${artist}`);
@@ -61,15 +63,17 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   };
 
   const eventStyleGetter = (event: any) => {
-    const isMyEvent = "123" === event.user._id || "123" === event.user.uid;
+    let style
+    if (auth) {
+      const isMyEvent = auth.uid === event.user._id || auth.uid === event.user.uid;
+      style = {
+        backgroundColor: isMyEvent ? "#347CF7" : "#465660",
+        borderRadius: "0px",
+        opacity: 0.8,
+        color: "chite",
+      };
 
-    const style = {
-      backgroundColor: isMyEvent ? "#347CF7" : "#465660",
-      borderRadius: "0px",
-      opacity: 0.8,
-      color: "chite",
-    };
-
+    }
     return {
       style,
     };

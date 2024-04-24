@@ -7,13 +7,13 @@ interface Auth {
 
 interface AuthState {
   status: string;
-  auth: Auth | {};
+  auth: Auth | undefined;
   errorMessage?: string | undefined;
 }
 
 const initialState: AuthState = {
   status: 'checking',
-  auth: {},
+  auth: undefined,
   errorMessage: undefined
 };
 
@@ -23,7 +23,7 @@ export const authSlice = createSlice({
   reducers: {
     onChecking: (state) => {
       state.status = 'checking';
-      state.auth = {};
+      state.auth = undefined;
       state.errorMessage = undefined;
     },
     onLogin: (state, { payload }) => {
@@ -33,7 +33,7 @@ export const authSlice = createSlice({
     },
     onLogout: (state, { payload }) => {
       state.status = 'not-authenticated';
-      state.auth = {};
+      state.auth = undefined;
       state.errorMessage = payload;
     },
     clearError: (state) => {
