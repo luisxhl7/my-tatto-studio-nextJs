@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Calendar, View } from "react-big-calendar";
 import { registerLocale } from "react-datepicker";
-import { addHours, set } from "date-fns";
+import { set } from "date-fns";
 import { getMessagesES, localizer } from "@/helpers";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { getAgenda_thunks } from "@/store/thunks/agenda";
 import { MenuCalendar } from "@/components/molecules/menu-calendar";
 import { CardEvent } from "@/components/molecules/card-event/Card-event";
 import { ModalFormAgenda } from "@/components/molecules/modal-form-agenda/ModalFormAgenda";
@@ -16,8 +17,6 @@ import { es } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./agenda-page.scss";
-import { getAgenda_thunks } from "@/store/thunks/agenda";
-import { convertEventsToDateEvents } from "@/helpers/convertEventsToDateEvents";
 
 registerLocale("es", es);
 
@@ -28,33 +27,6 @@ interface Params {
 interface DiaryPageProps {
   params: Params;
 }
-
-const myEventsList = [
-  {
-    title: "Veronica - luis",
-    nameArtist: "Veronica",
-    description: "busco algo diferente al resto",
-    dateInit: new Date(),
-    dateEnd: addHours(new Date(), 2),
-    bgColor: "#fafafa",
-    user: {
-      _id: "123",
-      name: "Veronica",
-    },
-  },
-  {
-    title: "Keneth - Daniel",
-    nameArtist: "Veronica",
-    description: "busco algo diferente al resto",
-    dateInit: new Date(),
-    dateEnd: addHours(new Date(), 2),
-    bgColor: "#fafafa",
-    user: {
-      _id: "123",
-      name: "Daniel",
-    },
-  },
-];
 
 const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const dispatch = useAppDispatch()
