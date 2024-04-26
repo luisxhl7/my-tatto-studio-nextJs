@@ -3,23 +3,9 @@ import { useEffect, useState } from "react";
 import { Banner } from "@/components/molecules/banner";
 import { tattooArtist } from "@/data/tattoo-artist";
 import ModalImage from "@/components/molecules/modal-image/Modal-image";
-import { SimpleSlider } from "@/components/atoms/simpleSlider/SimpleSlider";
+import { SimpleSlider } from "@/components/atoms/simpleSlider";
+import { ParamsProps, TatuadorPageProps } from "@/interface";
 import "./tatuador-page.scss";
-
-interface TatuadorPageProps {
-  name: string;
-  photo: string;
-  url: string;
-  description: string;
-  portafolio: string[];
-  disenos: string[];
-  redesSociales: string[];
-  logros: string[];
-}
-
-interface PageParams {
-  id: string;
-}
 
 const customSettings = {
   infinite: true,
@@ -61,7 +47,7 @@ const customSettings = {
   ],
 };
 
-const Tatuador = ({ params }: { params: PageParams }) => {
+const Tatuador = ({ params }: { params: ParamsProps }) => {
   const [tatuador, setTatuador] = useState<TatuadorPageProps | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [actualImage, setActualImage] = useState<number>(0);

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Grenze_Gotisch } from "next/font/google";
+import { Providers } from "@/store/providers";
 import { Footer } from "@/components/molecules/footer";
 import { NavBar } from "@/components/molecules/navbar";
-import { Providers } from "@/store/providers";
 import "./globals.scss";
 
 const GrenzeGotisch = Grenze_Gotisch({

@@ -4,15 +4,7 @@ import { clearError, onChecking, onLogin, onLogout } from "../slices/authSlice";
 import { setCookie } from "@/helpers/setCookie";
 import { myTattoStudioApi } from "@/api";
 import { clearCookie } from "@/helpers/clearCookie";
-
-interface User {
-    name: string;
-    lastName: string;
-    numberPhone: number | undefined;
-    document: number | undefined;
-    email: string;
-    password: string;
-}
+import { RegisterUserProps } from "@/interface";
 
 export const auth_thunks = (email: string, password:string) => {
     return async(dispatch: Dispatch, getState: () => RootState) => {
@@ -88,7 +80,7 @@ export const logout_thunks = () => {
     }
 }
 
-export const register_thunks = (user: User) => {
+export const register_thunks = (user:RegisterUserProps) => {
     return async(dispatch: Dispatch, getState: () => RootState) => {
         try {
             await dispatch(onChecking())

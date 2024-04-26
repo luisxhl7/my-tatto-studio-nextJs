@@ -1,14 +1,9 @@
-import React, { ReactNode } from 'react';
-import Slider, { Settings } from 'react-slick';
-import 'slick-carousel/slick/slick.css';
+import React from 'react';
+import Slider from 'react-slick';
+import { SimpleSliderProps } from '@/interface';
 import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 import './SimpleSlider.scss'
-
-interface SimpleSliderProps {
-  children: ReactNode;
-  customSettings?: Settings;
-}
-
 
 export const SimpleSlider: React.FC<SimpleSliderProps> = ({children, customSettings}) => {
   const settings = customSettings ? customSettings : {

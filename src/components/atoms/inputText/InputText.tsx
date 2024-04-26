@@ -1,17 +1,6 @@
 import { useState } from "react";
+import { InputTextProps } from "@/interface";
 import './inputText.scss'
-
-interface InputTextProps {
-  value: string | number | undefined;
-  nameLabel: string;
-  idInput: string;
-  type: string;
-  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  validationRegex?: RegExp;
-  alertMessage?: string;
-  autoComplete?: string;
-  placeholder?: string;
-}
 
 export const InputText: React.FC<InputTextProps> = ({
   value = '',

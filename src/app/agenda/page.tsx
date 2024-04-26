@@ -9,26 +9,19 @@ import { getMessagesES, localizer } from "@/helpers";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { getAgenda_thunks } from "@/store/thunks/agenda-thunks";
 import { MenuCalendar } from "@/components/molecules/menu-calendar";
-import { CardEvent } from "@/components/molecules/card-event/Card-event";
-import { ModalFormAgenda } from "@/components/molecules/modal-form-agenda/ModalFormAgenda";
+import { CardEvent } from "@/components/molecules/card-event";
+import { ModalFormAgenda } from "@/components/molecules/modal-form-agenda";
+import { onSetActiveAgenda } from "@/store/slices/agendaSlice";
+import { onOpenDateModal } from "@/store/slices/uiSlice";
+import { DiaryPageProps } from "@/interface";
 
 import { es } from "date-fns/locale";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./agenda-page.scss";
-import { onSetActiveAgenda } from "@/store/slices/agendaSlice";
-import { onOpenDateModal } from "@/store/slices/uiSlice";
 
 registerLocale("es", es);
-
-interface Params {
-  id?: string;
-}
-
-interface DiaryPageProps {
-  params: Params;
-}
 
 const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const dispatch = useAppDispatch()

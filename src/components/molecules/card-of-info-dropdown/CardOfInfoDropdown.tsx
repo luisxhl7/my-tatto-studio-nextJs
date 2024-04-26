@@ -1,11 +1,7 @@
-import React, { useState, ReactNode } from 'react';
+import React, { useState } from 'react';
 import { KeyboardArrowDown } from '@mui/icons-material';
+import { CardOfInfoDropdownProps } from '@/interface';
 import './CardOfInfoDropdown.scss';
-
-interface CardOfInfoDropdownProps {
-  title: string;
-  children: ReactNode;
-}
 
 export const CardOfInfoDropdown: React.FC<CardOfInfoDropdownProps> = ({ children, title }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

@@ -1,13 +1,13 @@
 "use client";
 
-import { Banner } from "@/components/molecules/banner";
 import {Facebook, WhatsApp, Instagram} from '@mui/icons-material';
 import Link from "next/link";
 import Image from "next/image";
 import { imagesList } from "@/data/tattoo-artist";
-import { SimpleSlider } from "@/components/atoms/simpleSlider";
-import images from "@/assets";
 import sponsors from "@/assets/sponsors";
+import images from "@/assets";
+import { Banner } from "@/components/molecules/banner";
+import { SimpleSlider } from "@/components/atoms/simpleSlider";
 import "./home-page.scss";
 
 const customSettings = {

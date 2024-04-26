@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "@emotion/react";
-import { parseISO, set } from "date-fns";
+import { set } from "date-fns";
 import { Modal } from "@/components/atoms/modal/Modal";
 import DatePicker, { registerLocale } from "react-datepicker";
 import {
@@ -15,6 +15,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createAppointment__thunks, updateAppointment__thunks } from "@/store/thunks/agenda-thunks";
 import { onCloseDateModal } from "@/store/slices/uiSlice";
+import { FormDataProps } from "@/interface";
 import { useForm } from "@/hook/useForm";
 import { InputText } from "@/components/atoms/inputText";
 
@@ -32,14 +33,6 @@ const darkTheme = createTheme({
     mode: "dark",
   },
 });
-
-interface formDataProps {
-  appointmentType: string;
-  description?: string;
-  nameArtist: string;
-  dateInit: Date | null;
-  dateEnd: Date | null;
-}
 
 const initialForm = {
   appointmentType: "",
@@ -68,7 +61,7 @@ export const ModalFormAgenda = () => {
     onInputChange,
     setDateInit,
     onSelectChange,
-  } = useForm<formDataProps>(activeAgenda ? activeAgenda : initialForm);
+  } = useForm<FormDataProps>(activeAgenda ? activeAgenda : initialForm);
 
   useEffect(() => {
     setDateInit(dateInit, "dateEnd");

@@ -6,32 +6,19 @@ import { useRouter } from "next/navigation";
 import { auth_thunks } from "@/store/thunks/auth";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { InputText } from "@/components/atoms/inputText";
+import { FormLoginUser, LoginPageProps } from "@/interface";
 import "./login-page.scss";
-
-interface formDataProps {
-    email: string;
-    password: string;
-}
 
 const initialForm = {
     email: "",
     password: "",
 };
 
-interface Params {
-    p?: string;
-}
-
-interface LoginPageProps {
-    searchParams: Params;
-}
-
-
 const LoginPage: React.FC<LoginPageProps>  = (props) => {
     
     const dispatch = useAppDispatch()
     const navigate = useRouter();
-    const { email, password, onInputChange } = useForm<formDataProps>(initialForm);
+    const { email, password, onInputChange } = useForm<FormLoginUser>(initialForm);
     const { status } = useAppSelector( state => state.auth)
     
     const handleOnSubmit = async(event:any) => {

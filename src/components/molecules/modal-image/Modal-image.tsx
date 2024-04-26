@@ -1,13 +1,7 @@
 import { FC } from "react";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
+import { ModalImageProps } from "@/interface";
 import "./modal-image.scss";
-
-interface ModalImageProps {
-  handleOpenModal: (idx?: number) => void;
-  images: string[];
-  actualImage: number;
-  setActualImage: (index: number) => void;
-}
 
 const ModalImage: FC<ModalImageProps> = ({ handleOpenModal, images, actualImage, setActualImage }) => {
   

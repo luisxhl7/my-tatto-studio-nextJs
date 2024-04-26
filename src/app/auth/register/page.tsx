@@ -1,30 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "@/hook/useForm";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { InputText } from "@/components/atoms/inputText";
-import "./register-page.scss";
 import { register_thunks } from "@/store/thunks/auth";
-import { useRouter } from "next/navigation";
-
-interface formDataProps {
-  email: string;
-  name: string;
-  lastName: string;
-  numberPhone: number | undefined;
-  document: number | undefined;
-  password: string;
-  passwordCompare: string;
-}
-
-interface Params {
-  p?: string;
-}
-
-interface RegisterPageProps {
-  searchParams: Params;
-}
+import { FormRegisterUserProps, RegisterPageProps } from "@/interface";
+import "./register-page.scss";
 
 const initialForm = {
   name: "",
@@ -48,7 +31,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
     password,
     passwordCompare,
     onInputChange
-  } = useForm<formDataProps>(initialForm);
+  } = useForm<FormRegisterUserProps>(initialForm);
   const { status } = useAppSelector((state) => state.auth);
   const [haveMessage, setHaveMessage] = useState('')
 

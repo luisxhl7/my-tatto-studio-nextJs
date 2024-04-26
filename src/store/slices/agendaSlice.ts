@@ -1,27 +1,7 @@
+import { AgendaStateProps } from '@/interface';
 import { createSlice } from '@reduxjs/toolkit'
 
-interface Agenda {
-  title: string;
-  nameArtist: string;
-  appointmentType: string;
-  description: string;
-  dateInit: Date;
-  dateEnd: Date;
-  user: {
-    uid: string;
-    name: string;
-  };
-  id: string;
-}
-
-interface AgendaState {
-  agenda: Agenda[];
-  errorMessage?: string | undefined;
-  isLoading: boolean
-  activeAgenda: Agenda | null,
-}
-
-const initialState: AgendaState = {
+const initialState: AgendaStateProps = {
   agenda: [],
   errorMessage: undefined,
   isLoading: false,

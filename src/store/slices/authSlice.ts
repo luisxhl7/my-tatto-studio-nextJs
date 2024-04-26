@@ -1,17 +1,8 @@
+import { AuthStateProps } from '@/interface';
 import { createSlice } from '@reduxjs/toolkit'
 
-interface User {
-  name: string,
-  uid: string,
-}
 
-interface AuthState {
-  status: string;
-  user: User | undefined;
-  errorMessage?: string | undefined;
-}
-
-const initialState: AuthState = {
+const initialState: AuthStateProps = {
   status: 'checking',
   user: undefined,
   errorMessage: undefined

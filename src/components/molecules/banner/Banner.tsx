@@ -1,15 +1,11 @@
 'use client'
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ImageItem } from "../../../interface";
-import images from "../../../assets";
+import { BannerProps } from "@/interface";
+import images from "@/assets";
 import "./banner.scss";
-
-interface BannerProps {
-  imagesList?: ImageItem[] | string;
-  title?: string;
-}
 
 export const Banner: React.FC<BannerProps> = ({ imagesList, title }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
@@ -22,7 +18,6 @@ export const Banner: React.FC<BannerProps> = ({ imagesList, title }) => {
   const handleMouseLeave = () => {
     setHoveredImage(null);
   };
-  
 
   useEffect(() => {
     if (imagesList) {

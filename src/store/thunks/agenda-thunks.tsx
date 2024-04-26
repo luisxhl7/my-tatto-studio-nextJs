@@ -8,17 +8,6 @@ import {
 } from "../slices/agendaSlice";
 import { myTattoStudioApi } from "@/api";
 
-interface User {
-  name: string;
-  uid: string;
-}
-
-interface AuthState {
-  status: string;
-  user: User | {};
-  errorMessage?: string | undefined;
-}
-
 export const getAgenda_thunks = () => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
     try {
@@ -43,7 +32,7 @@ export const createAppointment__thunks = (appointment: any) => {
     try {
       await dispatch(onLoading());
 
-      const { auth } = getState() as { auth: AuthState };
+      const { auth } = await getState();
 
       if (auth.user && "name" in auth.user) {
         const appointmentData = {
@@ -71,8 +60,9 @@ export const updateAppointment__thunks = (appointment: any, activeAgenda:any) =>
     try {
       await dispatch(onLoading());
       
-      const { auth } = getState() as { auth: AuthState };
-
+      const { auth } = await getState();
+      console.log(auth.user);
+      
 
 
       const mutableActiveAgenda = { ...activeAgenda };

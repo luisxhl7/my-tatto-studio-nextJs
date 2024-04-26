@@ -1,10 +1,6 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
+import { ModalProps } from '@/interface'
 import './modal.scss'
-
-interface ModalProps {
-  children: ReactNode;
-  className: String;
-}
 
 export const Modal:React.FC<ModalProps>  = ({children, className}) => {
   return (
