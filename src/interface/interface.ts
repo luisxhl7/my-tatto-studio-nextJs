@@ -50,17 +50,6 @@ export interface ParamsProps {
     id?: string;
 }
 
-export interface TatuadorPageProps {
-    name: string;
-    photo: string;
-    url: string;
-    description: string;
-    portafolio: string[];
-    disenos: string[];
-    redesSociales: string[];
-    logros: string[];
-}
-
 export interface RegisterPageProps {
     searchParams: ParamsProps;
 }

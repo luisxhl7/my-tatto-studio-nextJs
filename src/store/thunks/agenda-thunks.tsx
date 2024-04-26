@@ -41,6 +41,8 @@ export const createAppointment__thunks = (appointment: any) => {
         };
 
         const { data } = await myTattoStudioApi.post("/agenda", appointmentData);
+        console.log(data);
+        
         await dispatch(onAddNewAgenda({ ...data.Appointment }));
         
         return data
@@ -59,12 +61,6 @@ export const updateAppointment__thunks = (appointment: any, activeAgenda:any) =>
   return async (dispatch: Dispatch, getState: () => RootState) => {
     try {
       await dispatch(onLoading());
-      
-      const { auth } = await getState();
-      console.log(auth.user);
-      
-
-
       const mutableActiveAgenda = { ...activeAgenda };
 
       Object.keys(appointment).forEach((key) => {
@@ -73,11 +69,11 @@ export const updateAppointment__thunks = (appointment: any, activeAgenda:any) =>
         }
       });
 
-
-      // const resp = await myTattoStudioApi.put(`/agenda/${mutableActiveAgenda.id}`, mutableActiveAgenda)
       dispatch( onUpdateAgenda({ ...mutableActiveAgenda }) );
 
-      // console.log(resp);
+      const {data} = await myTattoStudioApi.put(`/agenda/${mutableActiveAgenda.id}`, mutableActiveAgenda)
+      return data
+      
     } catch (error) {
       console.log(error);
     }

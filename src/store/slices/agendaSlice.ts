@@ -19,15 +19,9 @@ export const agendaSlice = createSlice({
       state.activeAgenda = payload;
     },
     onUpdateAgenda: (state, { payload }) => {
-      console.log(payload);
-            
-      // state.agenda = state.agenda.map((event) => {
-      //   if (event.id === payload.id) {
-      //     return payload;
-      //   }
-
-      //   return event;
-      // });
+      console.log(state.agenda);
+      // state.agenda = payload.agenda;
+      // state.isLoading = false;
     },
     onAddingAgenda: (state, { payload }) => {
       state.agenda = payload.agenda;

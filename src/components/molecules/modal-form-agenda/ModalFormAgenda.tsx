@@ -90,12 +90,13 @@ export const ModalFormAgenda = () => {
           const resp = await dispatch(updateAppointment__thunks(appointment, activeAgenda))
           setIsAlertDates(false)
           
-          // if (resp.status === 200) {
-          //   setIsAlert(true)
-          //   setTimeout(() => {
-          //   setIsAlert(false)
-          //   }, 2000);
-          // }
+          if (resp.status === 200) {
+            setIsAlert(true)
+            setTimeout(() => {
+            setIsAlert(false)
+            window.location.reload();
+          }, 2000);
+          }
         }else{
           const resp = await dispatch(createAppointment__thunks(appointment));
           setIsAlertDates(false)

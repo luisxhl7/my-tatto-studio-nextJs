@@ -4,7 +4,7 @@ import { Banner } from "@/components/molecules/banner";
 import { tattooArtist } from "@/data/tattoo-artist";
 import ModalImage from "@/components/molecules/modal-image/Modal-image";
 import { SimpleSlider } from "@/components/atoms/simpleSlider";
-import { ParamsProps, TatuadorPageProps } from "@/interface";
+import { ParamsProps, TattooArtist } from "@/interface";
 import "./tatuador-page.scss";
 
 const customSettings = {
@@ -48,7 +48,7 @@ const customSettings = {
 };
 
 const Tatuador = ({ params }: { params: ParamsProps }) => {
-  const [tatuador, setTatuador] = useState<TatuadorPageProps | null>(null);
+  const [tatuador, setTatuador] = useState<TattooArtist | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [actualImage, setActualImage] = useState<number>(0);
   const [listImages, setListImages] = useState<Array<string> | null>(null);

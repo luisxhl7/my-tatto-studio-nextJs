@@ -75,7 +75,7 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const eventStyleGetter = (event: any) => {
     let style
     if (user) {
-      const isMyEvent = user.uid === event.user._id || user.uid === event.user.uid;
+      const isMyEvent = user.uid === event.user._id || user.uid === event.user;
       style = {
         backgroundColor: isMyEvent ? "#347CF7" : "#465660",
         borderRadius: "0px",
@@ -108,8 +108,13 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     dispatch(onSetActiveAgenda( updatedEvent ))
   }
 
-  const onDoubleClick = () => {
-    dispatch(onOpenDateModal())
+  const onDoubleClick = (event:any) => {
+    if (user) {
+      const isMyEvent = user.uid === event.user._id || user.uid === event.user;
+      if (isMyEvent) {
+        dispatch(onOpenDateModal())
+      }
+    }
   }
 
   const realTime  = new Date();
