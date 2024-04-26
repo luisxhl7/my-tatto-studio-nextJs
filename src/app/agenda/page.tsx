@@ -7,13 +7,15 @@ import { registerLocale } from "react-datepicker";
 import { parseISO, set } from "date-fns";
 import { getMessagesES, localizer } from "@/helpers";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { getAgenda_thunks } from "@/store/thunks/agenda-thunks";
+import { deleteAppointment__thunks, getAgenda_thunks } from "@/store/thunks/agenda-thunks";
 import { MenuCalendar } from "@/components/molecules/menu-calendar";
 import { CardEvent } from "@/components/molecules/card-event";
 import { ModalFormAgenda } from "@/components/molecules/modal-form-agenda";
 import { onSetActiveAgenda } from "@/store/slices/agendaSlice";
 import { onOpenDateModal } from "@/store/slices/uiSlice";
 import { DiaryPageProps } from "@/interface";
+
+import {Delete} from '@mui/icons-material';
 
 import { es } from "date-fns/locale";
 
@@ -26,7 +28,7 @@ registerLocale("es", es);
 const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const dispatch = useAppDispatch()
   const authState = useAppSelector( state => state.auth)
-  const { agenda, isLoading } = useAppSelector( state => state.agenda)
+  const { agenda, isLoading, activeAgenda } = useAppSelector( state => state.agenda)
   const [agenda2, setAgenda2] = useState<any>([]);
   const { params } = props;
   const router = useRouter();
@@ -99,14 +101,30 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   };
 
   const HandleOnSelect = async(event:any) => {
-    const updatedEvent = await{
-      ...event,
-      dateInit: event.dateInit instanceof Date ? event.dateInit.toISOString() : event.dateInit,
-      dateEnd: event.dateEnd instanceof Date ? event.dateEnd.toISOString() : event.dateEnd
-    };
-  
-    dispatch(onSetActiveAgenda( updatedEvent ))
+    if (user) {
+      const isMyEvent = user.uid === event.user._id || user.uid === event.user;
+      if (isMyEvent) {
+        const updatedEvent = await{
+          ...event,
+          dateInit: event.dateInit instanceof Date ? event.dateInit.toISOString() : event.dateInit,
+          dateEnd: event.dateEnd instanceof Date ? event.dateEnd.toISOString() : event.dateEnd
+        };
+      
+        dispatch(onSetActiveAgenda( updatedEvent ))
+      }else{
+        dispatch(onSetActiveAgenda( null ))
+      }
+    }
   }
+
+  const handleRemove = async() => {
+    if (activeAgenda) {
+      const resp = await dispatch(deleteAppointment__thunks(activeAgenda.id))
+      if (resp.status === 200) {
+        window.location.reload();
+      }
+    }
+  } 
 
   const onDoubleClick = (event:any) => {
     if (user) {
@@ -154,13 +172,18 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
           onSelectEvent={HandleOnSelect}
           onDoubleClickEvent={onDoubleClick}
         />
+        <button className="agenda-page__button-adding" onClick={handleOpenModal}>
+          +
+        </button>
+          {activeAgenda &&
+            <button className="agenda-page__button-delete" onClick={handleRemove}>
+              <Delete/>
+            </button>
+          }
+
       </div>
       
       <ModalFormAgenda/>
-
-      <button className="agenda-page__button-adding" onClick={handleOpenModal}>
-        +
-      </button>
     </main>
   );
 };

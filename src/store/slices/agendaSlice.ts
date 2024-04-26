@@ -31,9 +31,19 @@ export const agendaSlice = createSlice({
       state.agenda.push(payload);
       state.isLoading = false;
     },
+    onDeleteAgenda: (state) => {
+      if (state.activeAgenda !== null) {
+        const activeAgendaId = state.activeAgenda.id;
+        state.agenda = state.agenda.filter(
+          (event) => event.id !== activeAgendaId
+        );
+        state.activeAgenda = null;
+      }
+    }
+    
   }
 });
 
-export const { onLoading, onSetActiveAgenda, onAddingAgenda, onAddNewAgenda, onUpdateAgenda } = agendaSlice.actions;
+export const { onLoading, onSetActiveAgenda, onAddingAgenda, onAddNewAgenda, onUpdateAgenda, onDeleteAgenda } = agendaSlice.actions;
 
 export default agendaSlice.reducer;

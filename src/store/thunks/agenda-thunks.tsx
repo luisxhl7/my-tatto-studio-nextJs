@@ -5,6 +5,7 @@ import {
   onAddingAgenda,
   onAddNewAgenda,
   onUpdateAgenda,
+  onDeleteAgenda,
 } from "../slices/agendaSlice";
 import { myTattoStudioApi } from "@/api";
 
@@ -41,7 +42,6 @@ export const createAppointment__thunks = (appointment: any) => {
         };
 
         const { data } = await myTattoStudioApi.post("/agenda", appointmentData);
-        console.log(data);
         
         await dispatch(onAddNewAgenda({ ...data.Appointment }));
         
@@ -74,6 +74,23 @@ export const updateAppointment__thunks = (appointment: any, activeAgenda:any) =>
       const {data} = await myTattoStudioApi.put(`/agenda/${mutableActiveAgenda.id}`, mutableActiveAgenda)
       return data
       
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const deleteAppointment__thunks = (id:string) => {
+  return async (dispatch: Dispatch, getState: () => RootState) => {
+    try {
+      await dispatch(onLoading());
+      
+      const { data } = await myTattoStudioApi.delete(`/agenda/${id}`)
+      
+      await dispatch(onDeleteAgenda())
+    
+      return data;
+
     } catch (error) {
       console.log(error);
     }
