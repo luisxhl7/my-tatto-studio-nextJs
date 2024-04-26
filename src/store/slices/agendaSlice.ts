@@ -17,9 +17,17 @@ export const agendaSlice = createSlice({
     },
     onSetActiveAgenda: (state, { payload }) => {
       state.activeAgenda = payload;
+      state.isLoading = false;
     },
     onUpdateAgenda: (state, { payload }) => {
-      console.log(state.agenda);
+      state.agenda = state.agenda.map((event) => {
+        if (event.id === payload.id) {
+          return payload;
+        }
+
+        return event;
+      });
+      state.isLoading = false;
       // state.agenda = payload.agenda;
       // state.isLoading = false;
     },
@@ -39,6 +47,7 @@ export const agendaSlice = createSlice({
         );
         state.activeAgenda = null;
       }
+      state.isLoading = false;
     }
     
   }

@@ -28,6 +28,25 @@ export const getAgenda_thunks = () => {
   };
 };
 
+export const getAgendaByTattooArtist_thunks = (id:string) => {
+  return async (dispatch: Dispatch, getState: () => RootState) => {
+    try {
+      await dispatch(onLoading());
+      const { data } = await myTattoStudioApi.get(`/agenda/${id}`);
+
+      const agenda = data.Appointments;
+      
+      dispatch(
+        onAddingAgenda({
+          agenda: agenda,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const createAppointment__thunks = (appointment: any) => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
     try {
@@ -60,19 +79,28 @@ export const createAppointment__thunks = (appointment: any) => {
 export const updateAppointment__thunks = (appointment: any, activeAgenda:any) => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
     try {
+      const { auth } = await getState();
+
       await dispatch(onLoading());
-      const mutableActiveAgenda = { ...activeAgenda };
+      if (auth.user && "name" in auth.user) {
+        const mutableActiveAgenda = { ...activeAgenda,
+          title: `${appointment.nameArtist} - ${auth.user.name}`,
+        };
+        Object.keys(appointment).forEach((key) => {
+          if (mutableActiveAgenda.hasOwnProperty(key)) {
+            mutableActiveAgenda[key] = appointment[key];
+          }
+        });
+  
+        const {data} = await myTattoStudioApi.put(`/agenda/${mutableActiveAgenda.id}`, mutableActiveAgenda)
+  
+        dispatch( onUpdateAgenda({ ...mutableActiveAgenda }) );
+  
+        console.log(mutableActiveAgenda);
+        
+        return data
+      }
 
-      Object.keys(appointment).forEach((key) => {
-        if (mutableActiveAgenda.hasOwnProperty(key)) {
-          mutableActiveAgenda[key] = appointment[key];
-        }
-      });
-
-      dispatch( onUpdateAgenda({ ...mutableActiveAgenda }) );
-
-      const {data} = await myTattoStudioApi.put(`/agenda/${mutableActiveAgenda.id}`, mutableActiveAgenda)
-      return data
       
     } catch (error) {
       console.log(error);

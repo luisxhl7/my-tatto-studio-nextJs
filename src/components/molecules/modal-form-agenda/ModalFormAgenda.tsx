@@ -94,7 +94,7 @@ export const ModalFormAgenda = () => {
             setIsAlert(true)
             setTimeout(() => {
             setIsAlert(false)
-            window.location.reload();
+            // window.location.reload();
           }, 2000);
           }
         }else{
@@ -194,16 +194,18 @@ export const ModalFormAgenda = () => {
                 onSelectChange("appointmentType", event.target.value)
                 }
               >
-                <MenuItem value={"Consultas Iniciales"}>
-                Consulta Inicial
+                <MenuItem value={"consultas Iniciales"}>
+                  Consulta Inicial
                 </MenuItem>
-                <MenuItem value={"Citas para Diseño Personalizado"}>
-                Cita para Diseño Personalizado
+                <MenuItem value={"citas para Diseño Personalizado"}>
+                  Cita para Diseño Personalizado
                 </MenuItem>
-                <MenuItem value={"Citas para Sesiones de Tatuaje"}>
-                Cita para Sesión de Tatuaje
+                <MenuItem value={"citas para Sesiones de Tatuaje"}>
+                  Cita para Sesión de Tatuaje
                 </MenuItem>
-                <MenuItem value={"Citas de Retoque"}>Cita de Retoque</MenuItem>
+                <MenuItem value={"citas de Retoque"}>
+                  Cita de Retoque
+                </MenuItem>
               </Select>
             </FormControl>
           </ThemeProvider>
@@ -222,11 +224,11 @@ export const ModalFormAgenda = () => {
                   onSelectChange("nameArtist", event.target.value)
                 } 
               >
-                <MenuItem value={"Keneth"}>Keneth</MenuItem>
-                <MenuItem value={"Luis"}>Luis</MenuItem>
-                <MenuItem value={"Veronica"}>Veronica</MenuItem>
-                <MenuItem value={"Yeison"}>Yeison</MenuItem>
-                <MenuItem value={"Juan"}>Juan</MenuItem>
+                <MenuItem value={"keneth"}>Keneth</MenuItem>
+                <MenuItem value={"luis"}>Luis</MenuItem>
+                <MenuItem value={"veronica"}>Veronica</MenuItem>
+                <MenuItem value={"yeison"}>Yeison</MenuItem>
+                <MenuItem value={"juan"}>Juan</MenuItem>
               </Select>
             </FormControl>
           </ThemeProvider>

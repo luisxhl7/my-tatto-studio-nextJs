@@ -7,7 +7,7 @@ import { registerLocale } from "react-datepicker";
 import { parseISO, set } from "date-fns";
 import { getMessagesES, localizer } from "@/helpers";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { deleteAppointment__thunks, getAgenda_thunks } from "@/store/thunks/agenda-thunks";
+import { deleteAppointment__thunks, getAgendaByTattooArtist_thunks, getAgenda_thunks } from "@/store/thunks/agenda-thunks";
 import { MenuCalendar } from "@/components/molecules/menu-calendar";
 import { CardEvent } from "@/components/molecules/card-event";
 import { ModalFormAgenda } from "@/components/molecules/modal-form-agenda";
@@ -29,14 +29,16 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const dispatch = useAppDispatch()
   const authState = useAppSelector( state => state.auth)
   const { agenda, isLoading, activeAgenda } = useAppSelector( state => state.agenda)
-  const [agenda2, setAgenda2] = useState<any>([]);
   const { params } = props;
   const router = useRouter();
   const [view, setView] = useState<View>("month");
   const [date, setDate] = useState(new Date());
   const [artist, setArtist] = useState<string>(params.id ? params.id : "todos");
   const user = authState.user;
-
+  const realTime  = new Date();
+  const hourMin = set(realTime, { hours: 9, minutes: 0, seconds: 0 });
+  const hourMax = set(realTime, { hours: 18, minutes: 0, seconds: 0 });
+  
   useEffect(() => {
     if (artist !== "todos") {
       router.push(`/agenda/${artist}`);
@@ -48,27 +50,12 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
 
   useEffect(() => {
     if (params.id) {
-      console.log(`consulta personalizada de ${params.id}`);
+      dispatch(getAgendaByTattooArtist_thunks(params.id))
     } else {
       dispatch(getAgenda_thunks())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
-
-  useEffect(() => {
-
-    const updatedAgenda = agenda.map(event => {
-      if (typeof event.dateInit === 'string' && typeof event.dateEnd === 'string') {
-        return {
-          ...event,
-          dateInit: parseISO(event.dateInit),
-          dateEnd: parseISO(event.dateEnd)
-        };
-      }
-      return event;
-    });
-    setAgenda2(updatedAgenda)
-  }, [agenda]);
 
   const onViewChanged = (event: any) => {
     localStorage.setItem("lastView", event);
@@ -121,7 +108,6 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     if (activeAgenda) {
       const resp = await dispatch(deleteAppointment__thunks(activeAgenda.id))
       if (resp.status === 200) {
-        window.location.reload();
       }
     }
   } 
@@ -135,10 +121,6 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     }
   }
 
-  const realTime  = new Date();
-  const hourMin = set(realTime, { hours: 9, minutes: 0, seconds: 0 });
-  const hourMax = set(realTime, { hours: 18, minutes: 0, seconds: 0 });
-  
   return (
     <main className="agenda-page">
       <MenuCalendar
@@ -153,7 +135,16 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
         <Calendar
           culture="es"
           localizer={localizer}
-          events={isLoading ? [] : agenda2}
+          events={isLoading ? [] : agenda.map(event => {
+            if (typeof event.dateInit === 'string' && typeof event.dateEnd === 'string') {
+              return {
+                ...event,
+                dateInit: parseISO(event.dateInit),
+                dateEnd: parseISO(event.dateEnd)
+              };
+            }
+            return event;
+          })}
           startAccessor="dateInit"
           endAccessor="dateEnd"
           style={{ height: "calc(100vh - 80px)" }}
