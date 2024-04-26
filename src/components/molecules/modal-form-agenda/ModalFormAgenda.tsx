@@ -13,7 +13,7 @@ import {
   createTheme,
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { createAppointment__thunks } from "@/store/thunks/agenda-thunks";
+import { createAppointment__thunks, updateAppointment__thunks } from "@/store/thunks/agenda-thunks";
 import { onCloseDateModal } from "@/store/slices/uiSlice";
 import { useForm } from "@/hook/useForm";
 import { InputText } from "@/components/atoms/inputText";
@@ -77,6 +77,7 @@ export const ModalFormAgenda = () => {
 
   const handleOnSubmit = async (event: any) => {
     event.preventDefault();
+    
     try {
       if (dateInit === dateEnd) {
         setIsAlertDates('Establece una hora inicial y final de tu cita')
@@ -92,17 +93,27 @@ export const ModalFormAgenda = () => {
           dateInit,
           dateEnd,
         };
-        
-        const resp = await dispatch(createAppointment__thunks(appointment));
-        setIsAlertDates(false)
-        
-        if (resp.status === 200) {
-          setIsAlert(true)
-          setTimeout(() => {
-          setIsAlert(false)
-          }, 2000);
+        if (activeAgenda) {
+          const resp = await dispatch(updateAppointment__thunks(appointment, activeAgenda))
+          setIsAlertDates(false)
+          
+          // if (resp.status === 200) {
+          //   setIsAlert(true)
+          //   setTimeout(() => {
+          //   setIsAlert(false)
+          //   }, 2000);
+          // }
+        }else{
+          const resp = await dispatch(createAppointment__thunks(appointment));
+          setIsAlertDates(false)
+          
+          if (resp.status === 200) {
+            setIsAlert(true)
+            setTimeout(() => {
+            setIsAlert(false)
+            }, 2000);
+          }
         }
-
       }
     } catch (error) {
       console.log(error);

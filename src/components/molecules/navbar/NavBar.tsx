@@ -20,7 +20,7 @@ import "./navBar.scss";
 export const NavBar = () => {
   const dispatch = useAppDispatch();
   const navigate = useRouter()
-  const { status, auth } = useAppSelector((state) => state.auth);
+  const { status, user } = useAppSelector((state) => state.auth);
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<boolean>(false);
   const [optionsUserOpen, setOptionsUserOpen] = useState<boolean>(false);
   const { isMobile } = useMobileDetect();
@@ -136,9 +136,10 @@ export const NavBar = () => {
             </Link>
           </li>
           <li className="navBar__content-login">
-            {status === "authenticated" && "name" in auth ? (
+
+            {user && status === "authenticated" && "name" in user ? (
               <div className="navBar__content-login-user" onClick={handleOpenOptionsUser}>
-                <span>{auth.name}</span>
+                <span>{user.name}</span>
                 <AccountCircle />
                 <div className={`navBar__content-login-user__options ${optionsUserOpen ? '--isOpen' : ''}`}>
                   <button onClick={handleOnLogout}>cerrar sesión</button>

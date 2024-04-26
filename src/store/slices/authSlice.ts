@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-interface Auth {
+interface User {
   name: string,
   uid: string,
 }
 
 interface AuthState {
   status: string;
-  auth: Auth | undefined;
+  user: User | undefined;
   errorMessage?: string | undefined;
 }
 
 const initialState: AuthState = {
   status: 'checking',
-  auth: undefined,
+  user: undefined,
   errorMessage: undefined
 };
 
@@ -23,17 +23,17 @@ export const authSlice = createSlice({
   reducers: {
     onChecking: (state) => {
       state.status = 'checking';
-      state.auth = undefined;
+      state.user = undefined;
       state.errorMessage = undefined;
     },
     onLogin: (state, { payload }) => {
       state.status = 'authenticated';
-      state.auth = payload;
+      state.user = payload;
       state.errorMessage = undefined;
     },
     onLogout: (state, { payload }) => {
       state.status = 'not-authenticated';
-      state.auth = undefined;
+      state.user = undefined;
       state.errorMessage = payload;
     },
     clearError: (state) => {

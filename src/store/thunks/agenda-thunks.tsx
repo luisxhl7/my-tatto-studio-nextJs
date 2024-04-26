@@ -4,18 +4,18 @@ import {
   onLoading,
   onAddingAgenda,
   onAddNewAgenda,
+  onUpdateAgenda,
 } from "../slices/agendaSlice";
 import { myTattoStudioApi } from "@/api";
-import { convertEventsToDateEvents } from "@/helpers/convertEventsToDateEvents";
 
-interface Auth {
+interface User {
   name: string;
   uid: string;
 }
 
 interface AuthState {
   status: string;
-  auth: Auth | {};
+  user: User | {};
   errorMessage?: string | undefined;
 }
 
@@ -45,10 +45,10 @@ export const createAppointment__thunks = (appointment: any) => {
 
       const { auth } = getState() as { auth: AuthState };
 
-      if (auth.auth && "name" in auth.auth) {
+      if (auth.user && "name" in auth.user) {
         const appointmentData = {
           ...appointment,
-          title: `${appointment.nameArtist} - ${auth.auth.name}`,
+          title: `${appointment.nameArtist} - ${auth.user.name}`,
         };
 
         const { data } = await myTattoStudioApi.post("/agenda", appointmentData);
@@ -60,6 +60,34 @@ export const createAppointment__thunks = (appointment: any) => {
         console.log("Nombre de usuario no disponible");
       }
 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const updateAppointment__thunks = (appointment: any, activeAgenda:any) => {
+  return async (dispatch: Dispatch, getState: () => RootState) => {
+    try {
+      await dispatch(onLoading());
+      
+      const { auth } = getState() as { auth: AuthState };
+
+
+
+      const mutableActiveAgenda = { ...activeAgenda };
+
+      Object.keys(appointment).forEach((key) => {
+        if (mutableActiveAgenda.hasOwnProperty(key)) {
+          mutableActiveAgenda[key] = appointment[key];
+        }
+      });
+
+
+      // const resp = await myTattoStudioApi.put(`/agenda/${mutableActiveAgenda.id}`, mutableActiveAgenda)
+      dispatch( onUpdateAgenda({ ...mutableActiveAgenda }) );
+
+      // console.log(resp);
     } catch (error) {
       console.log(error);
     }

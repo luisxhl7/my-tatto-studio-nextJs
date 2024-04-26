@@ -40,7 +40,7 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
   const [view, setView] = useState<View>("month");
   const [date, setDate] = useState(new Date());
   const [artist, setArtist] = useState<string>(params.id ? params.id : "todos");
-  const auth = authState.auth;
+  const user = authState.user;
 
   useEffect(() => {
     if (artist !== "todos") {
@@ -81,8 +81,8 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
 
   const eventStyleGetter = (event: any) => {
     let style
-    if (auth) {
-      const isMyEvent = auth.uid === event.user._id || auth.uid === event.user.uid;
+    if (user) {
+      const isMyEvent = user.uid === event.user._id || user.uid === event.user.uid;
       style = {
         backgroundColor: isMyEvent ? "#347CF7" : "#465660",
         borderRadius: "0px",
@@ -100,7 +100,8 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     setDate(newDate);
   };
 
-  const handleOpenModal = () => {
+  const handleOpenModal = async() => {
+    await dispatch(onSetActiveAgenda( null ))
     dispatch(onOpenDateModal())
   };
 
