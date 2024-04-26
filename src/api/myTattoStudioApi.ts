@@ -13,7 +13,6 @@ interface MyTattoStudioApiInstance extends AxiosInstance {
 
 const myTattoStudioApi: MyTattoStudioApiInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL
-    
 });
 
 myTattoStudioApi.interceptors.request.use((config: InternalAxiosRequestConfig) => {

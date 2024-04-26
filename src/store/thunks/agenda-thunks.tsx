@@ -7,13 +7,14 @@ import {
   onUpdateAgenda,
   onDeleteAgenda,
 } from "../slices/agendaSlice";
-import { myTattoStudioApi } from "@/api";
+import MyTattoStudioService from "@/services/my-tatto-studio";
 
 export const getAgenda_thunks = () => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
     try {
       await dispatch(onLoading());
-      const { data } = await myTattoStudioApi.get("/agenda");
+
+      const { data } = await MyTattoStudioService.getAgenda();
 
       const agenda = data.Appointments;
       
@@ -22,6 +23,7 @@ export const getAgenda_thunks = () => {
           agenda: agenda,
         })
       );
+
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +34,8 @@ export const getAgendaByTattooArtist_thunks = (id:string) => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
     try {
       await dispatch(onLoading());
-      const { data } = await myTattoStudioApi.get(`/agenda/${id}`);
+
+      const { data } = await MyTattoStudioService.getAgendaByTattooArtist(id);
 
       const agenda = data.Appointments;
       
@@ -41,6 +44,7 @@ export const getAgendaByTattooArtist_thunks = (id:string) => {
           agenda: agenda,
         })
       );
+
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +64,7 @@ export const createAppointment__thunks = (appointment: any) => {
           title: `${appointment.nameArtist} - ${auth.user.name}`,
         };
 
-        const { data } = await myTattoStudioApi.post("/agenda", appointmentData);
+        const { data } = await MyTattoStudioService.createAppointment(appointmentData);
         
         await dispatch(onAddNewAgenda({ ...data.Appointment }));
         
@@ -82,6 +86,7 @@ export const updateAppointment__thunks = (appointment: any, activeAgenda:any) =>
       const { auth } = await getState();
 
       await dispatch(onLoading());
+
       if (auth.user && "name" in auth.user) {
         const mutableActiveAgenda = { ...activeAgenda,
           title: `${appointment.nameArtist} - ${auth.user.name}`,
@@ -92,15 +97,12 @@ export const updateAppointment__thunks = (appointment: any, activeAgenda:any) =>
           }
         });
   
-        const {data} = await myTattoStudioApi.put(`/agenda/${mutableActiveAgenda.id}`, mutableActiveAgenda)
-  
+        const {data} = await MyTattoStudioService.updateAppointment(mutableActiveAgenda.id, mutableActiveAgenda)
+        
         dispatch( onUpdateAgenda({ ...mutableActiveAgenda }) );
   
-        console.log(mutableActiveAgenda);
-        
         return data
       }
-
       
     } catch (error) {
       console.log(error);
@@ -113,7 +115,7 @@ export const deleteAppointment__thunks = (id:string) => {
     try {
       await dispatch(onLoading());
       
-      const { data } = await myTattoStudioApi.delete(`/agenda/${id}`)
+      const { data } = await MyTattoStudioService.deleteAppointment(id)
       
       await dispatch(onDeleteAgenda())
     
