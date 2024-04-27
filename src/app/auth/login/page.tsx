@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SyntheticEvent } from "react";
 import { useForm } from "@/hook/useForm";
 import { useRouter } from "next/navigation";
 import { auth_thunks } from "@/store/thunks/auth";
@@ -21,7 +22,7 @@ const LoginPage: React.FC<LoginPageProps>  = (props) => {
     const { email, password, onInputChange } = useForm<FormLoginUser>(initialForm);
     const { status } = useAppSelector( state => state.auth)
     
-    const handleOnSubmit = async(event:any) => {
+    const handleOnSubmit = async(event:SyntheticEvent) => {
         event.preventDefault()
         
         const resp = await dispatch(auth_thunks(email, password))

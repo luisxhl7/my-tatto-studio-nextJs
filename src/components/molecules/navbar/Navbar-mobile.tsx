@@ -23,13 +23,13 @@ export const NavbarMobile = () => {
     };
 
     useEffect(() => {
-        const handleDocumentClick = (event: any) => {
+        const handleDocumentClick = (event: MouseEvent) => {
         const optionsContainerMobile = document.querySelector(
             ".navBar__menu-mobile"
         );
         if (
             optionsContainerMobile &&
-            !optionsContainerMobile.contains(event.target) 
+            !optionsContainerMobile.contains(event.target as Node) 
         ) {
             setOpenMenu(false);
             setIsSubMenuOpen(false);

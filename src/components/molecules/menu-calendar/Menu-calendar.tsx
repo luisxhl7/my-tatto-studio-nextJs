@@ -9,6 +9,7 @@ import {
   createTheme,
 } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
+import { MenuCalendarProps } from "@/interface";
 
 const darkTheme = createTheme({
   palette: {
@@ -22,16 +23,16 @@ export const MenuCalendar = ({
   setArtist,
   artist,
   view,
-}: any) => {
+}: MenuCalendarProps) => {
   const handlePrev = () => {
     if (view === "month") {
       setDate(
-        (prevDate: any) =>
+        (prevDate: Date) =>
           new Date(prevDate.getFullYear(), prevDate.getMonth() - 1, 1)
       );
     } else if (view === "week") {
       setDate(
-        (prevDate: any) =>
+        (prevDate: Date) =>
           new Date(
             prevDate.getFullYear(),
             prevDate.getMonth(),
@@ -40,7 +41,7 @@ export const MenuCalendar = ({
       );
     } else if (view === "day") {
       setDate(
-        (prevDate: any) =>
+        (prevDate: Date) =>
           new Date(
             prevDate.getFullYear(),
             prevDate.getMonth(),
@@ -53,12 +54,12 @@ export const MenuCalendar = ({
   const handleNext = () => {
     if (view === "month") {
       setDate(
-        (prevDate: any) =>
+        (prevDate: Date) =>
           new Date(prevDate.getFullYear(), prevDate.getMonth() + 1, 1)
       );
     } else if (view === "week") {
       setDate(
-        (prevDate: any) =>
+        (prevDate: Date) =>
           new Date(
             prevDate.getFullYear(),
             prevDate.getMonth(),
@@ -67,7 +68,7 @@ export const MenuCalendar = ({
       );
     } else if (view === "day") {
       setDate(
-        (prevDate: any) =>
+        (prevDate: Date) =>
           new Date(
             prevDate.getFullYear(),
             prevDate.getMonth(),

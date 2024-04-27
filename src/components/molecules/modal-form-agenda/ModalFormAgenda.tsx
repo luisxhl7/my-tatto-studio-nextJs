@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { set } from "date-fns";
 import { Modal } from "@/components/atoms/modal/Modal";
@@ -68,7 +68,7 @@ export const ModalFormAgenda = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateInit]);
 
-  const handleOnSubmit = async (event: any) => {
+  const handleOnSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     
     try {
@@ -98,6 +98,8 @@ export const ModalFormAgenda = () => {
           }, 2000);
           }
         }else{
+          console.log(appointment);
+          
           const resp = await dispatch(createAppointment__thunks(appointment));
           setIsAlertDates(false)
           

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { View } from "react-big-calendar";
 import { Settings } from "react-slick";
 
 export interface ImageItem {
@@ -141,4 +142,19 @@ export interface ModalProps {
 export interface SimpleSliderProps {
     children: ReactNode;
     customSettings?: Settings;
+}
+
+export interface CardEventProps {
+    event: {
+        title: string;
+        appointmentType: string;
+    }
+}
+
+export interface MenuCalendarProps {
+    setDate: (date: any) => void;
+    setView: (view: View) => void;
+    setArtist: (artist: string) => void;
+    artist: string;
+    view: string;
 }

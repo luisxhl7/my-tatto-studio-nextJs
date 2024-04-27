@@ -57,7 +57,7 @@ const DiaryPage: React.FC<DiaryPageProps> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
-  const onViewChanged = (event: any) => {
+  const onViewChanged = (event:string) => {
     localStorage.setItem("lastView", event);
   };
 

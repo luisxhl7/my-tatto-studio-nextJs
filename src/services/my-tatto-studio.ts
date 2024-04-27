@@ -1,4 +1,5 @@
 import { myTattoStudioApi } from "@/api";
+import { FormDataProps } from "@/interface";
 
 class MyTattoStudioService {
   
@@ -10,7 +11,7 @@ class MyTattoStudioService {
     return myTattoStudioApi.get("/agenda");
   }
 
-  static createAppointment = (appointmentData:any) => {
+  static createAppointment = (appointmentData:FormDataProps) => {
     return myTattoStudioApi.post("/agenda", appointmentData);
   }
 

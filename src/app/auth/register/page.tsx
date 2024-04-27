@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "@/hook/useForm";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -35,7 +35,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
   const { status } = useAppSelector((state) => state.auth);
   const [haveMessage, setHaveMessage] = useState('')
 
-  const handleOnSubmit = async (event: any) => {
+  const handleOnSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
 
     const isValid = () => {

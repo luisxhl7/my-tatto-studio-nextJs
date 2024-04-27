@@ -8,6 +8,7 @@ import {
   onDeleteAgenda,
 } from "../slices/agendaSlice";
 import MyTattoStudioService from "@/services/my-tatto-studio";
+import { FormDataProps } from "@/interface";
 
 export const getAgenda_thunks = () => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
@@ -51,7 +52,7 @@ export const getAgendaByTattooArtist_thunks = (id:string) => {
   };
 };
 
-export const createAppointment__thunks = (appointment: any) => {
+export const createAppointment__thunks = (appointment: FormDataProps) => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
     try {
       await dispatch(onLoading());

@@ -45,9 +45,9 @@ export const NavBar = () => {
   }
 
   useEffect(() => {
-    const handleDocumentClick = (event: any) => {
+    const handleDocumentClick = (event: MouseEvent) => {
       const subMenuContainer = document.querySelector(".navBar__options-list");
-      if (subMenuContainer && !subMenuContainer.contains(event.target)) {
+      if (subMenuContainer && !subMenuContainer.contains(event.target as Node)) {
         setIsSubMenuOpen(false);
         setOptionsUserOpen(false);
       } 

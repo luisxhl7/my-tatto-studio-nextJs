@@ -1,7 +1,8 @@
+import { CardEventProps } from '@/interface';
 import './Card-event.scss';
 
-export const CardEvent = (event: any) => {
-    const {title, appointmentType} = event.event
+export const CardEvent = (event: CardEventProps) => {
+    const { title, appointmentType } = event.event
     
     return (
         <div className="card-event">
