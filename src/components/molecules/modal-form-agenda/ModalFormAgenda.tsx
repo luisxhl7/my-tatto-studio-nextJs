@@ -92,9 +92,9 @@ export const ModalFormAgenda = () => {
           
           if (resp.status === 200) {
             setIsAlert(true)
-            setTimeout(() => {
+          setTimeout(() => {
             setIsAlert(false)
-            // window.location.reload();
+            dispatch(onCloseDateModal())
           }, 2000);
           }
         }else{
@@ -107,7 +107,8 @@ export const ModalFormAgenda = () => {
             setIsAlert(true)
             setTimeout(() => {
             setIsAlert(false)
-            }, 2000);
+            dispatch(onCloseDateModal())
+          }, 2000);
           }
         }
       }
