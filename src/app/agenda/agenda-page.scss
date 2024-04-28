@@ -2,55 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    &__menu{
-        width: 250px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        &__content-arrows{
-            display: flex;
-            margin-top: 20px;
-            &__button-arrow{
-                background-color: transparent;
-                color: #ffffff;
-                width: auto;
-                padding: 0px 5px;
-                margin: 0px 10px;
-            }
-        }
-        &__content-date{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            margin: 10px 0px;
-            &__btn{
-                width: auto;
-                margin: 3px;
-            }
-        }
-        &__content-selected{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 150px;
-            & label{
-                font-size: 25px;
-            }
-            &__select{
-                width: 150px;
-                padding: 10px 5px;
-                border-radius: 4px;
-                font-size: 5px;
-                & option{
-                    background-color: red;
-                    padding: 5px;
-                    height: 100px;
-                }
-            }
-        }
-    }
+
     &__content-agenda{
         position: relative;
         width: 100%;

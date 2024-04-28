@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import { MenuCalendarProps } from "@/interface";
+import './menu-calendar.scss'
 
 const darkTheme = createTheme({
   palette: {
@@ -24,6 +25,7 @@ export const MenuCalendar = ({
   artist,
   view,
 }: MenuCalendarProps) => {
+
   const handlePrev = () => {
     if (view === "month") {
       setDate(
@@ -87,43 +89,43 @@ export const MenuCalendar = ({
   };
 
   return (
-    <div className="agenda-page__menu">
-      <div className="agenda-page__menu__content-arrows">
+    <div className="menu">
+      <div className="menu__content-arrows">
         <button
           onClick={handlePrev}
-          className="agenda-page__menu__content-arrows__button-arrow"
+          className="menu__content-arrows__button-arrow"
         >
           <KeyboardArrowLeft />
         </button>
-        <button onClick={handleInitValue}>Hoy</button>
+        <button onClick={handleInitValue} className="menu__content-arrows__button-today">Hoy</button>
         <button
           onClick={handleNext}
-          className="agenda-page__menu__content-arrows__button-arrow"
+          className="menu__content-arrows__button-arrow"
         >
           <KeyboardArrowRight />
         </button>
       </div>
-      <div className="agenda-page__menu__content-date">
+      <div className="menu__content-date">
         <button
-          onClick={() => setView("day")}
-          className="agenda-page__menu__content-date__btn"
-        >
-          Día
+          onClick={() => setView("month")}
+          className="menu__content-date__btn"
+          >
+          Mes
         </button>
         <button
           onClick={() => setView("week")}
-          className="agenda-page__menu__content-date__btn"
+          className="menu__content-date__btn"
         >
           Semana
         </button>
         <button
-          onClick={() => setView("month")}
-          className="agenda-page__menu__content-date__btn"
+          onClick={() => setView("day")}
+          className="menu__content-date__btn"
         >
-          Mes
+          Día
         </button>
       </div>
-      <div className="agenda-page__menu__content-selected">
+      <div className="menu__content-selected">
         <ThemeProvider theme={darkTheme}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Tatuador</InputLabel>
