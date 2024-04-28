@@ -108,19 +108,19 @@ export const MenuCalendar = ({
       <div className="menu__content-date">
         <button
           onClick={() => setView("month")}
-          className="menu__content-date__btn"
+          className={`menu__content-date__btn ${view === 'month' ? '--active' : ''}`}
           >
           Mes
         </button>
         <button
           onClick={() => setView("week")}
-          className="menu__content-date__btn"
+          className={`menu__content-date__btn ${view === 'week' ? '--active' : ''}`}
         >
           Semana
         </button>
         <button
           onClick={() => setView("day")}
-          className="menu__content-date__btn"
+          className={`menu__content-date__btn ${view === 'day' ? '--active' : ''}`}
         >
           Día
         </button>

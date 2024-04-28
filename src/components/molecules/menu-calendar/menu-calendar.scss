@@ -67,7 +67,11 @@
             color: #696864;
             border: 1px solid #696864;
             &:hover{
-                background-color: rgba(0, 0, 0, 0.842);
+                color: #ffffff;
+                border: 1px solid #ffffff;
+            }
+            &.--active{
+                background-color: #1b1b1b;
                 color: #ffffff;
                 border: 1px solid #ffffff;
             }
