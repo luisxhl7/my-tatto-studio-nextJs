@@ -1,76 +1,100 @@
+@import '../../../style/mixins.scss';
+@import '../../../style/variables.scss';
+
 .menu{
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  &__content-arrows{
-    display: flex;
-    margin: 20px auto;
-    &__button-arrow{
-        background-color: transparent;
-        color: #696864;
-        width: auto;
-        padding: 0px 09px;
-        & svg{
-            font-size: 30px;
-        }
-        &:hover{
-            background-color: rgba(0, 0, 0, 0.842);
-            color: #ffffff;
-        }
-    }
-    &__button-today{
-        transition-duration: 1s;
-        background-color: rgba(0, 0, 0, 0.842);
-        color: #696864;
-        padding: 0px 20px;
-        border: 1px solid #696864;
-        &:hover{
-            background-color: rgba(0, 0, 0, 0.842);
-            color: #ffffff;
-            border: 1px solid #ffffff;
-        }
-    }
-  }
-  &__content-date{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0px;
-    &__btn{
-        margin: 3px;
-        transition-duration: 1s;
-        background-color: rgba(0, 0, 0, 0.842);
-        color: #696864;
-        border: 1px solid #696864;
-        &:hover{
-            background-color: rgba(0, 0, 0, 0.842);
-            color: #ffffff;
-            border: 1px solid #ffffff;
-        }
-    }
-  }
-  &__content-selected{
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 150px;
-    margin-top: 30px;
-    & label{
-        font-size: 25px;
+    justify-content: flex-start;
+    @include FromMax($large) {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
     }
-    &__select{
-        width: 150px;
-        padding: 10px 5px;
-        border-radius: 4px;
-        font-size: 5px;
-        & option{
-            background-color: red;
-            padding: 5px;
-            height: 100px;
+    @include FromMax(550px) {
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    &__content-arrows{
+        display: flex;
+        margin: 20px auto;
+        @include FromMax($large) {
+            margin: 0px;
+        }
+        &__button-arrow{
+            background-color: transparent;
+            color: #696864;
+            width: auto;
+            padding: 11px 9px;
+            & svg{
+                font-size: 30px;
+            }
+            &:hover{
+                background-color: rgba(0, 0, 0, 0.842);
+                color: #ffffff;
+            }
+        }
+        &__button-today{
+            transition-duration: 1s;
+            background-color: rgba(0, 0, 0, 0.842);
+            color: #696864;
+            padding: 11px 20px;
+            border: 1px solid #696864;
+            &:hover{
+                background-color: rgba(0, 0, 0, 0.842);
+                color: #ffffff;
+                border: 1px solid #ffffff;
+            }
         }
     }
-  }
+    &__content-date{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0px;
+        &__btn{
+            @include FromMax(550px) {
+                margin: 10px 5px;
+            }
+            padding: 19px 13px;
+            margin: 3px;
+            transition-duration: 1s;
+            background-color: rgba(0, 0, 0, 0.842);
+            color: #696864;
+            border: 1px solid #696864;
+            &:hover{
+                background-color: rgba(0, 0, 0, 0.842);
+                color: #ffffff;
+                border: 1px solid #ffffff;
+            }
+        }
+    }
+    &__content-selected{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 150px;
+        margin-top: 30px;
+        @include FromMax($large) {
+            margin-top: 0px;
+        }
+        & label{
+            font-size: 25px;
+        }
+        &__select{
+            width: 150px;
+            padding: 10px 5px;
+            border-radius: 4px;
+            font-size: 5px;
+            & option{
+                background-color: red;
+                padding: 5px;
+                height: 100px;
+            }
+        }
+    }
 }

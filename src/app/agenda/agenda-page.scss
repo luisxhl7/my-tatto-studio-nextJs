@@ -1,7 +1,13 @@
+@import '../../style/mixins.scss';
+@import '../../style/variables.scss';
+
 .agenda-page{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    @include FromMax($large) {
+        flex-direction: column;
+    }
 
     &__content-agenda{
         position: relative;
@@ -16,6 +22,14 @@
         width: 70px;
         height: 70px;
         z-index: 20;
+        background-color: #026402;
+        transition: .5s linear;
+        color: #696864;
+        box-shadow: 5px 5px 5px #000000;
+        &:hover{
+            background-color: #00a800;
+            color: #ffffff;
+        }
     }
     &__button-delete{
         position: absolute;
@@ -26,6 +40,14 @@
         width: 70px;
         height: 70px;
         z-index: 20;
+        background-color: #640202;
+        transition: .5s linear;
+        color: #696864;
+        box-shadow: 5px 5px 5px #000000;
+        &:hover{
+            background-color: #a80000;
+            color: #ffffff;
+        }
     }
     & .rbc-btn-group{
         display: none;
