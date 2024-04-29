@@ -5,18 +5,27 @@ import { jwtVerify } from 'jose'
 export async function middleware(req: NextRequest) {
 
     const jwt = await req.cookies.get('token')
-    
-    if (jwt === undefined) {
-        const requestedPage = req.nextUrl.pathname
-        const url = req.nextUrl.clone()
-        url.pathname = '/auth/login'
-        url.search = `p=${requestedPage}`
-        
-        return NextResponse.redirect( url )
-    }
-    try {
-        const state = await jwtVerify(jwt.value, new TextEncoder().encode(process.env.JWT_SECRET_SEED))
+    const routesForUnauthenticatedUsers = ['/auth/login', '/auth/register'];
 
+    try {
+        if (jwt) {
+            const state = await jwtVerify(jwt.value, new TextEncoder().encode(process.env.JWT_SECRET_SEED))
+            if (state && routesForUnauthenticatedUsers.includes(req.nextUrl.pathname)) {
+                return NextResponse.redirect(new URL('/', req.url));
+            }
+        }else{
+            if (routesForUnauthenticatedUsers.includes(req.nextUrl.pathname)) {
+                return NextResponse.next()
+            }
+            
+            const requestedPage = req.nextUrl.pathname
+            const url = req.nextUrl.clone()
+            url.pathname = '/auth/login'
+            url.search = `p=${requestedPage}`
+            
+            return NextResponse.redirect( url )
+        }
+        
         return NextResponse.next()
     } catch (error) {
         console.log(error);
@@ -25,5 +34,9 @@ export async function middleware(req: NextRequest) {
 }
  
 export const config = {
-    matcher: '/agenda/:path*',
+    matcher: [
+        '/agenda/:path*',
+        '/auth/login',
+        '/auth/register'
+    ],
 }

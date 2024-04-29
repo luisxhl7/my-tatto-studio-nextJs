@@ -2,9 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import { AccountCircle, KeyboardArrowDown, KeyboardArrowUp, Logout } from "@mui/icons-material";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { logout_thunks } from "@/store/thunks/auth";
+import { useRouter } from "next/navigation";
 
 export const NavbarMobile = () => {
+    const dispatch = useAppDispatch();
+    const navigate = useRouter()
+    const { status, user } = useAppSelector((state) => state.auth);
     const [openMenu, setOpenMenu] = useState<boolean>(false);
     const [isSubMenuOpen, setIsSubMenuOpen] = useState<boolean>(false);
 
@@ -21,6 +27,16 @@ export const NavbarMobile = () => {
         setOpenMenu(false);
         setIsSubMenuOpen(false);
     };
+
+    const handleOnLogout = async() => {
+        const resp = await dispatch(logout_thunks())
+    
+        if (resp) {
+            navigate.refresh()
+            handleLinkClick()
+            navigate.replace('/auth/login')
+        } 
+    }
 
     useEffect(() => {
         const handleDocumentClick = (event: MouseEvent) => {
@@ -64,6 +80,18 @@ export const NavbarMobile = () => {
                 }`}
             >
                 <ul className="navBar__menu-mobile__options-list">
+                    <li className="navBar__menu-mobile__content-login">
+                        {user && status === "authenticated" && "name" in user ? (
+                            <div className="navBar__menu-mobile__content-login-user">
+                                <AccountCircle />
+                                <span>{user.name}</span>
+                            </div>
+                        ) : (
+                            <Link href="/auth/login" className="button-login" onClick={handleLinkClick}>
+                                {status === "checking" ? "Cargando" : "Login"}
+                            </Link>
+                        )}
+                    </li>
                     <li>
                         <Link href="/" onClick={handleLinkClick}>
                         Inicio
@@ -115,11 +143,22 @@ export const NavbarMobile = () => {
                         </ol>
                     </li>
                     <li>
+                        <Link href="/agenda" onClick={handleLinkClick}>
+                        Agenda
+                        </Link>
+                    </li>
+                    <li>
                         <Link href="/cuidados" onClick={handleLinkClick}>
                         Cuidados
                         </Link>
                     </li>
                 </ul>
+                {user && status === "authenticated" && "name" in user && (
+                    <button className="navBar__menu-mobile__button-logout" onClick={handleOnLogout}>
+                        <Logout/>
+                        Cerrar sesión
+                    </button>
+                )}
             </div>
         </div>
     );

@@ -42,39 +42,39 @@ const LoginPage: React.FC<LoginPageProps>  = (props) => {
     }
 
   return (
-    <main className="login-page" >
-        <h1>Inicia sesión</h1>
-        <form  className="login-page__form" onSubmit={(event) => handleOnSubmit(event)}>
-            <InputText
-                nameLabel="Email:"
-                type="text"
-                value={email}
-                idInput="email"
-                onInputChange={onInputChange}
-                autoComplete= 'on'
-            />
-            <InputText
-                nameLabel="Contraseña:"
-                type="password"
-                value={password}
-                idInput="password"
-                onInputChange={onInputChange}
-                autoComplete= 'on'
-            />
-            <button type="submit" disabled={status === 'checking'}>Iniciar sesión</button>
+        <main className="login-page" >
+            <h1>Inicia sesión</h1>
+            <form  className="login-page__form" onSubmit={(event) => handleOnSubmit(event)}>
+                <InputText
+                    nameLabel="Email:"
+                    type="text"
+                    value={email}
+                    idInput="email"
+                    onInputChange={onInputChange}
+                    autoComplete= 'on'
+                />
+                <InputText
+                    nameLabel="Contraseña:"
+                    type="password"
+                    value={password}
+                    idInput="password"
+                    onInputChange={onInputChange}
+                    autoComplete= 'on'
+                />
+                <button type="submit" disabled={status === 'checking'}>Iniciar sesión</button>
 
-            <div className="login-page__content-link-register">
-                <span>
-                    ¿Aún no estás registrado?{' '}
-                </span>
-                <br />
-                <Link href="/auth/register" className="login-page__link-register">
-                    Crear cuenta nueva
-                </Link>
-            </div>
+                <div className="login-page__content-link-register">
+                    <span>
+                        ¿Aún no estás registrado?{' '}
+                    </span>
+                    <br />
+                    <Link href="/auth/register" className="login-page__link-register">
+                        Crear cuenta nueva
+                    </Link>
+                </div>
 
-        </form>
-    </main>
+            </form>
+        </main>
   );
 }
 

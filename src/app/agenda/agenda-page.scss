@@ -23,10 +23,12 @@
         height: 70px;
         z-index: 20;
         background-color: #026402;
-        transition: .5s linear;
+        opacity: .7;
         color: #696864;
         box-shadow: 5px 5px 5px #000000;
+        transition: .5s linear;
         &:hover{
+            opacity: 1;
             background-color: #00a800;
             color: #ffffff;
         }
@@ -41,10 +43,12 @@
         height: 70px;
         z-index: 20;
         background-color: #640202;
-        transition: .5s linear;
         color: #696864;
         box-shadow: 5px 5px 5px #000000;
+        opacity: .7;
+        transition: .5s linear;
         &:hover{
+            opacity: 1;
             background-color: #a80000;
             color: #ffffff;
         }
