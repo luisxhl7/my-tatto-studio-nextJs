@@ -6,6 +6,7 @@ import ModalImage from "@/components/molecules/modal-image/Modal-image";
 import { SimpleSlider } from "@/components/atoms/simpleSlider";
 import { ParamsProps, TattooArtist } from "@/interface";
 import "./tatuador-page.scss";
+import Link from "next/link";
 
 const customSettings = {
   infinite: true,
@@ -76,8 +77,15 @@ const Tatuador = ({ params }: { params: ParamsProps }) => {
     <main className="tatuadorPage">
       <Banner imagesList={tatuador?.photo} title={tatuador?.name} />
 
-      <p className="tatuadorPage__description">{tatuador?.description}</p>
-
+      <section className="tatuadorPage__content-agenda">
+        <p className="tatuadorPage__content-agenda__description">{tatuador?.description}</p>
+        <p className="tatuadorPage__content-agenda__info-agenda">
+          ¡Reserva hoy tu cita con {tatuador?.name} y asegura tu lugar para tu próximo tatuaje!
+        </p>
+        <Link href={`/agenda/${tatuador?.name}`} className="home-page__section-end__button-agenda">
+          Agenda ahora
+        </Link>
+      </section>
       <h2>Proyectos Realizados</h2>
       <section className="tatuadorPage__content-images">
         {tatuador?.portafolio.map((item, idx) => (
@@ -91,7 +99,7 @@ const Tatuador = ({ params }: { params: ParamsProps }) => {
         ))}
       </section>
 
-      <section>
+      <section className="tatuadorPage__content-slider">
         <h2>Diseños</h2>
         <SimpleSlider customSettings={customSettings}>
           {tatuador?.disenos.map((item, idx) => (

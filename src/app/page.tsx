@@ -195,6 +195,12 @@ export default function Home() {
             </a>
 
           </div>
+          <p>
+            ¡Reserva tu cita con nosotros hoy mismo y asegura tu lugar para tu próximo tatuaje!
+          </p>
+          <Link href="/agenda" className="home-page__section-end__button-agenda">
+            Agenda ahora
+          </Link>
         </div>
       </section>
 

@@ -187,6 +187,17 @@
                 }
             }
         }
+        &__button-agenda{
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 15px;
+            background-color: #3a3a3a7c;
+            color: #9b9b9b;
+            transition: .5s linear;
+            &:hover{
+                color: #ffffff;
+            }
+        }
     }
     &__section-sponsors{
         & h2{
