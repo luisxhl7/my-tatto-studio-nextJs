@@ -1,24 +1,25 @@
-import { ImageItem, TattooArtist } from "../interface/interface";
+import { ImageItem, TattooArtist } from "@/interface/interface";
+import imagesUsers from '@/assets/users/index'
 
 export const imagesList:ImageItem[] = [
   {
-    image: "https://cdn0.bodas.net/article-real-wedding/578/3_2/960/jpg/4866844.webp",
+    image: imagesUsers.user_keneth.src,
     name: 'keneth'
   },
   {
-    image: "https://www.clarin.com/img/2017/06/07/rJTLCCbXW_1256x620.jpg",
+    image: imagesUsers.user_luis.src,
     name: 'luis'
   },
   {
-    image: "https://www.elidealgallego.com/images/showid2/5827226?w=900",
+    image: imagesUsers.user_veronica.src,
     name: 'veronica'
   },
   {
-    image: "https://lirp.cdn-website.com/md/pexels/dms3rep/multi/opt/pexels-photo-3657563-1920w.jpeg",
+    image: imagesUsers.user_yeison.src,
     name: 'yeison'
   },
   {
-    image: "https://miamicelebrities.com/wp-content/uploads/2022/11/306063231_751497419472784_3550204227281687983_n_11zon.jpg",
+    image: imagesUsers.user_juan.src,
     name: 'juan'
   },
 ];

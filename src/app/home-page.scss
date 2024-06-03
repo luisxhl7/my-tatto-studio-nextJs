@@ -46,7 +46,7 @@
         }
     }
     &__section-phrase{
-        background-image: url(https://estaticos.elcolombiano.com/binrepository/998x665/0c52/998d562/none/11101/QJEW/mtatuajes-en-sabaneta-3_40094000_20220605144706.jpg);
+        background-image: url(../assets/background-image-1.svg);
         background-repeat: no-repeat;
         background-size: 120%;
         position: relative;
@@ -55,6 +55,9 @@
         animation: reveal linear both;
         animation-timeline: view();
         animation-range: entry 10% cover 60%;
+        &.--section-2{
+            background-image: url(../assets/background-image-2.svg);
+        }
         @keyframes reveal {
             from {
                 background-position: 0% 100%;
@@ -67,7 +70,6 @@
             background-color: red;
             background-size: cover;
         }
-      
         & img{
             width: 100%;
             height: auto;

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { imagesList } from "@/data/tattoo-artist";
 import sponsors from "@/assets/sponsors";
 import images from "@/assets";
+import backgroundImages2 from "@/assets/background-image-2.svg";
 import { Banner } from "@/components/molecules/banner";
 import { SimpleSlider } from "@/components/atoms/simpleSlider";
 import "./home-page.scss";
@@ -145,11 +146,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-page__section-phrase"
-        style={{
-          backgroundImage: `url('https://foolhardytattoocom.files.wordpress.com/2020/06/tattoo-artist-wrapping-client-s-arm-in-plastic-clingfilm-to-encourage-tattoo-healing.jpg')`,
-        }}
-      >
+      <section className="home-page__section-phrase --section-2">
         <Image
           src={images.rasgado_con_negro}
           alt=""
@@ -182,15 +179,15 @@ export default function Home() {
           </p>
           <div className="home-page__section-end__social-networks">
             
-            <a href="https://www.facebook.com/" title="Facebook">
+            <a href="https://www.facebook.com/" title="Facebook" target="_blank">
               <Facebook/> 
             </a>
             
-            <a href="https://web.whatsapp.com/" title="WhatsApp">
+            <a href="https://web.whatsapp.com/" title="WhatsApp" target="_blank">
               <WhatsApp/>
             </a>
             
-            <a href="https://www.instagram.com/" title="Instagram">
+            <a href="https://www.instagram.com/" title="Instagram" target="_blank">
               <Instagram/> 
             </a>
 

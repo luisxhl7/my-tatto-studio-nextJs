@@ -1,12 +1,13 @@
 import React from "react";
 import { Banner } from "@/components/molecules/banner";
+import images from '../../assets/index'
 import "./cuidados-page.scss";
 
 const Cuidados = () => {
   return (
     <main className="cuidadosPage">
       <Banner
-        imagesList="https://foolhardytattoocom.files.wordpress.com/2020/06/tattoo-artist-wrapping-client-s-arm-in-plastic-clingfilm-to-encourage-tattoo-healing.jpg"
+        imagesList= {images.background_image_2.src}
         title="cuidados"
       />
 
