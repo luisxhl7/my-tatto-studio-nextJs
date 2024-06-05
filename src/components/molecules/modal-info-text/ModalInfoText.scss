@@ -1,0 +1,40 @@
+.modalInfoText{
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+    bottom: 0;
+    background-color: rgba(20, 20, 20, 0.959);
+    min-height: 0px;
+    animation: desplazamiento linear 2s both;
+    @keyframes desplazamiento {
+        from {
+            max-height: 0px;
+        }
+        to {
+            max-height: 300px;
+        }
+    }
+    & h3{
+        margin: 20px 20px 0px;
+    }
+    & p{
+        margin: 0px 20px 20px;
+    }
+    &__button-close-modal{
+        position: absolute;
+        right: 0;
+        background-color: transparent;
+        color: aliceblue;
+    }
+    &.--animated-close{
+        animation: desplazamiento2 linear 2s both;
+        @keyframes desplazamiento2 {
+            from {
+                max-height: 300px;
+            }
+            to {
+                max-height: 0px;
+            }
+        }
+    }
+}

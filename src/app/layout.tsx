@@ -3,6 +3,7 @@ import { Grenze_Gotisch } from "next/font/google";
 import { Providers } from "@/store/providers";
 import { Footer } from "@/components/molecules/footer";
 import { NavBar } from "@/components/molecules/navbar";
+import { ModalInfoText } from "@/components/molecules/modal-info-text";
 import "./globals.scss";
 
 const GrenzeGotisch = Grenze_Gotisch({
@@ -27,6 +28,7 @@ export default function RootLayout({
         <Providers>
           <NavBar/>
           {children}
+          <ModalInfoText/>
           <Footer/>
         </Providers>
       </body>
