@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { Close } from '@mui/icons-material';
 import './ModalInfoText.scss'
 
 export const ModalInfoText = () => {
@@ -17,7 +18,7 @@ export const ModalInfoText = () => {
         className='modalInfoText__button-close-modal'
         onClick={handleCloseModal}
       >
-        X
+        <Close/>
       </button>
       
       <h3>Bienvenidos!!</h3>

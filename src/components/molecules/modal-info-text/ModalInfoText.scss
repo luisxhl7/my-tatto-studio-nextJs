@@ -1,9 +1,11 @@
 .modalInfoText{
     position: fixed;
-    width: 100%;
+    width: calc(100% - 20px);
     z-index: 99;
+    margin: 10px;
     bottom: 0;
     background-color: rgba(20, 20, 20, 0.959);
+    border-radius: 15px;
     min-height: 0px;
     animation: desplazamiento linear 2s both;
     @keyframes desplazamiento {
@@ -15,6 +17,7 @@
         }
     }
     & h3{
+        color: #ffffff;
         margin: 20px 20px 0px;
     }
     & p{
